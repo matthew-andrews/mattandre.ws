@@ -27,8 +27,6 @@ menu:
 
 rss: /feed/
 
-excerpt_link: Read More
-
 widgets:
 - recent_posts
 - archive
