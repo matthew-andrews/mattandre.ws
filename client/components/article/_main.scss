@@ -26,7 +26,7 @@
 
 .article__category-link {
 	@include block-caption;
-	margin: 0 12px 0 12px;
+	margin: 0 12px;
 }
 
 .article__footer {
@@ -34,4 +34,14 @@
 	border-top: 1px solid $color-border;
 	margin: 0 $article-padding;
 	line-height: $line-height;
+}
+
+.article__tag-list-item {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.article__tag-list-link {
+	display: block;
+	margin: 10px 0;
 }

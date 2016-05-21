@@ -19,14 +19,14 @@ input:nth-child(1):checked ~ .tabs li:nth-child(1) label,
 input:nth-child(2):checked ~ .tabs li:nth-child(2) label,
 input:nth-child(3):checked ~ .tabs li:nth-child(3) label,
 input:nth-child(4):checked ~ .tabs li:nth-child(4) label {
-  /* Put the CSS to show the tab button is active here */
+	/* Put the CSS to show the tab button is active here */
 }
 
 input:nth-child(1):checked ~ .sections li:nth-child(1),
 input:nth-child(2):checked ~ .sections li:nth-child(2),
 input:nth-child(3):checked ~ .sections li:nth-child(3),
 input:nth-child(4):checked ~ .sections li:nth-child(4) {
-  /* Put the CSS to show the tab content is active here */
+	/* Put the CSS to show the tab content is active here */
 }
 ```
 
@@ -38,16 +38,16 @@ For the following HTML markup:-
 <input type="radio" id="s3" name="s" />
 <input type="radio" id="s4" name="s" />
 <ul class="tabs">
-  <li><label for="s1">One</label></li>
-  <li><label for="s2">Two</label></li>
-  <li><label for="s3">Three</label></li>
-  <li><label for="s4">Four</label></li>
+	<li><label for="s1">One</label></li>
+	<li><label for="s2">Two</label></li>
+	<li><label for="s3">Three</label></li>
+	<li><label for="s4">Four</label></li>
 </ul>
 <ul class="sections">
-  <li>Section one</li>
-  <li>Section two</li>
-  <li>Section three</li>
-  <li>Section four</li>
+	<li>Section one</li>
+	<li>Section two</li>
+	<li>Section three</li>
+	<li>Section four</li>
 </ul>
 ```
 

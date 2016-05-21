@@ -25,10 +25,10 @@ Unfortunately that new API is **very** sensitive to the format of the applicatio
 
 ```sh
 ./node_modules/.bin/haikro build deploy \
-    --app my-heroku-app \
-    --heroku-token $(HEROKU_AUTH_TOKEN) \
-    --commit `git rev-parse HEAD` \
-    --verbose
+	--app my-heroku-app \
+	--heroku-token $(HEROKU_AUTH_TOKEN) \
+	--commit `git rev-parse HEAD` \
+	--verbose
 ```
 
 I've tried my best not to reinvent too much and so pretty much everything about how you write Node.js apps for deploying via git push heroku should work for Haikro too, for example:-
@@ -39,9 +39,9 @@ To specify a particular version of Node.js add an ‘engines.node' property to y
 
 ```json
 […]
-    "engines": {
-        "node": "0.10.x"
-    }
+	"engines": {
+		"node": "0.10.x"
+	}
 […]
 ```
 
