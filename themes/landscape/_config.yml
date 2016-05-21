@@ -32,8 +32,6 @@ widgets:
 - archive
 - category
 
-archive_type: 'monthly'
-
 google_analytics: UA-34192510-1
 twitter: andrewsmatt
 google_plus: MattAndrewsUK
