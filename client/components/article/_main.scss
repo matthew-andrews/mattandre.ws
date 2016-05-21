@@ -2,6 +2,10 @@
 	margin: $block-margin 0;
 }
 
+.article__header {
+	padding: $article-padding;
+}
+
 .article__title {
 	font-size: 2em;
 	font-weight: bold;
