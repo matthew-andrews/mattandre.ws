@@ -2,13 +2,10 @@
 	<a href="<%- url_for() %>" class="header__title">
 		<%= config.title %></a>
 	</a>
-	<h2 class="header__subtitle">
-		<%= theme.subtitle %>
-	</h2>
-	<nav>
-		<a id="main-nav-toggle" class="nav-icon"></a>
+	<div class="header__subtitle"><%= theme.subtitle %></div>
+	<nav class="header__nav">
 		<% for (var i in theme.menu) { %>
-			<a class="main-nav-link" href="<%- url_for(theme.menu[i]) %>"><%= i %></a>
+			<a class="header__nav-item header__nav-item--importance-<%= theme.menu[i].importance %>" href="<%- url_for(theme.menu[i].url) %>"><%= i %></a>
 		<% } %>
 	</nav>
 </header>
