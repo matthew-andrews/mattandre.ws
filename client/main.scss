@@ -26,6 +26,7 @@ $font-mono: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
 
 @import "components/footer/main";
 @import "components/header/main";
+@import "components/widget/main";
 
 body {
 	background-color: $color-background;
