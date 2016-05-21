@@ -1,8 +1,15 @@
 ---
 title: What I wish I could have read before starting at the FT
 date: 2012-08-18
-categories: FT Labs
-tags: appcache, bootstrapping, FT, HTML5, web app
+categories:
+- Work
+- FTLabs
+tags:
+- appcache
+- bootstrapping
+- FT
+- HTML5
+- web app
 ---
 {% img /images/ftlabs.jpg %}
 

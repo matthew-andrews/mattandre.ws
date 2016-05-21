@@ -1,7 +1,9 @@
 ---
 title: The importance of tones in Mandarin Chinese
 categories: China
-tags: Mandarin, Tones
+tags:
+- Mandarin
+- Tones
 date: 2012-08-19
 ---
 When I was last in China I visited the small city (by Chinese standards – with a population of just 5.7 million) of Hefei in Anhui province. The person I was with was not a particularly proficient user of either chopsticks or Mandarin so as we ate breakfast I asked the waitress “Can you get us knives and forks?“. She walked over toward the kitchen, then came back and poured us two cups of tea.
