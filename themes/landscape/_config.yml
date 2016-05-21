@@ -38,10 +38,7 @@ widgets:
 - category
 
 archive_type: 'monthly'
-show_count: false
 
 google_analytics: UA-34192510-1
 twitter: andrewsmatt
 google_plus: MattAndrewsUK
-fb_admins:
-fb_app_id:
