@@ -16,7 +16,6 @@ tag_dir: tag
 archive_dir: archives
 category_dir: category
 code_dir: downloads/code
-i18n_dir: :lang
 skip_render:
 
 # Writing
