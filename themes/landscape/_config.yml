@@ -15,7 +15,6 @@ rss: /feed/
 
 excerpt_link: Read More
 
-sidebar: right
 widgets:
 - recent_posts
 - archive

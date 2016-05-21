@@ -1,13 +1,18 @@
 include n.Makefile
 
-build-production:
+build build-production:
 	rm -f public/feed
 	hexo generate
-	# HACK
+	@$(MAKE) $@-super
 	mv public/feed.xml public/feed
 
-
 run:
-	hexo serve
+	hexo serve -s
+
+watch:
+	@$(MAKE) watch-hexo watch-super -j2
+
+watch-hexo:
+	hexo generate --watch
 
 test: verify
