@@ -2,6 +2,7 @@
 title: The importance of tones in Mandarin Chinese
 categories: China
 tags:
+- China
 - Mandarin
 - Tones
 date: 2012-08-19
