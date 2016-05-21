@@ -12,12 +12,8 @@ input, button
     border: 0
     padding: 0
 
-html, body
-  height: 100%
-
 body
-  font: font-size font-sans
-  -webkit-text-size-adjust: 100%
+  font-size: font-size
 
 .outer
   clearfix()
@@ -39,12 +35,10 @@ body
 
 #main
   @media mq-normal
-    column(main-column)
+    column(9)
 
 @import "_extend"
-@import "_partial/header"
 @import "_partial/article"
 @import "_partial/archive"
-@import "_partial/footer"
 @import "_partial/highlight"
 @import "_partial/sidebar"

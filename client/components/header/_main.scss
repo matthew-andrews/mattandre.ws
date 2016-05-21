@@ -1,0 +1,37 @@
+.header {
+	background: $color-black;
+	border-bottom: 1px solid $color-border
+}
+
+.header__title {
+	display: block;
+	color: $color-white;
+	text-align: center;
+	font-size: 30px;
+	padding: 20px;
+
+	a {
+		color: $color-white;
+	}
+}
+
+.header__subtitle {
+	color: $color-white;
+	text-align: center;
+}
+
+.main-nav-link {
+	color: #fff;
+	opacity: 0.6;
+	text-decoration: none;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+	transition: opacity 0.2s;
+	display: inline-block;
+	padding: 20px 15px;
+	font-weight: 300;
+	letter-spacing: 1px;
+
+	&:hover {
+		opacity: 1
+	}
+}
