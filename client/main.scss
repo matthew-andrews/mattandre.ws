@@ -1,0 +1,42 @@
+// Colors
+$color-black: #000000;
+$color-grey: #999999;
+$color-light-grey: #eeeeee;
+$color-white: #ffffff;
+
+$color-background: $color-light-grey;
+$color-border: #dddddd;
+$color-footer-background: #262a30;
+$color-link: #258fb8;
+
+
+// Typography
+$line-height: 1.6em;
+
+$font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-serif: Georgia, "Times New Roman", serif;
+$font-mono: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
+
+// Responsivity
+@mixin large() {
+	@media screen and (min-width: 768px) {
+		@content;
+	}
+}
+
+@import "components/footer/main";
+@import "components/header/main";
+
+body {
+	background-color: $color-background;
+	font-family: $font-sans;
+	line-height: $line-height;
+}
+
+a {
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}

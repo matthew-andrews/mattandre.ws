@@ -1,0 +1,57 @@
+.header {
+	background-color: $color-black;
+	border-bottom: 1px solid $color-border;
+	color: $color-grey;
+	text-align: center;
+
+	a {
+		color: $color-white;
+		opacity: 0.8;
+		transition: opacity 0.2s;
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+}
+
+.header__title {
+	display: block;
+	font-weight: bold;
+	padding: 10px;
+	font-size: 20px;
+
+	@include large {
+		font-size: 30px;
+		padding: 20px 0 10px 0;
+	}
+}
+
+.header__subtitle {
+	font-style: italic;
+	display: none;
+
+	@include large {
+		display: block;
+	}
+}
+
+.header__nav {
+	padding: 5px 0 10px 0;
+}
+
+.header__nav-item {
+	display: inline-block;
+	padding: 0 10px;
+	font-weight: 300;
+	line-height: 170%;
+
+}
+
+.header__nav-item--importance-3 {
+	display: none;
+
+	@include large {
+		display: inline-block;
+	}
+}
