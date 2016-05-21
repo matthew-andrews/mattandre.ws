@@ -4,8 +4,6 @@ root = true
 indent_style = tab
 trim_trailing_whitespace = true
 
-
-
 [**{.json,.yml}]
 indent_style = space
 indent_size = 2
