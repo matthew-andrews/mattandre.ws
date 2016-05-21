@@ -19,9 +19,11 @@
 				<%- post.content %>
 			<% } %>
 		</div>
-		<footer class="article-footer">
-			<%- partial('post/tag') %>
-		</footer>
+		<% if (post.tags && post.tags.length > 0) { %>
+			<footer class="article-footer">
+				<%- partial('post/tag') %>
+			</footer>
+		<% } %>
 	</div>
 	<% if (!index) { %>
 		<%- partial('post/nav') %>
