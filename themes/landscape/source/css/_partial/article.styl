@@ -107,22 +107,13 @@
     text-decoration: none
     text-shadow: 0 1px darken(color-link, 20%)
 
-.article-footer
-  clearfix()
-  font-size: 0.85em
-  line-height: line-height
-  border-top: 1px solid color-border
-  padding-top: line-height
-  margin: 0 article-padding article-padding
-  a
-    color: color-grey
-    text-decoration: none
-    &:hover
-      color: color-default
-
 .article-tag-list-item
-  float: left
+  display: inline-block
   margin-right: 10px
+
+.article-tag-list-link
+  display: block
+  margin: 10px 0
 
 #article-nav
   clearfix()
