@@ -1,0 +1,19 @@
+.article__date {
+	@include block-caption;
+	float: left;
+}
+
+.article__category {
+	float: left;
+	line-height: 1em;
+	margin-left: 8px;
+
+	&:before {
+		content: "\2022";
+	}
+}
+
+.article__category-link {
+	@include block-caption;
+	margin: 0 12px 1em;
+}

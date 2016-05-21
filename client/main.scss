@@ -24,9 +24,16 @@ $font-mono: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
 	}
 }
 
+@mixin block-caption() {
+	font-weight: bold;
+	line-height: 1em;
+	margin-bottom: 1em;
+}
+
 @import "components/footer/main";
 @import "components/header/main";
 @import "components/widget/main";
+@import "components/article/main";
 
 body {
 	background-color: $color-background;
