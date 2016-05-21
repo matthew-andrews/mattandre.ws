@@ -1,32 +1,32 @@
 # Header
 menu:
-	CV:
-		url: /cv
-		importance: 1
-	Twitter:
-		url: https://twitter.com/andrewsmatt
-		importance: 1
-	Google+:
-		url: https://plus.google.com/+MattAndrewsUK/
-		importance: 3
-	Weibo 微博:
-		url: http://weibo.com/andrewsmatt
-		importance: 3
-	LinkedIn:
-		url: https://www.linkedin.com/in/mattrandrews
-		importance: 1
-	GitHub:
-		url: http://github.com/matthew-andrews
-		importance: 1
-	Email:
-		url: mailto:matt@mattandre.ws
-		importance: 1
-	Archives:
-		url: /archives
-		importance: 3
-	Feed:
-		url: /feed
-		importance: 3
+  CV:
+    url: /cv
+    importance: 1
+  Twitter:
+    url: https://twitter.com/andrewsmatt
+    importance: 1
+  Google+:
+    url: https://plus.google.com/+MattAndrewsUK/
+    importance: 3
+  Weibo 微博:
+    url: http://weibo.com/andrewsmatt
+    importance: 3
+  LinkedIn:
+    url: https://www.linkedin.com/in/mattrandrews
+    importance: 1
+  GitHub:
+    url: http://github.com/matthew-andrews
+    importance: 1
+  Email:
+    url: mailto:matt@mattandre.ws
+    importance: 1
+  Archives:
+    url: /archives
+    importance: 3
+  Feed:
+    url: /feed
+    importance: 3
 
 rss: /feed/
 
