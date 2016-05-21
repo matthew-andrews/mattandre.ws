@@ -21,9 +21,6 @@ menu:
   Email:
     url: mailto:matt@mattandre.ws
     importance: 1
-  Archives:
-    url: /archives
-    importance: 3
   Feed:
     url: /feed
     importance: 3
