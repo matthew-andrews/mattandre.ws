@@ -1,0 +1,31 @@
+# Header
+menu:
+	Home: /
+	CV: /cv
+	Twitter: https://twitter.com/andrewsmatt
+	Google+: https://plus.google.com/+MattAndrewsUK/
+	Weibo 微博: http://weibo.com/andrewsmatt
+	LinkedIn: https://www.linkedin.com/in/mattrandrews
+	GitHub: http://github.com/matthew-andrews
+	Email: mailto:matt@mattandre.ws
+	Archives: /archives
+	Feed: /feed
+
+rss: /feed/
+
+excerpt_link: Read More
+
+sidebar: right
+widgets:
+- recent_posts
+- archive
+- category
+
+archive_type: 'monthly'
+show_count: false
+
+google_analytics: UA-34192510-1
+twitter: andrewsmatt
+google_plus: MattAndrewsUK
+fb_admins:
+fb_app_id:
