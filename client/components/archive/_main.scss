@@ -22,6 +22,13 @@
 	margin: 1em 0;
 }
 
+.archive__article {
+	break-inside: avoid;
+
+	// HACK for box shadow
+	padding-bottom: 1px;
+}
+
 .archive__article-inner {
 	@include block;
 	padding: 10px;
