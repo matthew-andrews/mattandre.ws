@@ -6,7 +6,8 @@
       "Properties": {
         "BucketName": "mattandre.ws",
         "WebsiteConfiguration": {
-          "IndexDocument": "index.html"
+          "IndexDocument": "index.html",
+          "ErrorDocument": "404/index.html"
         }
       }
     },
@@ -15,7 +16,8 @@
       "Properties": {
         "BucketName": "staging.mattandre.ws",
         "WebsiteConfiguration": {
-          "IndexDocument": "index.html"
+          "IndexDocument": "index.html",
+          "ErrorDocument": "404/index.html"
         }
       }
     },
