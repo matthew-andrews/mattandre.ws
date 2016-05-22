@@ -50,12 +50,12 @@ We actually went a step further to make delegates **recyclable**. Via the delega
 
 ```html
 <body>
-  <section id="pane-1">
-    <button>Click me</button>
-  </section>
-  <section id="pane-2">
-    <button>No, Click me</button>
-  </section>
+	<section id="pane-1">
+		<button>Click me</button>
+	</section>
+	<section id="pane-2">
+		<button>No, Click me</button>
+	</section>
 </body>
 ```
 
@@ -65,7 +65,7 @@ var pane2 = document.getElementById('pane-1');
 
 var dd = new Delegate();
 dd.on('click', 'button', function() {
-  console.log("button clicked");
+	console.log("button clicked");
 });
 
 dd.root(pane1);
@@ -86,7 +86,7 @@ You can set up a delegate's event listeners whenever you like, and when you are 
 ```js
 var dd = new Delegate();
 dd.on('click', '.close', function() {
- closeOverlay();
+	closeOverlay();
 });
 
 // ** some time later **
@@ -122,7 +122,7 @@ This is handy as we like to handle all image load failures by hiding them, which
 ```js
 var dd = new Delegate(document.body);
 dd.on('error', 'img', function() {
-  this.style.display = 'none';
+	this.style.display = 'none';
 });
 ```
 
