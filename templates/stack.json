@@ -6,7 +6,7 @@
       "Properties": {
         "BucketName": "www.mattandre.ws",
         "WebsiteConfiguration": {
-          "IndexDocument": "index.html"
+          "RedirectAllRequestsTo": "mattandre.ws"
         }
       }
     },
@@ -51,4 +51,3 @@
     }
   }
 }
-
