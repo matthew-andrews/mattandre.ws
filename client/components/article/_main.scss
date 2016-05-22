@@ -45,6 +45,10 @@
 	line-height: $line-height;
 }
 
+.article__tag-list {
+	padding: 0;
+}
+
 .article__tag-list-item {
 	display: inline-block;
 	margin-right: 10px;
