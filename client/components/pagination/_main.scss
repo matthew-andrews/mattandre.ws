@@ -1,0 +1,34 @@
+.pagination {
+	@include block;
+	text-align: center;
+	position: relative;
+
+	.next,
+	.prev,
+	.page-number {
+		padding: 10px 20px;
+	}
+
+	.page-number {
+		display: inline-block;
+
+		&.current {
+			font-weight: bold;
+		}
+	}
+
+	a.page-number:hover {
+		text-decoration: none;
+		background-color: $color-light-grey;
+	}
+
+	.next {
+		position: absolute;
+		right: 0;
+	}
+
+	.prev {
+		position: absolute;
+		left: 0;
+	}
+}

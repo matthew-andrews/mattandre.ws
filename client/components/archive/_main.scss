@@ -1,12 +1,13 @@
 .archive__year {
 	@include block-caption;
 	color: $color-grey;
+	display: block;
+	margin: 1em 0;
 }
 
 .archive__article-inner {
 	@include block;
 	padding: 10px;
-	margin-bottom: 15px;
 }
 
 .archive__article-date {
