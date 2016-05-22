@@ -51,6 +51,25 @@
           ]
         }
       }
+    },
+    "WWWBucketPolicy": {
+      "Type": "AWS::S3::BucketPolicy",
+      "DependsOn": "WWWBucket",
+      "Properties": {
+        "Bucket" : "www.mattandre.ws",
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": "*",
+              "Action": ["s3:GetObject"],
+              "Resource": [
+                "arn:aws:s3:::www.mattandre.ws/*"
+               ]
+            }
+          ]
+        }
+      }
     }
   }
 }
