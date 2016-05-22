@@ -17,10 +17,4 @@ watch-hexo:
 test: verify
 
 deploy:
-	echo "use deploy-prod"
-
-deploy-prod:
 	nht deploy-static `find . -path "./public/*"` --strip 1 --region eu-west-1 --cache-control 300 --bucket mattandre.ws
-
-deploy-stage:
-	nht deploy-static `find . -path "./public/*"` --strip 1 --region eu-west-1 --cache-control 300 --bucket staging.mattandre.ws
