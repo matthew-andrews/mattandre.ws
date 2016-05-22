@@ -21,7 +21,7 @@
 .article__title {
 	font-weight: bold;
 	font-size: 2em;
-	margin: 1em 0;
+	margin: 0;
 	display: block;
 	line-height: 1.5em;
 }
@@ -50,7 +50,7 @@
 .article__footer {
 	font-size: 0.85em;
 	border-top: 1px solid $color-border;
-	margin: 0 $article-padding;
+	margin: $article-padding;
 	line-height: $line-height;
 }
 
