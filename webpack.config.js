@@ -56,7 +56,6 @@ module.exports = {
 	},
 	sassLoader: {
 		sourcemap: true,
-		includePaths: [ path.resolve('./bower_components') ],
 		// NOTE: This line is important for preservation of comments needed by the css-extract-block plugin
 		outputStyle: 'expanded'
 	},
@@ -79,7 +78,6 @@ module.exports = {
 	})(),
 	resolve: {
 		root: [
-			path.resolve('./bower_components'),
 			path.resolve('./node_modules')
 		]
 	}
