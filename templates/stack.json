@@ -1,6 +1,15 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
   "Resources" : {
+    "WWWBucket": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketName": "www.mattandre.ws",
+        "WebsiteConfiguration": {
+          "IndexDocument": "index.html"
+        }
+      }
+    },
     "Bucket": {
       "Type": "AWS::S3::Bucket",
       "Properties": {
