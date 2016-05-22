@@ -3,15 +3,19 @@
   clear: left;
 
 .article-entry
-  @extend $base-style
-  clearfix()
-  color: color-default
-  padding: 0 article-padding
-  p, table
+  ul, ol, dl
+    margin: 0 20px
     line-height: line-height
-    margin: line-height 0
-  a
-    color: color-link
+  ul, ol
+    ul, ol
+      margin-top: 0
+      margin-bottom: 0
+  ul
+    list-style: disc
+  ol
+    list-style: decimal
+  dt
+    font-weight: bold
   ul, ol, dl
     margin-top: line-height
     margin-bottom: line-height
@@ -62,21 +66,6 @@
     margin-top: 0.5em
     position: relative
     text-align: center
-
-.article-more-link a
-  display: inline-block
-  line-height: 1em
-  padding: 6px 15px
-  border-radius: 15px
-  background: color-background
-  color: color-grey
-  text-shadow: 0 1px #fff
-  text-decoration: none
-  &:hover
-    background: color-link
-    color: #fff
-    text-decoration: none
-    text-shadow: 0 1px darken(color-link, 20%)
 
 #article-nav
   clearfix()

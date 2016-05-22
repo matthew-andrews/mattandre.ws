@@ -9,7 +9,7 @@
 		<% if (post.link || post.title) { %>
 			<header class="article__header"><%- partial('post/title', { class_name: 'article__title' }) %></header>
 		<% } %>
-		<div class="article-entry" itemprop="articleBody">
+		<div class="article-entry article__entry" itemprop="articleBody">
 			<% if (post.excerpt && index) { %>
 				<%- post.excerpt %>
 				<p class="article-more-link">

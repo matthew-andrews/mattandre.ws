@@ -67,3 +67,28 @@
 	display: block;
 	margin: 10px 0;
 }
+
+.article__entry {
+	padding: 0 $article-padding;
+
+	a {
+		color: $color-link;
+	}
+
+	h2 {
+		font-size: 1.3em;
+	}
+
+	h3 {
+		font-size: 1.1em;
+	}
+
+	hr {
+		border: 1px dashed $color-border;
+	}
+
+	acronym,
+	abbr {
+		border-bottom: 1px dotted;
+	}
+}
