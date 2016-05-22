@@ -13,7 +13,6 @@
     "hexo-renderer-ejs": "^0.2.0",
     "hexo-renderer-marked": "^0.2.10",
     "hexo-server": "^0.2.0",
-    "lintspaces-cli": "^0.1.1",
     "normalize.css": "^4.1.1"
   },
   "devDependencies": {
