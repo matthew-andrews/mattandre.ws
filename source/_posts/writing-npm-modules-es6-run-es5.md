@@ -40,7 +40,7 @@ The following snippet in your `package.json` will convert all the files in src f
 ```json
 "main": "build/main.js",
 "scripts": {
-  "prepublish": "babel src --out-dir build"
+	"prepublish": "babel src --out-dir build"
 }
 ```
 
