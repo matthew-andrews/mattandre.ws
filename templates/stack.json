@@ -14,7 +14,7 @@
       "Type": "AWS::S3::BucketPolicy",
       "DependsOn": "Bucket",
       "Properties": {
-        "Bucket" : { "Fn::Join": [ "", [ { "Ref": "AWS::StackName" }, "-", { "Ref": "AWS::Region" } ] ] },
+        "Bucket" : "mattandre.ws",
         "PolicyDocument": {
           "Statement": [{
             "Effect": "Allow",
