@@ -6,4 +6,4 @@ deployment:
   production:
     branch: master
     commands:
-      - make deploy-prod
+      - make deploy
