@@ -22,8 +22,8 @@
 	<title><% if (title) { %><%= title %> | <% } %><%= config.title %></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<%- open_graph({twitter_id: config.twitter, google_plus: config.google_plus}) %>
-	<% if (theme.rss) { %>
-		<link rel="alternate" href="<%- theme.rss %>" title="<%= config.title %>" type="application/atom+xml">
+	<% if (config.feed.path_hack) { %>
+		<link rel="alternate" href="<%- config.feed.path_hack %>" title="<%= config.title %>" type="application/atom+xml">
 	<% } %>
 	<% if (config.highlight.enable) { %>
 		<link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
