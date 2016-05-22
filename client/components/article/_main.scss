@@ -2,6 +2,10 @@
 	margin: $block-margin 0;
 }
 
+.article__inner {
+	@include block;
+}
+
 .article__header {
 	padding: $article-padding;
 }
@@ -14,11 +18,11 @@
 
 .article__date {
 	@include block-caption;
-	float: left;
+	display: inline-block;
 }
 
 .article__category {
-	float: left;
+	display: inline-block;
 	line-height: 1em;
 	margin-left: 8px;
 

@@ -3,6 +3,12 @@
 	color: $color-grey;
 }
 
+.archive__article-inner {
+	@include block;
+	padding: 10px;
+	margin-bottom: 15px;
+}
+
 .archive__article-date {
 	color: $color-grey;
 	font-size: 0.85em;
