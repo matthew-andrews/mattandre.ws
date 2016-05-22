@@ -15,6 +15,7 @@ $block-margin: 20px;
 
 // Typography
 $line-height: 1.6em;
+$font-size: 14px;
 
 $font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-serif: Georgia, "Times New Roman", serif;
@@ -42,6 +43,7 @@ $font-mono: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
 body {
 	background-color: $color-background;
 	font-family: $font-sans;
+	font-size: $font-size;
 	line-height: $line-height;
 }
 
