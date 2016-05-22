@@ -1,47 +1,5 @@
-// Colors
-$color-black: #000000;
-$color-grey: #999999;
-$color-light-grey: #eeeeee;
-$color-white: #ffffff;
-
-$color-background: $color-light-grey;
-$color-border: #dddddd;
-$color-footer-background: #262a30;
-$color-link: #258fb8;
-
-// Other
-$article-padding: 20px;
-$block-margin: 20px;
-
-// Typography
-$line-height: 1.6em;
-$font-size: 14px;
-
-$font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$font-serif: Georgia, "Times New Roman", serif;
-$font-mono: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
-
-// Responsivity
-@mixin large() {
-	@media screen and (min-width: 910px) {
-		@content;
-	}
-}
-
-@mixin block-caption() {
-	font-weight: bold;
-	line-height: 1em;
-	margin-bottom: 1em;
-}
-
-@mixin block() {
-	background-color: $color-white;
-	border: 1px solid $color-border;
-	box-shadow: 1px 2px 3px $color-border;
-	border-radius: 3px;
-	display: block;
-	margin-bottom: 15px;
-}
+@import "shared/variables";
+@import "shared/mixins";
 
 @import "~normalize.css/normalize.css";
 @import "components/archive/main";

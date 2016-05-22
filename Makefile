@@ -7,10 +7,10 @@ build build-production:
 	mv public/feed.xml public/feed
 
 run:
-	hexo serve -s
+	static public
 
 watch:
-	@$(MAKE) watch-hexo watch-super -j2
+	@$(MAKE) watch-super watch-hexo -j2
 
 watch-hexo:
 	hexo generate --watch
