@@ -69,16 +69,10 @@ module.exports = {
 		];
 
 		if (process.argv.indexOf('--dev') === -1) {
-			plugins.push(new webpack.DefinePlugin({ 'process.env': { 'NODE_ENV': '"production"' } }));
 			plugins.push(new webpack.optimize.UglifyJsPlugin({ 'compress': { 'warnings': false } }));
 			plugins.push(new AssetHashesPlugin());
 		}
 
 		return plugins;
-	})(),
-	resolve: {
-		root: [
-			path.resolve('./node_modules')
-		]
-	}
+	})()
 };

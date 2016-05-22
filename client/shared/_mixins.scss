@@ -1,0 +1,21 @@
+// Responsivity
+@mixin large() {
+	@media screen and (min-width: 910px) {
+		@content;
+	}
+}
+
+@mixin block-caption() {
+	font-weight: bold;
+	line-height: 1em;
+	margin-bottom: 1em;
+}
+
+@mixin block() {
+	background-color: $color-white;
+	border: 1px solid $color-border;
+	box-shadow: 1px 2px 3px $color-border;
+	border-radius: 3px;
+	display: block;
+	margin-bottom: 15px;
+}

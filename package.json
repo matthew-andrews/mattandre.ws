@@ -11,8 +11,7 @@
     "hexo-generator-index": "^0.2.0",
     "hexo-generator-tag": "^0.2.0",
     "hexo-renderer-ejs": "^0.2.0",
-    "hexo-renderer-marked": "^0.2.10",
-    "hexo-server": "^0.2.0"
+    "hexo-renderer-marked": "^0.2.10"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.6",
@@ -22,6 +21,7 @@
     "imports-loader": "^0.6.5",
     "lintspaces-cli": "^0.1.1",
     "node-sass": "^3.7.0",
+    "node-static": "^0.7.7",
     "normalize.css": "^4.1.1",
     "postcss-loader": "^0.9.1",
     "raw-loader": "^0.5.1",
