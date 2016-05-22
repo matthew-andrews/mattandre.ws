@@ -1,0 +1,37 @@
+// Create the dot
+.article-nav {
+	position: relative;
+
+	&:before {
+		width: 8px;
+		height: 8px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin-top: -4px;
+		margin-left: -4px;
+		content: "";
+		border-radius: 50%;
+		background: $color-grey;
+		box-shadow: 0 1px 2px $color-white;
+	}
+}
+
+.article-nav {
+	display: flex;
+}
+
+.article-nav__newer,
+.article-nav__older {
+	flex: 1;
+	padding: 0 20px 0;
+	color: $color-grey;
+}
+
+.article-nav__newer {
+	text-align: right;
+}
+
+.article-nav__title {
+	font-size: 0.85em;
+}
