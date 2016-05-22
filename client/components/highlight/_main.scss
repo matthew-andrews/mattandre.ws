@@ -13,14 +13,14 @@ $highlight-blue: #6699cc;
 $highlight-purple: #cc99cc;
 
 @mixin code-block() {
+	overflow: auto;
 	background: $highlight-background;
-	margin: 0 $article-padding * -1;
-	padding: 15px $article-padding;
+	margin: 0;
+	padding: 15px;
 	border-style: solid;
 	border-color: $color-border;
 	border-width: 1px 0;
 	color: $highlight-foreground;
-	line-height: $font-size;
 }
 
 @mixin line-numbers() {
@@ -36,7 +36,7 @@ $highlight-purple: #cc99cc;
 
 	code {
 		background: $color-background;
-		text-shadow: 0 1px #fff;
+		text-shadow: 0 1px $color-white;
 		padding: 0 0.3em;
 	}
 

@@ -3,12 +3,6 @@
 @import "_util/mixin"
 @import "_util/grid"
 
-.outer
-  clearfix()
-  max-width: (column-width + gutter-width) * columns + gutter-width
-  margin: 0 auto
-  padding: 0 gutter-width
-
 .inner
   column(columns)
 
@@ -20,14 +14,6 @@
 
 .clear
   clear: both
-
-#main
-  @media mq-normal
-    column(9)
-
-#sidebar
-  @media mq-normal
-    column(3)
 
 @import "_extend"
 @import "_partial/article"

@@ -68,4 +68,4 @@ One obvious downside is that for complex projects the scripts section of your `p
 
 {% img /images/trollface.png [[Thank you and good night]] %}
 
-* This might be a lie.
+\* This might be a lie.

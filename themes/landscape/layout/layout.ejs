@@ -2,7 +2,7 @@
 <body>
 	<%- partial('_partial/header', null, { cache: !config.relative_link }) %>
 	<div class="outer">
-		<section id="main"><%- body %></section>
+		<section class="main"><%- body %></section>
 		<%- partial('_partial/sidebar', null, { cache: !config.relative_link }) %>
 	</div>
 	<%- partial('_partial/footer', null, { cache: !config.relative_link }) %>
