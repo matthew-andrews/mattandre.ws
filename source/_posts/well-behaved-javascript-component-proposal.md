@@ -23,7 +23,7 @@ A well behaved component should be an instantiable object that exposes an API, w
 
 Unless instructed to by the parent application, the component should never search through, read from or write to the DOM.
 
-When the component wants to inform the parent application of an event prefer to do so via the observer pattern. One very light, NPM/bower installable event library is Wilson Page's event.
+When the component wants to inform the parent application of an event prefer to do so via the observer pattern. One very light, NPM/bower installable event library is Wilson Page's [event](https://github.com/wilsonpage/event).
 
 Until it has been instantiated the component should do nothing. The component should also do nothing when its javascript is first executed.
 
