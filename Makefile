@@ -16,3 +16,6 @@ watch-hexo:
 	hexo generate --watch
 
 test: verify
+
+deploy:
+	nht deploy-static `find . -path "./public/*"` --strip 1 --region eu-west-1 --cache-control 300 --bucket mattandre.ws

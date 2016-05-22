@@ -1,0 +1,896 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Matt Andrews</title>
+  <subtitle>Software engineer making apps – that aren’t apps – and more at the FT. 会说汉语.</subtitle>
+  <link href="/feed.xml" rel="self"/>
+  
+  <link href="https://mattandre.ws/"/>
+  <updated>2016-05-22T12:11:22.000Z</updated>
+  <id>https://mattandre.ws/</id>
+  
+  <author>
+    <name>Matt Andrews</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Writing npm modules in ES6 that run in ES5</title>
+    <link href="https://mattandre.ws/2015/07/writing-npm-modules-es6-run-es5/"/>
+    <id>https://mattandre.ws/2015/07/writing-npm-modules-es6-run-es5/</id>
+    <published>2015-07-22T23:00:00.000Z</published>
+    <updated>2016-05-22T12:11:22.000Z</updated>
+    
+    <content type="html">&lt;p&gt;“&lt;em&gt;Writing&lt;/em&gt; ES6 is lovely, but &lt;em&gt;using&lt;/em&gt; it is a nightmare,” a colleague of mine remarked today.&lt;/p&gt;
+&lt;p&gt;Actually, he used a swear word.&lt;/p&gt;
+&lt;p&gt;The problem is we’re far from being ready to assume that every app or module that depends on our npm modules is capable of understanding ES6. If we want to be able to write our modules in ES6 we must transform them.&lt;/p&gt;
+&lt;h2 id=&quot;What-should-and-should-not-be-committed-into-source-control&quot;&gt;&lt;a href=&quot;#What-should-and-should-not-be-committed-into-source-control&quot; class=&quot;headerlink&quot; title=&quot;What should and should not be committed into source control&quot;&gt;&lt;/a&gt;What should and should not be committed into source control&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Only the original source files should be committed into repositories.&lt;/li&gt;
+&lt;li&gt;Never commit anything that is automatically built or compiled by a tool or script.&lt;/li&gt;
+&lt;li&gt;Never commit css that has been built from Sass.&lt;/li&gt;
+&lt;li&gt;Or javascript that has been transpiled by babel.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;Why&quot;&gt;&lt;a href=&quot;#Why&quot; class=&quot;headerlink&quot; title=&quot;Why?&quot;&gt;&lt;/a&gt;Why?&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;It’s confusing for developers coming to the project fresh. It’s often not clear which files they should edit.&lt;/li&gt;
+&lt;li&gt;Built files &lt;em&gt;always&lt;/em&gt; drift out of sync with source files because someone &lt;em&gt;always&lt;/em&gt; forgets to rebuild before committing.&lt;/li&gt;
+&lt;li&gt;It makes using GitHub’s web UI to make changes impractical or often impossible.&lt;/li&gt;
+&lt;li&gt;It messes up diffs and commit history.&lt;/li&gt;
+&lt;li&gt;Just never commit built files*.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;* O.K. so this is like any other rule—break it before doing something even worse—but except on those occasions, definitely never do it!&lt;/p&gt;
+&lt;h2 id=&quot;Writing-npm-modules-in-ES6-so-that-they-run-in-ES5&quot;&gt;&lt;a href=&quot;#Writing-npm-modules-in-ES6-so-that-they-run-in-ES5&quot; class=&quot;headerlink&quot; title=&quot;Writing npm modules in ES6 so that they run in ES5&quot;&gt;&lt;/a&gt;Writing npm modules in ES6 so that they run in ES5&lt;/h2&gt;&lt;p&gt;There are some convenient hooks in npm scripts where you can integrate any build steps for npm modules. One of them is &lt;code&gt;prepublish&lt;/code&gt; that will, as the name suggests, run before npm pushes your module to the registry.&lt;/p&gt;
+&lt;p&gt;The following snippet in your &lt;code&gt;package.json&lt;/code&gt; will convert all the files in src from ES6 to ES5 and pop the result a new folder called &lt;code&gt;build&lt;/code&gt;:&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&quot;main&quot;: &quot;build/main.js&quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&quot;scripts&quot;: &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&quot;prepublish&quot;: &quot;babel src --out-dir build&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;Additionally, you can create an &lt;code&gt;.npmignore&lt;/code&gt; file with &lt;code&gt;src/&lt;/code&gt; in it to prevent the original pre-transpiled ES6 code from being published to the npm registry.&lt;/p&gt;
+&lt;h2 id=&quot;Side-effects&quot;&gt;&lt;a href=&quot;#Side-effects&quot; class=&quot;headerlink&quot; title=&quot;Side effects&quot;&gt;&lt;/a&gt;Side effects&lt;/h2&gt;&lt;p&gt;This has annoying consequences. Run &lt;code&gt;git status&lt;/code&gt; after an &lt;code&gt;npm publish&lt;/code&gt; and you’ll notice that, as expected, the built files have been generated—and git will tempt you to commit them.&lt;/p&gt;
+&lt;p&gt;As I’ve hopefully convinced you, committing built files is a Bad Idea™. Instead, you might consider adding &lt;code&gt;/build/&lt;/code&gt; to your &lt;code&gt;.gitignore&lt;/code&gt; file.&lt;/p&gt;
+&lt;p&gt;This will solve the immediate issue of stopping you accidentally committing your built files into git but will create another issue.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;npm publish&lt;/code&gt; will exclude all files matching the rules in &lt;code&gt;.gitignore&lt;/code&gt; from being published to the registry. If you added &lt;code&gt;/build/&lt;/code&gt; to your project’s &lt;code&gt;.gitignore&lt;/code&gt; the built JavaScript won’t be published and apps and modules depending on your component will break.&lt;/p&gt;
+&lt;p&gt;To fix this simply create a &lt;code&gt;.npmignore&lt;/code&gt; file — its mere existence will prevent npm looking at our .gitignore file and our code will be properly published to the npm registry.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Use a .npmignore file to keep stuff out of your package. If there’s no .npmignore file, but there is a .gitignore file, then npm will ignore the stuff matched by the .gitignore file. If you want to include something that is excluded by your .gitignore file, you can create an empty .npmignore file to override it. — &lt;a href=&quot;https://docs.npmjs.com/misc/developers&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://docs.npmjs.com/misc/developers&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;For our project we’ll probably want an .npmignore file that looks like this:-&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;src/&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;Side-Effects-round-2&quot;&gt;&lt;a href=&quot;#Side-Effects-round-2&quot; class=&quot;headerlink&quot; title=&quot;Side Effects, round 2&quot;&gt;&lt;/a&gt;Side Effects, round 2&lt;/h2&gt;&lt;p&gt;The npm command line tool will allow you to install dependencies from the registry — the normal way—or directly from git.&lt;/p&gt;
+&lt;p&gt;For example if you run &lt;code&gt;npm install --save strongloop/express&lt;/code&gt; it will bypass the npm registry and go straight to GitHub to download express from there.&lt;/p&gt;
+&lt;p&gt;Because we’ve pointed the main property of the package.json of our module to a file that doesn’t exist in git and therefore doesn’t exist when our module is installed this way &lt;em&gt;it will not work&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;The fix? Commit the built files.&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;“&lt;em&gt;Writing&lt;/em&gt; ES6 is lovely, but &lt;em&gt;using&lt;/em&gt; it is a nightmare,” a colleague of mine remarked today.&lt;/p&gt;
+&lt;p&gt;Actually, he used a sw
+    
+    </summary>
+    
+      <category term="Work" scheme="https://mattandre.ws/category/work/"/>
+    
+      <category term="JavaScript" scheme="https://mattandre.ws/category/work/javascript/"/>
+    
+    
+      <category term="JavaScript" scheme="https://mattandre.ws/tag/javascript/"/>
+    
+      <category term="ES6" scheme="https://mattandre.ws/tag/es6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Haikro: better Heroku deploys for Node.js</title>
+    <link href="https://mattandre.ws/2014/11/haikro-heroku-deploys-node-js/"/>
+    <id>https://mattandre.ws/2014/11/haikro-heroku-deploys-node-js/</id>
+    <published>2014-11-23T00:00:00.000Z</published>
+    <updated>2016-05-21T22:07:30.000Z</updated>
+    
+    <content type="html">&lt;p&gt;There’s a lot to love about Heroku. Servers spin up instantly. Code deployments are quick. You can rollback to any old version of your application in just one click.&lt;/p&gt;
+&lt;p&gt;And much, much more.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;But there’s a lot I don’t like about Heroku for Node.js web applications&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;By default it runs npm install to install dependencies as part of every deploy. Although it has some magic to cache those dependencies and the NPM registry is a lot more reliable than it used it be this still introduces some risk that if npm install &lt;strong&gt;can’t run, you won’t be able to deploy your app&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Also as our websites have gotten more complex, to keep our codebases tidy we’ve started using tools like SASS and Browserify to split our CSS and front-end JavaScript up across multiple files. This means that it’s quite normal for applications that I work on to need to be ‘built’ before they can be published on the web. If you’re using Heroku and need to run a lot of built steps as part of your deploy the options are even worse than for node_modules. You either need to remember to rebuild and commit the files that get generated into git before deploying — or run your &lt;strong&gt;entire build process on Heroku itself&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Running your build process on Heroku turns out to be quite difficult. Often build processes rely on a lot of tools — SASS, for example, relies on Ruby. If you run your build process on Heroku you’ll end up installing a lot of tools onto your web server that will only ever get used once, when the site is deployed. This slows down your deploy and makes it more fragile.&lt;/p&gt;
+&lt;p&gt;It is true that if you check your node_modules and, if you have them, build JavaScript and CSS files into git Heroku won’t need do all these steps on deploy but I prefer not to do that because doing this ruins ‘diffs’ previews between commits and means that you can’t make quick edits to code via the GitHub UI — need to run the whole build process for every change.&lt;/p&gt;
+&lt;h2 id=&quot;Introducing-Haikro&quot;&gt;&lt;a href=&quot;#Introducing-Haikro&quot; class=&quot;headerlink&quot; title=&quot;Introducing Haikro&quot;&gt;&lt;/a&gt;Introducing Haikro&lt;/h2&gt;&lt;p&gt;Heroku actually supports two mechanisms for deploying code. You can either use Heroku toolbelt and (typically) typing &lt;code&gt;git push heroku&lt;/code&gt; or they &lt;a href=&quot;https://devcenter.heroku.com/articles/platform-api-deploying-slugs&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;now also have a new API that can be used for deployments&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Unfortunately that new API is &lt;strong&gt;very&lt;/strong&gt; sensitive to the format of the applications you give it to run. Because of this I’ve written a small wrapper around that API that can be dropped into any Node.js project which means that the code that is deployed onto Heroku no longer needs to be the same code that is checked into git. I’ve called it &lt;strong&gt;&lt;a href=&quot;https://github.com/matthew-andrews/haikro&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Haikro&lt;/a&gt;&lt;/strong&gt;.&lt;/p&gt;
+&lt;figure class=&quot;highlight sh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;./node_modules/.bin/haikro build deploy \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	--app my-heroku-app \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	--heroku-token $(HEROKU_AUTH_TOKEN) \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	--commit `git rev-parse HEAD` \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	--verbose&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;I’ve tried my best not to reinvent too much and so pretty much everything about how you write Node.js apps for deploying via git push heroku should work for Haikro too, for example:-&lt;/p&gt;
+&lt;h3 id=&quot;Specific-version-of-Node-js&quot;&gt;&lt;a href=&quot;#Specific-version-of-Node-js&quot; class=&quot;headerlink&quot; title=&quot;Specific version of Node.js&quot;&gt;&lt;/a&gt;Specific version of Node.js&lt;/h3&gt;&lt;p&gt;To specify a particular version of Node.js add an ‘engines.node’ property to your package.json file with the semver of your desired Node.js version:-&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;[…]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&quot;engines&quot;: &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&quot;node&quot;: &quot;0.10.x&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[…]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;Procfile&quot;&gt;&lt;a href=&quot;#Procfile&quot; class=&quot;headerlink&quot; title=&quot;Procfile&quot;&gt;&lt;/a&gt;Procfile&lt;/h3&gt;&lt;p&gt;Also Procfiles for web nodes will continue to work (but not yet for worker nodes):-&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;web: node server/app.js&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;Bringing-this-together&quot;&gt;&lt;a href=&quot;#Bringing-this-together&quot; class=&quot;headerlink&quot; title=&quot;Bringing this together&quot;&gt;&lt;/a&gt;Bringing this together&lt;/h3&gt;&lt;p&gt;This means you can pre-download your dependencies and run your build steps locally or as part of your Continuous Integration process (I’ve tested &lt;a href=&quot;https://codeship.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Codeship&lt;/a&gt;, &lt;a href=&quot;https://travis-ci.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Travis&lt;/a&gt; and &lt;a href=&quot;https://circleci.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;CircleCI&lt;/a&gt;) and then all Heroku needs to do is run your application.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/matthew-andrews/haikro-sass-app/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Continue to a full worked example using Grunt, SASS and Express…&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/matthew-andrews/haikro/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Or, take a look at the Haikro repository.&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;There’s a lot to love about Heroku. Servers spin up instantly. Code deployments are quick. You can rollback to any old version of your ap
+    
+    </summary>
+    
+      <category term="Work" scheme="https://mattandre.ws/category/work/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Yet another task runner</title>
+    <link href="https://mattandre.ws/2014/08/task-runner-npm-scripts/"/>
+    <id>https://mattandre.ws/2014/08/task-runner-npm-scripts/</id>
+    <published>2014-08-29T23:00:00.000Z</published>
+    <updated>2016-05-22T08:47:02.000Z</updated>
+    
+    <content type="html">&lt;p&gt;Now you’ve all heard of &lt;strong&gt;&lt;a href=&quot;http://gruntjs.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Grunt&lt;/a&gt;&lt;/strong&gt;, &lt;strong&gt;&lt;a href=&quot;http://gulpjs.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Gulp&lt;/a&gt;&lt;/strong&gt;, &lt;strong&gt;&lt;a href=&quot;https://github.com/joliss/broccoli&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Broccoli&lt;/a&gt;&lt;/strong&gt; and &lt;strong&gt;&lt;a href=&quot;http://duojs.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Duo&lt;/a&gt;&lt;/strong&gt; I think it’s time for me to announce a task runner for JavaScript projects that I’ve been &lt;em&gt;ahem&lt;/em&gt; working on&lt;em&gt;. It’s called &lt;em&gt;*scripts&lt;/em&gt;&lt;/em&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;Adding-tasks&quot;&gt;&lt;a href=&quot;#Adding-tasks&quot; class=&quot;headerlink&quot; title=&quot;Adding tasks&quot;&gt;&lt;/a&gt;Adding tasks&lt;/h2&gt;&lt;p&gt;Tasks are simply added to your project’s &lt;code&gt;package.json&lt;/code&gt; like this:&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;[..]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&quot;scripts&quot;: &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&quot;test&quot;: &quot;npm run jshint &amp;amp;&amp;amp; npm run lintspaces &amp;amp;&amp;amp; mocha&quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&quot;jshint&quot;: &quot;jshint *.js&quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&quot;lintspaces&quot;: &quot;lintspaces -ntd spaces -i js-comments -s 2 *.js&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[..]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;Running-tasks&quot;&gt;&lt;a href=&quot;#Running-tasks&quot; class=&quot;headerlink&quot; title=&quot;Running tasks&quot;&gt;&lt;/a&gt;Running tasks&lt;/h2&gt;&lt;p&gt;Simply type &lt;code&gt;npm run &amp;lt;scriptname&amp;gt;&lt;/code&gt; into your Terminal. For the most commonly run script, &lt;code&gt;test&lt;/code&gt;, you can even just type: &lt;code&gt;npm test&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;Pass-information-from-task-to-task&quot;&gt;&lt;a href=&quot;#Pass-information-from-task-to-task&quot; class=&quot;headerlink&quot; title=&quot;Pass information from task to task&quot;&gt;&lt;/a&gt;Pass information from task to task&lt;/h2&gt;&lt;p&gt;By using the back-tick ` and &lt;code&gt;npm run&lt;/code&gt;‘s silent mode you can even pass information from task to task:&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;[..]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&quot;scripts&quot;: &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&quot;test&quot;: &quot;npm run jshint &amp;amp;&amp;amp; npm run lintspaces &amp;amp;&amp;amp; mocha&quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&quot;jshint&quot;: &quot;jshint `npm run -s js-files`&quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&quot;lintspaces&quot;: &quot;lintspaces -ntd spaces -i js-comments -s 2 `npm run -s js-files`&quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&quot;js-files&quot;: &quot;find . -name &#39;*.js&#39; ! -path &#39;./node_modules/*&#39;&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[..]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;Here I am using &lt;code&gt;npm run -s js-files&lt;/code&gt; to get a list of all the JavaScript files in my project, which are then being linted by Lintspaces and JSHint via &lt;code&gt;npm run jshint&lt;/code&gt; and &lt;code&gt;npm run lintspaces&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;Plugins&quot;&gt;&lt;a href=&quot;#Plugins&quot; class=&quot;headerlink&quot; title=&quot;Plugins&quot;&gt;&lt;/a&gt;Plugins&lt;/h2&gt;&lt;p&gt;It comes with support for &lt;strong&gt;&lt;a href=&quot;http://jshint.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;JSHint&lt;/a&gt;&lt;/strong&gt;, &lt;strong&gt;&lt;a href=&quot;https://github.com/substack/node-browserify&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Browserify&lt;/a&gt;&lt;/strong&gt;, and more – in fact because it works any tool that has a command line interface directly it supports everything! And you can say goodbye to installing &lt;code&gt;foo-contrib-bar&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;Shut-up-Matt&quot;&gt;&lt;a href=&quot;#Shut-up-Matt&quot; class=&quot;headerlink&quot; title=&quot;Shut up, Matt&quot;&gt;&lt;/a&gt;Shut up, Matt&lt;/h2&gt;&lt;p&gt;If you haven’t guessed by now this post is intentionally a little bit tongue-in-cheek and provocative – but it is also a serious suggestion and I’m &lt;a href=&quot;http://substack.net/task_automation_with_npm_run&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;not the first person to suggest it&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Using &lt;code&gt;npm scripts&lt;/code&gt; as your task runner has a number of quite compelling advantages:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;If you have node, &lt;strong&gt;npm scripts is already installed&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;With npm scripts you will have fewer dependencies because you install tools directly rather than the task-runner specific version of each tool, which makes them &lt;strong&gt;quicker to install and easier to update&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Reduces the number of files&lt;/strong&gt; in your repositories (no need for an additional Gruntfile, Gulpfile, etc)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;One obvious downside is that for complex projects the scripts section of your &lt;code&gt;package.json&lt;/code&gt; files will start to get a little crowded. But for those cases there’s a natural upgrade path to &lt;a href=&quot;http://mrbook.org/tutorials/make/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;make&lt;/a&gt;…&lt;/p&gt;
+&lt;img src=&quot;/images/trollface.png&quot; title=&quot;[[Thank you and good night]]&quot;&gt;
+&lt;p&gt;* This might be a lie.&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Now you’ve all heard of &lt;strong&gt;&lt;a href=&quot;http://gruntjs.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Grunt&lt;/a&gt;&lt;/strong&gt;, &lt;strong&gt;&lt;a href=&quot;http://
+    
+    </summary>
+    
+      <category term="Work" scheme="https://mattandre.ws/category/work/"/>
+    
+      <category term="JavaScript" scheme="https://mattandre.ws/category/work/javascript/"/>
+    
+    
+      <category term="broccoli" scheme="https://mattandre.ws/tag/broccoli/"/>
+    
+      <category term="duo" scheme="https://mattandre.ws/tag/duo/"/>
+    
+      <category term="grunt" scheme="https://mattandre.ws/tag/grunt/"/>
+    
+      <category term="gulp" scheme="https://mattandre.ws/tag/gulp/"/>
+    
+      <category term="make" scheme="https://mattandre.ws/tag/make/"/>
+    
+      <category term="phing" scheme="https://mattandre.ws/tag/phing/"/>
+    
+      <category term="task-runner" scheme="https://mattandre.ws/tag/task-runner/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>DOM Event Delegation without jQuery</title>
+    <link href="https://mattandre.ws/2014/08/small-beautiful-dom-delegation/"/>
+    <id>https://mattandre.ws/2014/08/small-beautiful-dom-delegation/</id>
+    <published>2014-08-01T23:00:00.000Z</published>
+    <updated>2016-05-22T08:23:17.000Z</updated>
+    
+    <content type="html">&lt;p&gt;When building the &lt;a href=&quot;https://app.ft.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;FT’s&lt;/a&gt; and &lt;a href=&quot;https://app.economist.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Economist’s&lt;/a&gt; HTML5 apps we felt that as we were targeting only the latest browsers shipping the entirety of jQuery would be a bit – well – wasteful. What we wanted were small focused components that could be swapped in and out that we could pull in (initially) via &lt;strong&gt;npm&lt;/strong&gt;, &lt;strong&gt;bower&lt;/strong&gt; or (later) our &lt;a href=&quot;https://origami-build.ft.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;build service&lt;/a&gt;. This thinking has since spread to the rest of the FT, who are now also &lt;a href=&quot;http://origami.ft.com/docs/3rd-party-a-list/#why-not-jquery&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;moving away from jQuery&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;So-what-is-jQuery&quot;&gt;&lt;a href=&quot;#So-what-is-jQuery&quot; class=&quot;headerlink&quot; title=&quot;So what is jQuery?&quot;&gt;&lt;/a&gt;So what &lt;em&gt;is&lt;/em&gt; jQuery?&lt;/h2&gt;&lt;p&gt;According the documentation, it’s quite a lot of things – as a very crude measure, &lt;a href=&quot;http://api.jquery.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;its API docs have 593 articles&lt;/a&gt;. I don’t think I’m unusual in thinking that the vast majority of that I’ve never used and probably would never use.&lt;/p&gt;
+&lt;p&gt;For me what has made jQuery so helpful are its wrappers that make Ajax, DOM manipulation, DOM transversal and listening to events simple to do.&lt;/p&gt;
+&lt;p&gt;Since the ‘invention’ of jQuery the browser has completely changed. Whilst we sometimes need to maintain backwards compatibility, for example &lt;a href=&quot;https://developer.microsoft.com/en-us/microsoft-edge/ie6countdown/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;our stubborn friends in China who just refuse to let go of IE6&lt;/a&gt;, the browser now provides a huge amount of what jQuery gave us natively. (Specifically I’m thinking of things like &lt;code&gt;querySelectorAll&lt;/code&gt;, &lt;code&gt;classList&lt;/code&gt;, the new array methods)&lt;/p&gt;
+&lt;p&gt;Also after using TJ Holowaychuk’s &lt;a href=&quot;https://github.com/visionmedia/superagent&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;SuperAgent&lt;/a&gt; I can’t look at jQuery’s Ajax API without seeing its idiosyncrasies. (Why is &lt;code&gt;type&lt;/code&gt; not &lt;code&gt;method&lt;/code&gt;!?)&lt;/p&gt;
+&lt;h2 id=&quot;What-to-do-about-event-delegation&quot;&gt;&lt;a href=&quot;#What-to-do-about-event-delegation&quot; class=&quot;headerlink&quot; title=&quot;What to do about event delegation?&quot;&gt;&lt;/a&gt;What to do about event delegation?&lt;/h2&gt;&lt;p&gt;But there was a piece of jQuery we needed that was missing in the component world and that is a &lt;em&gt;nice&lt;/em&gt; library to help with event delegation &lt;a href=&quot;https://www.sitepoint.com/javascript-event-delegation-is-easier-than-you-think/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;(read more about Javascript event delegation and why you might use this pattern on Site Point)&lt;/a&gt;. So we built one and called it &lt;a href=&quot;https://github.com/ftlabs/ftdomdelegate&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;FT DOM Delegate&lt;/a&gt; (or &lt;code&gt;dom-delegate&lt;/code&gt; on the npm or bower registries).&lt;/p&gt;
+&lt;p&gt;Without the baggage of an old API that everyone already knows we were able to start from scratch. So this is what we did:-&lt;/p&gt;
+&lt;h2 id=&quot;You-decide-which-DOM-element-to-listen-to-events-on&quot;&gt;&lt;a href=&quot;#You-decide-which-DOM-element-to-listen-to-events-on&quot; class=&quot;headerlink&quot; title=&quot;You decide which DOM element to listen to events on&quot;&gt;&lt;/a&gt;You decide which DOM element to listen to events on&lt;/h2&gt;&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; bodyListener = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Delegate(&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.body);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; targetedListener = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Delegate(&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.getElementById(&lt;span class=&quot;string&quot;&gt;&#39;my-el&#39;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;Rather than listening to all events on the same place (usually &lt;code&gt;document.body&lt;/code&gt;) FT DOM Delegate allows you to create more focused DOM Delegates that only listen to events within a specific element. This is really helpful for creating self-contained widgets or in single page applications like our’s where we dynamically load pages without refreshing the page (where each page might require a different set of event listeners).&lt;/p&gt;
+&lt;h2 id=&quot;Delegates-can-be-killed&quot;&gt;&lt;a href=&quot;#Delegates-can-be-killed&quot; class=&quot;headerlink&quot; title=&quot;Delegates can be killed&quot;&gt;&lt;/a&gt;Delegates can be killed&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;targetedListener.destroy();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;Just one call to &lt;code&gt;destroy&lt;/code&gt; and all events will be unbound, event listeners removed. On single page apps with views being rapidly created and destroyed – this is essential to prevent memory leaks.&lt;/p&gt;
+&lt;p&gt;We actually went a step further to make delegates &lt;strong&gt;recyclable&lt;/strong&gt;. Via the delegate’s &lt;code&gt;root&lt;/code&gt; method you can trivially attach and detach delegates to DOM nodes. This is useful as it allows you to completely re-render the pages’ HTML in javascript without having to re-attach all the event listeners individually.&lt;/p&gt;
+&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;body&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;section&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;id&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;pane-1&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;button&lt;/span&gt;&amp;gt;&lt;/span&gt;Click me&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;button&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;section&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;section&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;id&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;pane-2&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;button&lt;/span&gt;&amp;gt;&lt;/span&gt;No, Click me&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;button&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;section&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;body&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; pane1 = &lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.getElementById(&lt;span class=&quot;string&quot;&gt;&#39;pane-1&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; pane2 = &lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.getElementById(&lt;span class=&quot;string&quot;&gt;&#39;pane-1&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; dd = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Delegate();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;dd.on(&lt;span class=&quot;string&quot;&gt;&#39;click&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;button&#39;&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&quot;button clicked&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;dd.root(pane1);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// Clicking &#39;Click me&#39; =&amp;gt; console.log&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// Clicking &#39;No, click me&#39; =&amp;gt; nothing&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;dd.root(pane2);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// Clicking &#39;Click me&#39; =&amp;gt; nothing&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// Clicking &#39;No, click me&#39; =&amp;gt; console.log&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;Delegates-can-be-created-without-the-DOM&quot;&gt;&lt;a href=&quot;#Delegates-can-be-created-without-the-DOM&quot; class=&quot;headerlink&quot; title=&quot;Delegates can be created without the DOM&quot;&gt;&lt;/a&gt;Delegates can be created without the DOM&lt;/h2&gt;&lt;p&gt;Because Delegates can be detached from the DOM we realised that we didn’t actually need any DOM at all to be able to set up event listeners.&lt;/p&gt;
+&lt;p&gt;You can set up a delegate’s event listeners whenever you like, and when you are ready to actually start receiving those events, simply attach the delegate:-&lt;/p&gt;
+&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; dd = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Delegate();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;dd.on(&lt;span class=&quot;string&quot;&gt;&#39;click&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;.close&#39;&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	closeOverlay();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// ** some time later **&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; overlay = &lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.getElementById(&lt;span class=&quot;string&quot;&gt;&#39;overlay&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;dd.root(overlay);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;Use-capture-for-pros&quot;&gt;&lt;a href=&quot;#Use-capture-for-pros&quot; class=&quot;headerlink&quot; title=&quot;Use capture for pros&quot;&gt;&lt;/a&gt;Use capture for pros&lt;/h2&gt;&lt;p&gt;nother area we felt was missing from other event libraries was that whilst they were extremely helpful in basic cases – because of the need to support legacy IE they didn’t give you access to decide whether you wanted your event listeners to be capturing or not. (For more detail on how DOM events and &lt;code&gt;useCapture&lt;/code&gt; work &lt;a href=&quot;https://www.smashingmagazine.com/2013/11/12/an-introduction-to-dom-events/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;read my former colleague Wilson Page’s article on Smashing Mag)&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Basically all events start at the document body then step through the DOM until they hit the element where the event (for example a click) was triggered. Then, if the event can bubble, it reverses back through the DOM until it hits the document body again. (Not all events bubble – for example &lt;code&gt;error&lt;/code&gt; and &lt;code&gt;blur&lt;/code&gt; events)&lt;/p&gt;
+&lt;p&gt;As the event moves from the document body towards the target element it is said to be in its &lt;strong&gt;capturing phase&lt;/strong&gt;, when it reaches the target it is &lt;strong&gt;at target&lt;/strong&gt; and is in its &lt;strong&gt;bubbling phase&lt;/strong&gt; when it reverses back up through the document.&lt;/p&gt;
+&lt;p&gt;Sometimes when you are adding listeners you will want to specify which stage of the event flow you are interested in. Our DOM Delegate library allows you to do this via its fourth parameter:-&lt;/p&gt;
+&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;delegate.on(&lt;span class=&quot;string&quot;&gt;&#39;click&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;.js-btn&#39;&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&quot;Caught event during capturing phase!&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;, &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;delegate.on(&lt;span class=&quot;string&quot;&gt;&#39;click&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;.js-btn&#39;&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&quot;Caught event during bubbling phase!&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;, &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;Sensible-defaults-for-capture-phases&quot;&gt;&lt;a href=&quot;#Sensible-defaults-for-capture-phases&quot; class=&quot;headerlink&quot; title=&quot;Sensible defaults for capture phases&quot;&gt;&lt;/a&gt;Sensible defaults for capture phases&lt;/h2&gt;&lt;p&gt;Some events don’t bubble – e.g. &lt;code&gt;error&lt;/code&gt;, &lt;code&gt;blur&lt;/code&gt;, &lt;code&gt;focus&lt;/code&gt;, &lt;code&gt;scroll&lt;/code&gt;, and &lt;code&gt;resize&lt;/code&gt; – so for these (unless you specify otherwise) we set &lt;code&gt;useCapture&lt;/code&gt; to be &lt;code&gt;true&lt;/code&gt; by default.&lt;/p&gt;
+&lt;p&gt;This is handy as we like to handle all image load failures by hiding them, which we can do with just a few lines of code:-&lt;/p&gt;
+&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; dd = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Delegate(&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.body);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;dd.on(&lt;span class=&quot;string&quot;&gt;&#39;error&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;img&#39;&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.style.display = &lt;span class=&quot;string&quot;&gt;&#39;none&#39;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;Events-for-the-future&quot;&gt;&lt;a href=&quot;#Events-for-the-future&quot; class=&quot;headerlink&quot; title=&quot;Events for the future&quot;&gt;&lt;/a&gt;Events for the future&lt;/h2&gt;&lt;p&gt;With this library we believe we’ve made a really nice and absolutely tiny event delegation library that gives you as much power as the browser native methods – with some helpful methods that allow to you to easily tidy up after yourself. And we’re one step closer to kicking our jQuery addiction.&lt;/p&gt;
+&lt;p&gt;And, of course, it’s open source: &lt;a href=&quot;https://github.com/ftlabs/ftdomdelegate&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/ftlabs/ftdomdelegate&lt;/a&gt;.&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;When building the &lt;a href=&quot;https://app.ft.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;FT’s&lt;/a&gt; and &lt;a href=&quot;https://app.economist.com/&quot; target=&quot;
+    
+    </summary>
+    
+      <category term="Work" scheme="https://mattandre.ws/category/work/"/>
+    
+      <category term="JavaScript" scheme="https://mattandre.ws/category/work/javascript/"/>
+    
+    
+      <category term="FT" scheme="https://mattandre.ws/tag/ft/"/>
+    
+      <category term="JavaScript" scheme="https://mattandre.ws/tag/javascript/"/>
+    
+      <category term="web app" scheme="https://mattandre.ws/tag/web-app/"/>
+    
+      <category term="jQuery" scheme="https://mattandre.ws/tag/jquery/"/>
+    
+      <category term="HTML5" scheme="https://mattandre.ws/tag/html5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Playing with Channel messaging</title>
+    <link href="https://mattandre.ws/2014/05/javascript-wormholes-playing-channel-messaging/"/>
+    <id>https://mattandre.ws/2014/05/javascript-wormholes-playing-channel-messaging/</id>
+    <published>2014-05-17T23:00:00.000Z</published>
+    <updated>2016-05-22T16:45:24.000Z</updated>
+    
+    <content type="html">&lt;p&gt;Whilst building some &lt;a href=&quot;https://matthew-andrews.github.io/serviceworker-simple&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;recent&lt;/a&gt; &lt;a href=&quot;https://matthew-andrews.github.io/serviceworker-chat&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;experiments&lt;/a&gt; with ServiceWorkers I’ve discovered a whole new API that I never knew existed: &lt;strong&gt;Channel messaging&lt;/strong&gt;. Paper-clipped onto the end of the HTML5 Web Messaging specification, Channel messaging enables:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;…independent pieces of code (e.g. running in different browsing contexts) to communicate directly&lt;br&gt;&lt;a href=&quot;http://www.w3.org/TR/webmessaging/#channel-messaging&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.w3.org/TR/webmessaging/#channel-messaging&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;As far as I can see, they’re basically Javascript wormholes between different tabs and windows.&lt;/p&gt;
+&lt;h1 id=&quot;How-do-they-work&quot;&gt;&lt;a href=&quot;#How-do-they-work&quot; class=&quot;headerlink&quot; title=&quot;How do they work?&quot;&gt;&lt;/a&gt;How do they work?&lt;/h1&gt;&lt;p&gt;te a new channel you call the &lt;code&gt;MessageChannel&lt;/code&gt; constructor in the normal way:&lt;/p&gt;
+&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; wormhole = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; MessageChannel();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;The wormhole has two portals, which are &lt;code&gt;wormhole.port1&lt;/code&gt; and &lt;code&gt;wormhole.port2&lt;/code&gt; and to send objects between one and the other you can &lt;code&gt;postMessage&lt;/code&gt; the data on the sending port and listen to &lt;code&gt;message&lt;/code&gt; message events on the receiving port.&lt;/p&gt;
+&lt;p&gt;One small complexity is that you won’t be able to listen to any of the incoming messages until &lt;code&gt;start&lt;/code&gt; has been called on the &lt;em&gt;receiving&lt;/em&gt; port.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Note: any data sent before the port has been opened will be lost – and there’s no way to interrogate the &lt;code&gt;MessageChannel&lt;/code&gt; to find out whether a port is open or not.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Also note: as &lt;code&gt;postMessage&lt;/code&gt; is asynchronous you can actually swap the &lt;code&gt;wormhole.port2.start()&lt;/code&gt; and &lt;code&gt;wormhole.port1.postMessage(&amp;#39;HELLO&amp;#39;);&lt;/code&gt; around and it will still work.&lt;/em&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; wormhole = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; MessageChannel();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;wormhole.port2.addEventListener(&lt;span class=&quot;string&quot;&gt;&#39;message&#39;&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;event&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&#39;port2 received:&#39;&lt;/span&gt;+event.data);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;wormhole.port2.start();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;wormhole.port1.postMessage(&lt;span class=&quot;string&quot;&gt;&#39;HELLO&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;a href=&quot;http://jsbin.com/natom/1/edit?js,console&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;See this for yourself on JSBin&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;It’s-no-fun-to-talk-to-yourself&quot;&gt;&lt;a href=&quot;#It’s-no-fun-to-talk-to-yourself&quot; class=&quot;headerlink&quot; title=&quot;It’s no fun to talk to yourself&quot;&gt;&lt;/a&gt;It’s no fun to talk to yourself&lt;/h2&gt;&lt;p&gt;Let’s now see if we can use a Shared Worker to wire two browser windows up with each other and see what we are able to send, window to window, tab to tab. The &lt;a href=&quot;https://github.com/matthew-andrews/messagechannel-demo/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;full code is up on GitHub&lt;/a&gt; and you can &lt;a href=&quot;https://matthew-andrews.github.io/messagechannel-demo&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;try it out there&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For this we’ll need two files: &lt;code&gt;index.html&lt;/code&gt; and &lt;code&gt;agent.js&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;agent-js&quot;&gt;&lt;a href=&quot;#agent-js&quot; class=&quot;headerlink&quot; title=&quot;/agent.js&quot;&gt;&lt;/a&gt;&lt;code&gt;/agent.js&lt;/code&gt;&lt;/h3&gt;&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; mc;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;onconnect = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;e&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; port = e.ports[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (mc) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		port.postMessage(&amp;#123; port: mc.port2 &amp;#125;, [m c.port2 ]);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		mc = &lt;span class=&quot;literal&quot;&gt;undefined&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125; &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		mc = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; MessageChannel();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		port.postMessage(&amp;#123; port: mc.port1 &amp;#125;, [ mc.port1 ]);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;This is the &lt;code&gt;SharedWorker&lt;/code&gt;. Every odd browser window that connects to it (ie. the 1st, 3rd, 5th, etc), it creates a new &lt;code&gt;MessageChannel&lt;/code&gt; and passes one of the ports of that MessageChannel object to that browser window. It will also keep hold of a reference to the most recently created &lt;code&gt;MessageChannel&lt;/code&gt; so that it can give the other port of it to the ‘even’ connecting browser windows (the 2nd, 3rd, 4th, …).&lt;/p&gt;
+&lt;p&gt;This allows the &lt;code&gt;SharedWorker&lt;/code&gt; to hook up the browser windows, after which it can simply get out of the way – allowing the browser windows to talk to each other directly.&lt;/p&gt;
+&lt;h3 id=&quot;index-html&quot;&gt;&lt;a href=&quot;#index-html&quot; class=&quot;headerlink&quot; title=&quot;/index.html&quot;&gt;&lt;/a&gt;&lt;code&gt;/index.html&lt;/code&gt;&lt;/h3&gt;&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;lt;!DOCTYPE HTML&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;title&lt;/span&gt;&amp;gt;&lt;/span&gt;MessageChannel Demo&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;title&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;pre&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;id&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;log&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;Log:&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;pre&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;script&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;javascript&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; worker = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; SharedWorker(&lt;span class=&quot;string&quot;&gt;&#39;agent.js&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; log = &lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.getElementById(&lt;span class=&quot;string&quot;&gt;&#39;log&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	worker.port.onmessage = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;e&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.portal = e.data.port;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.portal.start();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.portal.addEventListener(&lt;span class=&quot;string&quot;&gt;&#39;message&#39;&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;e&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			log.innerText += &lt;span class=&quot;string&quot;&gt;&#39;\n&#39;&lt;/span&gt;+ (&lt;span class=&quot;keyword&quot;&gt;typeof&lt;/span&gt; e.data) + &lt;span class=&quot;string&quot;&gt;&#39; : &#39;&lt;/span&gt; + e.data;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;script&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;onclick&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;window.portal.postMessage(&#39;hi&#39;);&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;Send &#39;hi&#39;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;button&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;onclick&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;var now = new Date();window.portal.postMessage(now);&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;Send a date object&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;button&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;onclick&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;var node = document.createElement(&#39;div&#39;);window.portal.postMessage(node);&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;Send a dom node&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;button&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;This code will connect to the &lt;code&gt;SharedWorker&lt;/code&gt;, wait for the &lt;code&gt;SharedWorker&lt;/code&gt; to send it one of the ports of the &lt;code&gt;MessageChannel&lt;/code&gt; (which the &lt;code&gt;SharedWorker&lt;/code&gt; will create) and when it gets one, it will start listening to &lt;strong&gt;message&lt;/strong&gt; events and print out the data it receives onto the web page.&lt;/p&gt;
+&lt;p&gt;I’ve also added some buttons so that it’s easy to test sending bits of data between the two browser windows. (Remember, you need to have two browser windows open for this to work)&lt;/p&gt;
+&lt;h2 id=&quot;Uncaught-DataCloneError-Failed-to-execute-‘postMessage’-on-‘MessagePort’-An-object-could-not-be-cloned&quot;&gt;&lt;a href=&quot;#Uncaught-DataCloneError-Failed-to-execute-‘postMessage’-on-‘MessagePort’-An-object-could-not-be-cloned&quot; class=&quot;headerlink&quot; title=&quot;Uncaught DataCloneError: Failed to execute ‘postMessage’ on ‘MessagePort’: An object could not be cloned.&quot;&gt;&lt;/a&gt;Uncaught DataCloneError: Failed to execute ‘postMessage’ on ‘MessagePort’: An object could not be cloned.&lt;/h2&gt;&lt;p&gt;Not every kind of javascript object can be sent in this way (which is why DOM nodes fail). According to the specification:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Posts a message to the given window. Messages can be structured objects, e.g. nested objects and arrays, can contain JavaScript values (strings, numbers, Dates, etc), and can contain certain data objects such as File Blob, FileList, and ArrayBuffer objects.&lt;br&gt;&lt;a href=&quot;http://www.w3.org/TR/2012/WD-webmessaging-20120313/#posting-messages&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.w3.org/TR/2012/WD-webmessaging-20120313/#posting-messages&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Whilst building some &lt;a href=&quot;https://matthew-andrews.github.io/serviceworker-simple&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;recent&lt;/a&gt; &lt;a href=&quot;
+    
+    </summary>
+    
+      <category term="Work" scheme="https://mattandre.ws/category/work/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Beware of embedding tweets in full screen single page apps</title>
+    <link href="https://mattandre.ws/2014/05/embedding-tweets-single-page-apps/"/>
+    <id>https://mattandre.ws/2014/05/embedding-tweets-single-page-apps/</id>
+    <published>2014-05-09T23:00:00.000Z</published>
+    <updated>2016-05-22T16:55:07.000Z</updated>
+    
+    <content type="html">&lt;p&gt;Using components built by other people is fundamental to the success of any piece of technology. The more high quality physical and virtual components you can pull together, the less you need to build from scratch and the faster you can build things. We’ve been sharing and reusing code since the beginning of the web – and almost every web company that I can think of offers some way to embed their content on your site.&lt;/p&gt;
+&lt;p&gt;That’s all fine until you find the component does something that you don’t expect it to. For example, if the creator of the component made an assumption that is not true for your application, instead of saving you time it can cause problems for your application or the component itself. This happened to us when we tried to embed Tweets in the FT Web App.&lt;/p&gt;
+&lt;h2 id=&quot;This-is-an-embedded-Tweet&quot;&gt;&lt;a href=&quot;#This-is-an-embedded-Tweet&quot; class=&quot;headerlink&quot; title=&quot;This is an embedded Tweet:&quot;&gt;&lt;/a&gt;This is an embedded Tweet:&lt;/h2&gt;&lt;p&gt;This is an embedded Tweet:&lt;/p&gt;
+&lt;p&gt;&lt;blockquote class=&quot;twitter-tweet&quot; data-lang=&quot;en&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;Want to know how to make your web page/app work offline or survive a crappy connection? &lt;a href=&quot;http://t.co/jQl6G1TiO2&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://t.co/jQl6G1TiO2&lt;/a&gt; with &lt;a href=&quot;https://twitter.com/andrewsmatt&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;@andrewsmatt&lt;/a&gt;&lt;/p&gt;&amp;mdash; Jim Cresswell (@JimCresswell) &lt;a href=&quot;https://twitter.com/JimCresswell/status/464336250447867904&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;May 8, 2014&lt;/a&gt;&lt;/blockquote&gt;&lt;/p&gt;
+&lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;One of the features the JavaScript Twitter use for embedded tweets on external websites has is that if you click &lt;strong&gt;reply&lt;/strong&gt; or &lt;strong&gt;retweet&lt;/strong&gt; instead of taking your user away from your website to Twitter, it will helpfully open a new, smaller window in which the user can use to post Tweets from, like this:&lt;/p&gt;
+&lt;img src=&quot;/images/tweet-window.png&quot;&gt;
+&lt;p&gt;The problem is that the way this is implemented is that it doesn’t just affect the behaviour for links within the &lt;code&gt;&amp;lt;blockquote class=&amp;quot;twitter-tweet&amp;quot;&amp;gt;&lt;/code&gt; elements, it will listen to clicks on &lt;strong&gt;all&lt;/strong&gt; links &lt;strong&gt;anywhere&lt;/strong&gt; anywhere on your web page – and if the link is to a URL containing &lt;code&gt;twitter.com/intent&lt;/code&gt; it will open a small new window.&lt;/p&gt;
+&lt;p&gt;To see this behaviour &lt;a href=&quot;https://twitter.com/intent/tweet&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;click here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Interestingly it’ll also match links to others domains, as long as they contain the pattern &lt;code&gt;twitter.com/intent/&lt;/code&gt;. Eg. &lt;a href=&quot;http://mattandre.ws/twitter.com/intent/tweet&quot;&gt;http://mattandre.ws/twitter.com/intent/tweet&lt;/a&gt;. &lt;a href=&quot;http://jsbin.com/huxok/2/edit?html,js,output&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Play around with this on JSBin&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;After a bit of digging, hidden in the minified code Twitter encourage you to use, are these few lines that are responsible for this:-&lt;/p&gt;
+&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;m&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;e&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; t, r, i, s;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	e = e || &lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.event, t = e.target || e.srcElement;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (e.altKey || e.metaKey || e.shiftKey) &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt; (t) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (~n.indexOf([&lt;span class=&quot;string&quot;&gt;&quot;A&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;AREA&quot;&lt;/span&gt;], t.nodeName))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			&lt;span class=&quot;keyword&quot;&gt;break&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		t = t.parentNode&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	t &amp;amp;&amp;amp; t.href &amp;amp;&amp;amp; (r = t.href.match(o), r &amp;amp;&amp;amp; (s = v(t.href), s = s.replace(&lt;span class=&quot;regexp&quot;&gt;/^http[:]/&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;https:&quot;&lt;/span&gt;), s = s.replace(&lt;span class=&quot;regexp&quot;&gt;/^\/\//&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;https://&quot;&lt;/span&gt;), g(s, t), e.returnValue = !&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, e.preventDefault &amp;amp;&amp;amp; e.preventDefault()))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[...]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; o = &lt;span class=&quot;regexp&quot;&gt;/twitter\.com(\:\d&amp;#123;2,4&amp;#125;)?\/intent\/(\w+)/&lt;/span&gt;, u = &lt;span class=&quot;string&quot;&gt;&quot;scrollbars=yes,resizable=yes,toolbar=no,location=yes&quot;&lt;/span&gt;, a = &lt;span class=&quot;number&quot;&gt;550&lt;/span&gt;, f = &lt;span class=&quot;number&quot;&gt;520&lt;/span&gt;, l = screen.height, c = screen.width, h;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;b.prototype = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; t, n.aug(b.prototype, &amp;#123;render: &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;e&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; h = &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;, &lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.__twitterIntentHandler || (&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.addEventListener ? &lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.addEventListener(&lt;span class=&quot;string&quot;&gt;&quot;click&quot;&lt;/span&gt;, m, !&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;) : &lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.attachEvent &amp;amp;&amp;amp; &lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.attachEvent(&lt;span class=&quot;string&quot;&gt;&quot;onclick&quot;&lt;/span&gt;, m), &lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.__twitterIntentHandler = !&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;), s.fulfill(&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.body)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&amp;#125;), b.open = g, e(b)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;For most ordinary websites this behaviour wouldn’t be surprising – and probably even desired.&lt;/p&gt;
+&lt;p&gt;But our site ain’t no ordinary website. It’s one of those modern new fangled offline-first single page apps called &lt;a href=&quot;http://app.ft.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;the FT Web app&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Most of our users use our application full screen after it has been added to their (typically) iOS home screen. The problem is that we need to be in complete control (within javascript) of what happens when the user clicks any link because the default behaviour is fairly ugly (the application will suddenly close and the link will be opened in Safari). In order to make that experience a little less awful, in order to support external links like we first show the user a popup warning them that they’re about to leave the app like this:-&lt;/p&gt;
+&lt;img src=&quot;/images/are-you-sure-you-wanna-exit.png&quot;&gt;
+&lt;p&gt;I’d be the first to admit that this isn’t exactly the pinnacle of user experience – it reminds me of the Microsoft Office paperclip helpfully double checking that you’re absolutely “sure you wanna exit?” but it’s the best we can do for now.&lt;/p&gt;
+&lt;p&gt;When we tried to start using Twitter’s embedded Tweet functionality we found that the code we’d carefully crafted to stop web links from inadvertently closing our full screen web app was being completely bypassed. In the end decided not to use Twitter’s javascript library.&lt;/p&gt;
+&lt;p&gt;It’s a little bit unfair that I’ve singled out Twitter, especially as they do provide &lt;a href=&quot;https://dev.twitter.com/docs/tfw/embed-code-css&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;the raw CSS to style Tweets&lt;/a&gt; without the Javascript that does all the weird stuff. In fact we’ve ended up shunning lots of different libraries for similar reasons (eg. jQuery and numerous advertising libraries) and every now and again one of our advertisers creates an advert that breaks critical features of our web application, which never fails to create a little excitement in the office. For being so adverse to externally written code, we’ve gained something of a reputation internally.&lt;/p&gt;
+&lt;p&gt;The fundamental problem is that unless you use an iframe to embed content (like YouTube does) – which causes numerous other problems for our web app so we don’t support either :( – the web is not encapsulated. If you add a 3rd party library to your web page, that library can do what it wants to your page and, short of just removing it, there isn’t always much you can do about it if it does do something you don’t agree with.&lt;/p&gt;
+&lt;h3 id=&quot;Guidance&quot;&gt;&lt;a href=&quot;#Guidance&quot; class=&quot;headerlink&quot; title=&quot;Guidance&quot;&gt;&lt;/a&gt;Guidance&lt;/h3&gt;&lt;p&gt;If you’re building websites in non-standard ways (full screen ‘web apps’; packaged/hybrid apps; single page apps and/or offline first apps) don’t automatically assume that because you’re using ‘web technologies’ you will be able to use every existing library that was built for the web. All libraries – even modern, well written ones like the one Twitter use for embedding Tweets – are built with certain assumptions that may not be true for your product.&lt;/p&gt;
+&lt;p&gt;In the future &lt;a href=&quot;http://html5-demos.appspot.com/static/webcomponents/index.html#25&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Web components (via Shadow DOM)&lt;/a&gt; will finally bring the encapsulation that the web needs that will help us address some of these problems.&lt;/p&gt;
+&lt;p&gt;Hopefully iOS will also make the way it handles links in full screen web apps a little better too.&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Using components built by other people is fundamental to the success of any piece of technology. The more high quality physical and virtu
+    
+    </summary>
+    
+      <category term="Technologies" scheme="https://mattandre.ws/category/technologies/"/>
+    
+      <category term="JavaScript" scheme="https://mattandre.ws/category/technologies/javascript/"/>
+    
+    
+      <category term="HTML" scheme="https://mattandre.ws/tag/html/"/>
+    
+      <category term="web app" scheme="https://mattandre.ws/tag/web-app/"/>
+    
+      <category term="HTML5" scheme="https://mattandre.ws/tag/html5/"/>
+    
+      <category term="offline" scheme="https://mattandre.ws/tag/offline/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HTML5 Offline Workshop this Autumn in Freiberg</title>
+    <link href="https://mattandre.ws/2014/05/html5-offline-autumn-freiberg/"/>
+    <id>https://mattandre.ws/2014/05/html5-offline-autumn-freiberg/</id>
+    <published>2014-05-06T23:00:00.000Z</published>
+    <updated>2016-05-22T12:03:00.000Z</updated>
+    
+    <content type="html">&lt;p&gt;I’m going to teaching &lt;a href=&quot;http://smashingconf.com/freiburg-2014/workshops/matthew-andrews&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;a workshop on offline technologies in Freiberg at Smashing Conference this Autumn&lt;/a&gt; covering:-&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A brief history of the offline web&lt;/li&gt;
+&lt;li&gt;Patterns for offline web applications&lt;/li&gt;
+&lt;li&gt;Cookies and Local Storage&lt;/li&gt;
+&lt;li&gt;IndexedDB and WebSQL&lt;/li&gt;
+&lt;li&gt;AppCache and ServiceWorker&lt;/li&gt;
+&lt;li&gt;Offline data sync strategies&lt;/li&gt;
+&lt;li&gt;Open-source libraries that can help us&lt;/li&gt;
+&lt;li&gt;Fallback techniques for older browsers, search-engine crawlers and users that do not need an offline experience&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Come along, if you like :-)&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;I’m going to teaching &lt;a href=&quot;http://smashingconf.com/freiburg-2014/workshops/matthew-andrews&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;a workshop
+    
+    </summary>
+    
+      <category term="Work" scheme="https://mattandre.ws/category/work/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Automate Sass Testing (with Travis CI)</title>
+    <link href="https://mattandre.ws/2014/01/testing-sass-travis-ci/"/>
+    <id>https://mattandre.ws/2014/01/testing-sass-travis-ci/</id>
+    <published>2014-01-19T00:00:00.000Z</published>
+    <updated>2016-05-22T14:07:52.000Z</updated>
+    
+    <content type="html">&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://github.com/matthew-andrews/sass-example&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;View my demo project on GitHub&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Having a large amount of CSS is unavoidable in a modern web application. Using preprocessors such as Sass help us manage that CSS but as we write more &lt;code&gt;@mixin&lt;/code&gt;‘s, &lt;code&gt;@function&lt;/code&gt;‘s and adopt techniques such as &lt;em&gt;&lt;a href=&quot;http://coding.smashingmagazine.com/2011/12/12/an-introduction-to-object-oriented-css-oocss/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;object orientated css&lt;/a&gt;&lt;/em&gt; the complexity grows. At FT Labs we even use (or perhaps abuse) npm as a package manager for &lt;strong&gt;Sass only repositories&lt;/strong&gt; for various projects, including the &lt;a href=&quot;http://labs.ft.com/articles/the-ft-web-app/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;FT Web app&lt;/a&gt;, so that those styles can be shared across projects.&lt;/p&gt;
+&lt;p&gt;With this ever increasing complexity, the differences between writing CSS and any other programming language are eroding.&lt;/p&gt;
+&lt;h3 id=&quot;All-this-complexity-adds-risk&quot;&gt;&lt;a href=&quot;#All-this-complexity-adds-risk&quot; class=&quot;headerlink&quot; title=&quot;All this complexity adds risk&quot;&gt;&lt;/a&gt;All this complexity adds risk&lt;/h3&gt;&lt;p&gt;In other programming languages we mitigate this kind of risk with automated testing. It’s time to start testing our Sass.&lt;/p&gt;
+&lt;h3 id=&quot;Testing-Sass-with-Travis-CI&quot;&gt;&lt;a href=&quot;#Testing-Sass-with-Travis-CI&quot; class=&quot;headerlink&quot; title=&quot;Testing Sass with Travis CI&quot;&gt;&lt;/a&gt;Testing Sass with Travis CI&lt;/h3&gt;&lt;p&gt;Sass isn’t a language that Travis CI currently has first class support for but we can get it working with just a small number of hacks to the .travis.yml file.&lt;/p&gt;
+&lt;p&gt;Apart from some Sass (which I’m assuming you have already) you will need a .travis.yml file that looks something like this:&lt;/p&gt;
+&lt;figure class=&quot;highlight yml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;script:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;bullet&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;test/travis.rb&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;language:&lt;/span&gt; sass&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;before_install:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;bullet&quot;&gt;-&lt;/span&gt; gem install sass&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/matthew-andrews/sass-example/blob/master/.travis.yml&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;View source file&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Here I’m telling Travis to &lt;strong&gt;first install Sass&lt;/strong&gt; then &lt;strong&gt;execute the file located at&lt;/strong&gt; &lt;code&gt;test/travis.rb&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;If you use a task runner such as make, Rake, Grunt or another you’ll probably want to use it rather than a script like this but I wanted to keep things as simple and technology agnostic as possible.&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;Interestingly the &lt;code&gt;language:&lt;/code&gt; option is &lt;em&gt;actually optional&lt;/em&gt; and it even allows for invalid values – helpfully it will default to Ruby (the language Sass is written in). Optimistically I’ve set it to sass but it may be more robust to set this to ruby.&lt;/p&gt;
+&lt;h3 id=&quot;The-test&quot;&gt;&lt;a href=&quot;#The-test&quot; class=&quot;headerlink&quot; title=&quot;The test&quot;&gt;&lt;/a&gt;The test&lt;/h3&gt;&lt;p&gt;The next step will be to tell Travis exactly what to build.&lt;/p&gt;
+&lt;p&gt;Here are the contents of my &lt;code&gt;test/travis.rb&lt;/code&gt; script:&lt;/p&gt;
+&lt;figure class=&quot;highlight ruby&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#!/usr/bin/env ruby&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;result = &lt;span class=&quot;string&quot;&gt;`sass main.scss built.css`&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;raise result &lt;span class=&quot;keyword&quot;&gt;unless&lt;/span&gt; $?.to_i == &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;raise &lt;span class=&quot;string&quot;&gt;&quot;When compiled the module should output some CSS&quot;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;unless&lt;/span&gt; File.exists?(&lt;span class=&quot;string&quot;&gt;&#39;built.css&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;puts &lt;span class=&quot;string&quot;&gt;&quot;Regular compile worked successfully&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/matthew-andrews/sass-example/blob/master/test/travis.rb&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;View source file&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I’m using back ticks rather than &lt;a href=&quot;http://tech.natemurray.com/2007/03/ruby-shell-commands.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;any of the other other ways to run shell commands in ruby&lt;/a&gt; so I can easily check the status code and output any errors thrown by Sass (which come through via stdout). I then check to see if the built files exists – and &lt;code&gt;raise&lt;/code&gt; an error if it does not.&lt;/p&gt;
+&lt;p&gt;An error thrown at either step will stop the script executing and cause the build to fail.&lt;/p&gt;
+&lt;h3 id=&quot;Protection-against-bad-PR&quot;&gt;&lt;a href=&quot;#Protection-against-bad-PR&quot; class=&quot;headerlink&quot; title=&quot;Protection against bad PR&quot;&gt;&lt;/a&gt;Protection against bad PR&lt;/h3&gt;&lt;p&gt;From now on &lt;a href=&quot;https://github.com/matthew-andrews/sass-example/pull/1&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;any Pull Request that causes our Sass not to compile will come with a bright &lt;del&gt;yellow&lt;/del&gt; red ‘The Travis CI build failed’ warning&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;What-can-we-actually-test&quot;&gt;&lt;a href=&quot;#What-can-we-actually-test&quot; class=&quot;headerlink&quot; title=&quot;What can we actually test?&quot;&gt;&lt;/a&gt;What can we actually &lt;em&gt;test&lt;/em&gt;?&lt;/h3&gt;&lt;p&gt;Compiling is a good first step but that offers little more than a &lt;a href=&quot;https://en.wikipedia.org/wiki/Lint_(software&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;linter&lt;/a&gt;) and will only catch the most basic of regressions. Here are some other ideas and examples of what could be tested:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;@mixin&lt;/code&gt;‘s and &lt;code&gt;@function&lt;/code&gt;‘s are relatively easy – test known outputs against known inputs.&lt;/li&gt;
+&lt;li&gt;Many CSS libraries, such as &lt;a href=&quot;https://twitter.com/csswizardry&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;@csswizardry&lt;/a&gt;‘s &lt;a href=&quot;http://csswizardry.com/csswizardry-grids/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;grid module&lt;/a&gt; offer the option of &lt;a href=&quot;https://github.com/csswizardry/csswizardry-grids&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;‘silent output’&lt;/a&gt;. Your test could build the CSS library with the silent flag switched on and assert that the &lt;a href=&quot;https://github.com/matthew-andrews/csswizardry-grids/blob/travis/test/travis.rb#L9&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;resulting built css file is empty&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://github.com/matthew-andrews/sass-example&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;View my demo project on GitHub&lt;/a&gt;&lt;/stro
+    
+    </summary>
+    
+      <category term="Technologies" scheme="https://mattandre.ws/category/technologies/"/>
+    
+    
+      <category term="CSS3" scheme="https://mattandre.ws/tag/css3/"/>
+    
+      <category term="CSS" scheme="https://mattandre.ws/tag/css/"/>
+    
+      <category term="object orientated design" scheme="https://mattandre.ws/tag/object-orientated-design/"/>
+    
+      <category term="Sass" scheme="https://mattandre.ws/tag/sass/"/>
+    
+      <category term="CI" scheme="https://mattandre.ws/tag/ci/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Removing noise from Timeline reports in Chrome DevTools</title>
+    <link href="https://mattandre.ws/2013/11/filter-noise-output-performance-profiling-timeline-chrome/"/>
+    <id>https://mattandre.ws/2013/11/filter-noise-output-performance-profiling-timeline-chrome/</id>
+    <published>2013-11-10T00:00:00.000Z</published>
+    <updated>2016-05-22T16:26:05.000Z</updated>
+    
+    <content type="html">&lt;p&gt;&lt;a href=&quot;https://developers.google.com/chrome-developer-tools/docs/timeline&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Timeline in Chrome’s Dev Tools&lt;/a&gt; is really cool. It can help you get all sorts of data from dozens of metrics on the performance health of your web application.&lt;/p&gt;
+&lt;p&gt;The problem is making Chrome Timeline recordings to me is a bit like the &lt;a href=&quot;http://www.metacafe.com/watch/an-bscBuY74YhbJmm/apollo_13_1995_a_manual_course_correction/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Manual Burn scene in Apollo 13&lt;/a&gt;. The minute you hit the red button and move your cursor back to the website all hell breaks loose.&lt;/p&gt;
+&lt;p&gt;It becomes a race against time to kill the recording before it has filled up with so much information, triggered by so many different events that you lose all hope of hunting down those janks, layout thrashes and performance burps.&lt;/p&gt;
+&lt;p&gt;No matter how hard I try my timeline recording never look consistent, with a (relatively) clear root cause like this:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.youtube.com/watch?v=z0_jD8nO5Zw&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;&lt;img src=&quot;/images/pauls.png&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;– Chrome Office Hours: Performance&lt;/p&gt;
+&lt;p&gt;Unlike other profiling tools in Chrome that can be controlled directly from Javascript I always find my Timeline reports have really poor signal-to-noise ratios. They tend to be a chaotic mixture of colours and where there is good information, it can feel like I’m just being told that I’m doing &lt;strong&gt;everything wrong&lt;/strong&gt;:&lt;/p&gt;
+&lt;img src=&quot;/images/bad.png&quot;&gt;
+&lt;p&gt;Note how in the first few frames the frame rate budget is being burst by scripting, rendering &lt;strong&gt;and&lt;/strong&gt; painting.&lt;/p&gt;
+&lt;p&gt;Where do you even start?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;I want a timeline that looks like this:&lt;/strong&gt;&lt;/p&gt;
+&lt;img src=&quot;/images/neat.png&quot;&gt;
+&lt;p&gt;&lt;strong&gt;Only&lt;/strong&gt; the events in the timeline are those I have triggered (which you can see beneath because I triggered them in &lt;strong&gt;JavaScript&lt;/strong&gt;). There is nothing after, and nothing before – which means there is no need to waste time digging through looking for the event you’re interested in.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Tip: don’t use your mouse when using Timeline profiling. Give elements IDs and trigger the events on them that you want to profile via the console.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The result of doing this gives you a timeline that contains &lt;strong&gt;only&lt;/strong&gt; the data that is relevant to the action you are profiling, &lt;a href=&quot;https://github.com/ftlabs/ftscroller/issues/65&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;leading to easy investigate, reproducible test cases&lt;/a&gt;:&lt;/p&gt;
+&lt;img src=&quot;/images/test.png&quot;&gt;
+&lt;p&gt;This is an improvement but it doesn’t work in all cases – some times you might want to profile, say, a hover state. I’d really like more granular control over what can start Timeline recording. Something like &lt;strong&gt;Event Listener Breakpoints&lt;/strong&gt; (Sources panel of Dev Tools) to choose the sort of events that kick off Timeline recording (to be honest even just a way to stop mouse moves from doing it would be a good start)…&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Bonus tips – Keyboard Shortcuts&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Cmd/Ctrl + E starts and stops Timeline (and other profilers) recordings but the Dev Tools window must be focused so if you need to use the mouse during profiling (and want to avoid collecting too many extraneous mouse move events) you are probably going to want to switch back and forth with the keyboard.&lt;/p&gt;
+&lt;p&gt;Unfortunately there’s no keyboard shortcut that I know of to directly switch between Dev Tools on the Timeline and the browser*. If you have Dev Tools undocked you can only use the native OS’s window switching shortcuts (Alt + Tab on Windows, Cmd + ~ on Mac).&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;* In Chrome 30 if you switch on “Enable Cmd + 1-9 shortcut to switch panels” – the last option in the General tab of Dev Tools settings (click the cog) you can open the timeline with the easy to remember Cmd + Shift + J [release] Cmd + 5.&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;If you have Dev Tools undocked you can use Cmd + Alt + J to show and hide Dev Tools (and switch what is the focused at the same time), but when Dev Tools closes any Timeline recording in progress will be killed :(.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Pet Peeves&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Another really helpful feature Timeline has is when you hover over Layout events, it will show you the affected region by adding a semi transparent blue rectangle over the affected area on your web page.&lt;/p&gt;
+&lt;p&gt;If you accidentally hover over anything in the timeline report &lt;strong&gt;whilst it’s still recording&lt;/strong&gt; it’ll still add blue highlighting to the elements affected – and that blue highlighting itself pollutes Timeline’s output:&lt;/p&gt;
+&lt;img src=&quot;/images/hmm.png&quot;&gt;
+&lt;p&gt;All the &lt;strong&gt;Composite layers&lt;/strong&gt; events (the green ones) recorded after the ~8 second mark were caused by interacting with Timeline output.&lt;/p&gt;
+&lt;p&gt;When I’m profiling I’d rather Chrome didn’t do any highlighting at all, but I feel it really, really shouldn’t fill up the report produced Timeline with irrelevant noise that I then have to filter out…&lt;/p&gt;
+&lt;h3 id=&quot;Bug-reports&quot;&gt;&lt;a href=&quot;#Bug-reports&quot; class=&quot;headerlink&quot; title=&quot;Bug reports&quot;&gt;&lt;/a&gt;Bug reports&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://code.google.com/p/chromium/issues/detail?id=317357&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Don’t add blue rectangles whilst profiling&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://code.google.com/p/chromium/issues/detail?id=317358&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Start profiling from Chrome, not (only) devtools&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://code.google.com/p/chromium/issues/detail?id=317359&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;More control over the first event collected by the Timeline profiler.&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;Update-you-can-now-start-and-stop-timeline-profiles-from-JavaScript&quot;&gt;&lt;a href=&quot;#Update-you-can-now-start-and-stop-timeline-profiles-from-JavaScript&quot; class=&quot;headerlink&quot; title=&quot;Update: you can now start and stop timeline profiles from JavaScript&quot;&gt;&lt;/a&gt;Update: you can now start and stop timeline profiles from JavaScript&lt;/h3&gt;&lt;p&gt;&lt;blockquote class=&quot;twitter-tweet&quot; data-lang=&quot;en&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;DevTools tip: Start/stop Timeline recordings directly from your code with console.timeline() &amp;amp; console.timelineEnd() &lt;a href=&quot;http://t.co/QxbPgK0WTc&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;pic.twitter.com/QxbPgK0WTc&lt;/a&gt;&lt;/p&gt;&amp;mdash; Addy Osmani (@addyosmani) &lt;a href=&quot;https://twitter.com/addyosmani/status/487353570606743552&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;July 10, 2014&lt;/a&gt;&lt;/blockquote&gt;&lt;/p&gt;
+&lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://developers.google.com/chrome-developer-tools/docs/timeline&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Timeline in Chrome’s Dev Tool
+    
+    </summary>
+    
+      <category term="Work" scheme="https://mattandre.ws/category/work/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Full Frontal Conference 2013 Notes</title>
+    <link href="https://mattandre.ws/2013/11/full-frontal-2013-presentations-notes/"/>
+    <id>https://mattandre.ws/2013/11/full-frontal-2013-presentations-notes/</id>
+    <published>2013-11-09T00:00:00.000Z</published>
+    <updated>2016-05-22T16:14:19.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;09-50-—-10-30-ES6-Uncensored-slides-Angus-Croll-–-angustweets&quot;&gt;&lt;a href=&quot;#09-50-—-10-30-ES6-Uncensored-slides-Angus-Croll-–-angustweets&quot; class=&quot;headerlink&quot; title=&quot;09:50 — 10:30: ES6 Uncensored (slides) Angus Croll – @angustweets&quot;&gt;&lt;/a&gt;09:50 — 10:30: &lt;a href=&quot;https://speakerdeck.com/anguscroll/es6-uncensored&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;ES6 Uncensored (slides)&lt;/a&gt; &lt;em&gt;&lt;a href=&quot;https://twitter.com/angustweets&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Angus Croll – @angustweets&lt;/a&gt;&lt;/em&gt;&lt;/h3&gt;&lt;p&gt;A whistlestop tour of ES6 (the upcoming version of javascript due next year). The highlight for me was finally an explanation of &lt;code&gt;yield&lt;/code&gt; that I actually understood. &lt;em&gt;Is it me or does ES6 look a lot like Scala?&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://traceur-compiler.googlecode.com/git/demo/repl.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Traceur&lt;/a&gt; &lt;a href=&quot;https://github.com/google/traceur-compiler&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;(github)&lt;/a&gt; – try out ES6 online in a JSBin-y sort of way&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://decadecity.net/blog/2013/11/08/angus-croll-es6-uncensored&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Orde Saunders’ notes on Angus’ talk&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;10-30-–-11-10-Javascript-in-the-real-world-slides-Andrew-Nesbitt-–-teabass&quot;&gt;&lt;a href=&quot;#10-30-–-11-10-Javascript-in-the-real-world-slides-Andrew-Nesbitt-–-teabass&quot; class=&quot;headerlink&quot; title=&quot;10:30 – 11:10: Javascript in the real world (slides) Andrew Nesbitt – @teabass&quot;&gt;&lt;/a&gt;10:30 – 11:10: &lt;a href=&quot;https://speakerdeck.com/andrew/javascript-in-the-real-world&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Javascript in the real world (slides)&lt;/a&gt; &lt;em&gt;&lt;a href=&quot;https://twitter.com/teabass&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Andrew Nesbitt – @teabass&lt;/a&gt;&lt;/em&gt;&lt;/h3&gt;&lt;p&gt;Mind still buzzing with &lt;code&gt;yield&lt;/code&gt;ing generators we segued into Andrew Nesbitt’s delightful Terminator-reference and Rabbit-photo packed presentation on the cutting edge of Javascript powered robots.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/andrew/node-ev3-robot&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Control your Lego Mindstorms EV3 Tanks with an xbox controller over bluetooth&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/rwaldron/johnny-five&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Johnny Five&lt;/a&gt; – the jQuery of the javascript robots world.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;11-40-–-12-20-Mobile-isn’t-a-thing-it-is-everything-slides-Joe-McCann-–-joemccann&quot;&gt;&lt;a href=&quot;#11-40-–-12-20-Mobile-isn’t-a-thing-it-is-everything-slides-Joe-McCann-–-joemccann&quot; class=&quot;headerlink&quot; title=&quot;11:40 – 12:20: Mobile isn’t a thing, it is everything (slides) Joe McCann – @joemccann&quot;&gt;&lt;/a&gt;11:40 – 12:20: &lt;a href=&quot;http://www.slideshare.net/joemccann/mobile-is-not-a-thing-it-is-everything&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Mobile isn’t a thing, it is everything (slides)&lt;/a&gt; &lt;em&gt;&lt;a href=&quot;https://twitter.com/joemccann&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Joe McCann – @joemccann&lt;/a&gt;&lt;/em&gt;&lt;/h3&gt;&lt;p&gt;Lots of charts of absurd growth and examples of mobile changing everything, from the most frivolous to the most life-saving and inspirational ways.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.kinsahealth.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Kinsa&lt;/a&gt; – the $1 thermometer and app for your smartphone – was my key wow moment from Joe’s talk&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://blog.uber.com/ICanHasUberKITTENS&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Uber kitten delivery service&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;12-20-–-13-00-Pushing-the-limits-of-mobile-performance-slides-Andrew-Grieve-–-GrieveAndrew&quot;&gt;&lt;a href=&quot;#12-20-–-13-00-Pushing-the-limits-of-mobile-performance-slides-Andrew-Grieve-–-GrieveAndrew&quot; class=&quot;headerlink&quot; title=&quot;12:20 – 13:00: Pushing the limits of mobile performance (slides) Andrew Grieve – @GrieveAndrew&quot;&gt;&lt;/a&gt;12:20 – 13:00: &lt;a href=&quot;https://docs.google.com/presentation/d/1onNCD7APXOwbG58hvXdlogLDXbpId-KDeOLqr8xJ79Y/pub?start=false&amp;amp;loop=false&amp;amp;delayms=3000#slide=id.p&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Pushing the limits of mobile performance (slides)&lt;/a&gt; &lt;em&gt;&lt;a href=&quot;https://twitter.com/GrieveAndrew&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Andrew Grieve – @GrieveAndrew&lt;/a&gt;&lt;/em&gt;&lt;/h3&gt;&lt;p&gt;A peak into the history of Gmail web app for the original iPhones. Amazing to see how much faster smart phones have become since 2007. My main take away: Javascript performance isn’t the issue it used to be on mobile devices – rendering is (probably) a much bigger concern.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/ftlabs/fastclick&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Eliminate the 360ms delay on touch screen devices but be aware of the caveats&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://alistapart.com/article/application-cache-is-a-douchebag&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Use the HTML5 AppCache, but read Jake Archibald’s post first&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Genius tip: send XHR requests on app start before the code to handle the response has run. Assign the response to a global variable and retrieve later.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p align=&quot;center&quot;&gt;&lt;em&gt;&lt;a href=&quot;http://www.bardsleys-fishandchips.co.uk/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;break for fish ‘n’ chips&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr&gt;
+&lt;h3 id=&quot;14-30-–-15-10-Our-web-development-workflow-is-completely-broken-slides-Kenneth-Auchenberg-–-auchenberg&quot;&gt;&lt;a href=&quot;#14-30-–-15-10-Our-web-development-workflow-is-completely-broken-slides-Kenneth-Auchenberg-–-auchenberg&quot; class=&quot;headerlink&quot; title=&quot;14:30 – 15:10: Our web development workflow is completely broken (slides) Kenneth Auchenberg – @auchenberg&quot;&gt;&lt;/a&gt;14:30 – 15:10: &lt;a href=&quot;http://auchenberg.github.io/presentations/fullfrontal-our-web-development-workflow-is-completely-broken/#1&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Our web development workflow is completely broken (slides)&lt;/a&gt; &lt;em&gt;&lt;a href=&quot;https://twitter.com/auchenberg&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Kenneth Auchenberg – @auchenberg&lt;/a&gt;&lt;/em&gt;&lt;/h3&gt;&lt;p&gt;I imagine like many I had unquestioningly accepted the fact that when I use Chrome I must use Chrome dev tools; for Safari and iOS I must use Safari’s and so on.&lt;br&gt;We’ve all been doing it wrong.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://remotedebug.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;The humbly titled “Initiative to unify remote debugging across browsers”&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote class=&quot;twitter-tweet&quot; data-lang=&quot;en&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;Chrome devtools bridged to Firefox. Just WOW. Thanks &lt;a href=&quot;https://twitter.com/remotedebug&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;@remotedebug&lt;/a&gt;! &lt;a href=&quot;https://twitter.com/hashtag/fullfrontalconf?src=hash&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;#fullfrontalconf&lt;/a&gt; &lt;a href=&quot;http://t.co/2bCbnGwApL&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;pic.twitter.com/2bCbnGwApL&lt;/a&gt;&lt;/p&gt;&amp;mdash; Thomas Parisot (@oncletom) &lt;a href=&quot;https://twitter.com/oncletom/status/398827159709839360&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;November 8, 2013&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;hr&gt;
+&lt;h3 id=&quot;15-10-–-15-50-Stunning-visuals-with-maths-and…-No-javascript-slides-Ana-Tudor-–-thebabydino&quot;&gt;&lt;a href=&quot;#15-10-–-15-50-Stunning-visuals-with-maths-and…-No-javascript-slides-Ana-Tudor-–-thebabydino&quot; class=&quot;headerlink&quot; title=&quot;15:10 – 15:50: Stunning visuals with maths and… No javascript? (slides) Ana Tudor – @thebabydino&quot;&gt;&lt;/a&gt;15:10 – 15:50: &lt;a href=&quot;http://f773873.5minfork.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Stunning visuals with maths and… No javascript? (slides)&lt;/a&gt; &lt;em&gt;&lt;a href=&quot;https://twitter.com/thebabydino&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Ana Tudor – @thebabydino&lt;/a&gt;&lt;/em&gt;&lt;/h3&gt;&lt;p&gt;Really, really cool demonstrations of what can be done with just CSS (and maths).&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.youtube.com/watch?v=w9HeWBH_kvg&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Maths-powered transforms for creating 3D shapes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://codepen.io/thebabydino&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Ana’s CodePen account is amazing&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote class=&quot;twitter-tweet&quot; data-lang=&quot;en&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;“If we put it all together, we get really simple code.” &lt;a href=&quot;https://twitter.com/thebabydino&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;@thebabydino&lt;/a&gt;, cool as a cucumber &lt;a href=&quot;https://twitter.com/hashtag/fullfrontalconf?src=hash&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;#fullfrontalconf&lt;/a&gt; &lt;a href=&quot;http://t.co/YkG89djsdW&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;pic.twitter.com/YkG89djsdW&lt;/a&gt;&lt;/p&gt;&amp;mdash; Benjen Darlow (@kapowaz) &lt;a href=&quot;https://twitter.com/kapowaz/status/398836328399654913&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;November 8, 2013&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;hr&gt;
+&lt;h3 id=&quot;16-20-–-17-00-Building-with-web-components-using-x-tags-slides-Angelina-Fabbro-–-angelinamagnum&quot;&gt;&lt;a href=&quot;#16-20-–-17-00-Building-with-web-components-using-x-tags-slides-Angelina-Fabbro-–-angelinamagnum&quot; class=&quot;headerlink&quot; title=&quot;16:20 – 17:00: Building with web components using x-tags (slides) Angelina Fabbro – @angelinamagnum&quot;&gt;&lt;/a&gt;16:20 – 17:00: &lt;a href=&quot;http://afabbro.github.io/jsconfcolombia-2013-mobile-apps-with-brick/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Building with web components using x-tags (slides)&lt;/a&gt; &lt;em&gt;&lt;a href=&quot;https://twitter.com/angelinamagnum&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Angelina Fabbro – @angelinamagnum&lt;/a&gt;&lt;/em&gt;&lt;/h3&gt;&lt;p&gt;The cutting edge of Web Components from the Mozilla camp.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://dvcs.w3.org/hg/webcomponents/raw-file/ccd579693e46/explainer/index.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Web components explainer&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://appmaker.mozillalabs.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Mozilla App Maker&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://chat.meatspac.es/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Ohai from Meatspaces&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;17-00-–-17-40-Time-slides-Jeremy-Keith-–-adactio&quot;&gt;&lt;a href=&quot;#17-00-–-17-40-Time-slides-Jeremy-Keith-–-adactio&quot; class=&quot;headerlink&quot; title=&quot;17:00 – 17:40: Time (slides) Jeremy Keith – @adactio&quot;&gt;&lt;/a&gt;17:00 – 17:40: &lt;a href=&quot;https://speakerdeck.com/adactio/time&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Time (slides)&lt;/a&gt; &lt;em&gt;&lt;a href=&quot;https://twitter.com/adactio&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Jeremy Keith – @adactio&lt;/a&gt;&lt;/em&gt;&lt;/h3&gt;&lt;p&gt;And Full Frontal 2013 ended on &lt;em&gt;Time&lt;/em&gt; – an exploration of the permanence of digital information, the longevity of formats and a brief history of time.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://longbets.org/601/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;“The original URL for this prediction (www.longbets.org/601) will no longer be available in eleven years.”&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.swissfortknox.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Swiss Fort Knoxx&lt;/a&gt; – “forget the Cloud, I want my data stored in a mountain”&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Ruth_Belville&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Ruth Belville, the “Greenwich Mean Time Lady”&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.youtube.com/watch?v=0fKBhvDjuy0&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;The “Powers of 10” video&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;What an excellent day at the seaside.&lt;/p&gt;
+&lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;09-50-—-10-30-ES6-Uncensored-slides-Angus-Croll-–-angustweets&quot;&gt;&lt;a href=&quot;#09-50-—-10-30-ES6-Uncensored-slides-Angus-Croll-–-angustwee
+    
+    </summary>
+    
+      <category term="Work" scheme="https://mattandre.ws/category/work/"/>
+    
+      <category term="Conferences" scheme="https://mattandre.ws/category/work/conferences/"/>
+    
+    
+      <category term="HTML" scheme="https://mattandre.ws/tag/html/"/>
+    
+      <category term="HTML5" scheme="https://mattandre.ws/tag/html5/"/>
+    
+      <category term="Javascript" scheme="https://mattandre.ws/tag/javascript/"/>
+    
+      <category term="Sass" scheme="https://mattandre.ws/tag/sass/"/>
+    
+      <category term="brighton" scheme="https://mattandre.ws/tag/brighton/"/>
+    
+      <category term="conferences" scheme="https://mattandre.ws/tag/conferences/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Open all files with uncommitted git changes in separate vim tabs</title>
+    <link href="https://mattandre.ws/2013/08/open-files-git-uncommitted-separate-vim-tabs/"/>
+    <id>https://mattandre.ws/2013/08/open-files-git-uncommitted-separate-vim-tabs/</id>
+    <published>2013-08-16T23:00:00.000Z</published>
+    <updated>2016-05-22T10:49:11.000Z</updated>
+    
+    <content type="html">&lt;p&gt;Another quick tip. Open all files with uncommitted changes in separate vim tabs:&lt;/p&gt;
+&lt;figure class=&quot;highlight sh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;vi -p `git status --porcelain | cut -c4-&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;You can add it as an alias alias vi-git-status to your .bash_profile:&lt;/p&gt;
+&lt;figure class=&quot;highlight sh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;alias&lt;/span&gt; vi-git-status=&lt;span class=&quot;string&quot;&gt;&#39;vi -p `git status --porcelain | cut -c4-`&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Another quick tip. Open all files with uncommitted changes in separate vim tabs:&lt;/p&gt;
+&lt;figure class=&quot;highlight sh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;g
+    
+    </summary>
+    
+      <category term="Technologies" scheme="https://mattandre.ws/category/technologies/"/>
+    
+      <category term="Vim" scheme="https://mattandre.ws/category/technologies/vim/"/>
+    
+    
+      <category term="bash_profile" scheme="https://mattandre.ws/tag/bash-profile/"/>
+    
+      <category term="vi" scheme="https://mattandre.ws/tag/vi/"/>
+    
+      <category term="vim tips" scheme="https://mattandre.ws/tag/vim-tips/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Clear search highlighting in vim</title>
+    <link href="https://mattandre.ws/2013/07/clear-searching-highlighting-vim/"/>
+    <id>https://mattandre.ws/2013/07/clear-searching-highlighting-vim/</id>
+    <published>2013-07-30T23:00:00.000Z</published>
+    <updated>2016-05-22T12:13:04.000Z</updated>
+    
+    <content type="html">&lt;p&gt;Can’t believe how long I let this bother me before figuring it out:&lt;/p&gt;
+&lt;p&gt;Clear search highlighting in vim with &lt;code&gt;:noh&lt;/code&gt;.&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Can’t believe how long I let this bother me before figuring it out:&lt;/p&gt;
+&lt;p&gt;Clear search highlighting in vim with &lt;code&gt;:noh&lt;/code&gt;.&lt;/p&gt;
+
+    
+    </summary>
+    
+      <category term="Work" scheme="https://mattandre.ws/category/work/"/>
+    
+      <category term="Vim" scheme="https://mattandre.ws/category/work/vim/"/>
+    
+    
+      <category term="vi" scheme="https://mattandre.ws/tag/vi/"/>
+    
+      <category term="vim tips" scheme="https://mattandre.ws/tag/vim-tips/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Does the HTML5 History API automatically add pages to the AppCache?</title>
+    <link href="https://mattandre.ws/2013/07/html5-history-api-automatically-add-pages-appcache/"/>
+    <id>https://mattandre.ws/2013/07/html5-history-api-automatically-add-pages-appcache/</id>
+    <published>2013-07-11T23:00:00.000Z</published>
+    <updated>2016-05-22T12:16:35.000Z</updated>
+    
+    <content type="html">&lt;p&gt;I met with a colleague from a previous company this evening who had gotten back in touch after stumbling across &lt;a href=&quot;http://labs.ft.com/2013/04/offline-html5-history-api/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;one of the tutorials I had written about the HTML5 History API and AppCache&lt;/a&gt;. This, I thought, was quite cool. What was less cool was that my post didn’t actually answer his question, which was:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Do pages visited via the HTML5 History API get automatically added to the Application Cache?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The answer: No, they don’t.&lt;/p&gt;
+&lt;p&gt;Basically, the AppCache can only store the URLs that are either:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Listed in the AppCache manifest for the page that was originally loaded from the network.&lt;/li&gt;
+&lt;li&gt;Or, are themselves the page that is loaded from the network. (See this wonderfully titled Stack Overflow post: &lt;a href=&quot;http://stackoverflow.com/questions/9287044/my-html5-application-cache-manifest-is-caching-everything&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;“My HTML5 Application Cache is caching everything”&lt;/a&gt;)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Note to self – what happens if you programmatically change the manifest attribute on the html tag? (Or set it if it was blank before?). The answer: absolutely nothing.&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;I met with a colleague from a previous company this evening who had gotten back in touch after stumbling across &lt;a href=&quot;http://labs.ft.c
+    
+    </summary>
+    
+      <category term="Technologies" scheme="https://mattandre.ws/category/technologies/"/>
+    
+      <category term="HTML5" scheme="https://mattandre.ws/category/technologies/html5/"/>
+    
+    
+      <category term="web app" scheme="https://mattandre.ws/tag/web-app/"/>
+    
+      <category term="HTML5" scheme="https://mattandre.ws/tag/html5/"/>
+    
+      <category term="appcache" scheme="https://mattandre.ws/tag/appcache/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Case sensitive filenames on OS X with git – “fatal: destination exists”</title>
+    <link href="https://mattandre.ws/2013/06/case-sensitive-filenames-os-git-fatal-destination-exists/"/>
+    <id>https://mattandre.ws/2013/06/case-sensitive-filenames-os-git-fatal-destination-exists/</id>
+    <published>2013-06-26T23:00:00.000Z</published>
+    <updated>2016-05-22T10:47:24.000Z</updated>
+    
+    <content type="html">&lt;p&gt;One of the more frustrating features of OS X when you’re using git that can really trip you up if you’re frequently switching between Linux and OS X is that &lt;strong&gt;file names on OS X are &lt;a href=&quot;http://stackoverflow.com/questions/10523849/changing-capitalization-of-filenames-in-git&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;not case sensitive&lt;/a&gt;&lt;/strong&gt;. It doesn’t understand the difference between blah and Blah.&lt;/p&gt;
+&lt;p&gt;This is fine if you always keep those files on you Mac, but usually at some point you’re going to want to move those to another machine. Sometimes that machine will be Linux based (it could be a webserver, for example) and you might like use git to share those files between those machines. At that point if a file’s name has the wrong case, scripts on the new machine will not be able to find those files anymore…&lt;/p&gt;
+&lt;p&gt;Also on OS X by default git won’t let you just rename a file to the same name with different case – it’ll warn you with a fatal error that the “destination exists”.&lt;/p&gt;
+&lt;p&gt;Luckily the solution is simple (the hard part is realising it’s the case that’s wrong).&lt;/p&gt;
+&lt;p&gt;To rename a file with git on OS X to the same name (but with in a different case) just add &lt;code&gt;--force&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;So renaming &lt;code&gt;src/ws/mattandre/classname.java&lt;/code&gt; to &lt;code&gt;src/ws/mattandre/ClassName.java&lt;/code&gt; would require the following command:&lt;/p&gt;
+&lt;figure class=&quot;highlight sh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;git mv --force src/ws/mattandre/classname.java src/ws/mattandre/ClassName.java&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;One of the more frustrating features of OS X when you’re using git that can really trip you up if you’re frequently switching between Lin
+    
+    </summary>
+    
+      <category term="Technologies" scheme="https://mattandre.ws/category/technologies/"/>
+    
+      <category term="Git" scheme="https://mattandre.ws/category/technologies/git/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>A well-behaved javascript component</title>
+    <link href="https://mattandre.ws/2013/05/well-behaved-javascript-component-proposal/"/>
+    <id>https://mattandre.ws/2013/05/well-behaved-javascript-component-proposal/</id>
+    <published>2013-05-07T23:00:00.000Z</published>
+    <updated>2016-05-22T12:10:57.000Z</updated>
+    
+    <content type="html">&lt;p&gt;I’ve recently been involved in integrating a large and complex javascript application into another large and complex javascript application and this has led me to think about potential best practises for javascript components.&lt;/p&gt;
+&lt;p&gt;Based on this experience I have a compiled a list of basic rules for a component to follow.&lt;/p&gt;
+&lt;h2 id=&quot;A-well-behaved-component…&quot;&gt;&lt;a href=&quot;#A-well-behaved-component…&quot; class=&quot;headerlink&quot; title=&quot;A well behaved component…&quot;&gt;&lt;/a&gt;A well behaved component…&lt;/h2&gt;&lt;h3 id=&quot;Should-not-speak-unless-it-is-spoken-to&quot;&gt;&lt;a href=&quot;#Should-not-speak-unless-it-is-spoken-to&quot; class=&quot;headerlink&quot; title=&quot;Should not speak unless it is spoken to.&quot;&gt;&lt;/a&gt;Should not speak unless it is spoken to.&lt;/h3&gt;&lt;p&gt;A well behaved component should be an instantiable object that exposes an API, which will enable the parent application to completely control that single instance of that component.&lt;/p&gt;
+&lt;p&gt;Unless instructed to by the parent application, the component should never search through, read from or write to the DOM.&lt;/p&gt;
+&lt;p&gt;When the component wants to inform the parent application of an event prefer to do so via the observer pattern. One very light, NPM/bower installable event library is Wilson Page’s &lt;a href=&quot;https://github.com/wilsonpage/event&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;event&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Until it has been instantiated the component should do nothing. The component should also do nothing when its javascript is first executed.&lt;/p&gt;
+&lt;h3 id=&quot;Cleans-up-after-itself&quot;&gt;&lt;a href=&quot;#Cleans-up-after-itself&quot; class=&quot;headerlink&quot; title=&quot;Cleans up after itself.&quot;&gt;&lt;/a&gt;Cleans up after itself.&lt;/h3&gt;&lt;p&gt;To &lt;a href=&quot;http://stackoverflow.com/questions/11930050/finding-js-memory-leak-in-chrome-dev-tools&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;avoid detached DOM nodes&lt;/a&gt;, it should leave no event listener bound to any DOM element (even if that DOM element has gone).&lt;/p&gt;
+&lt;h3 id=&quot;Is-not-an-individual&quot;&gt;&lt;a href=&quot;#Is-not-an-individual&quot; class=&quot;headerlink&quot; title=&quot;Is not an individual.&quot;&gt;&lt;/a&gt;Is not an individual.&lt;/h3&gt;&lt;p&gt;It should be able to cope with being instantiated multiple times. It, and none of its sub-components (or sub-sub-components, etc) should be singletons.&lt;/p&gt;
+&lt;h3 id=&quot;Asks-politely-for-the-things-it-needs-or-brings-them-itself&quot;&gt;&lt;a href=&quot;#Asks-politely-for-the-things-it-needs-or-brings-them-itself&quot; class=&quot;headerlink&quot; title=&quot;Asks politely for the things it needs (or brings them itself).&quot;&gt;&lt;/a&gt;Asks politely for the things it needs (or brings them itself).&lt;/h3&gt;&lt;p&gt;For example if the component is dependent on a javascript library it can either explicitly request that library be made available to it to use, or it should have that library built into the component’s compiled javascript at build-time.&lt;/p&gt;
+&lt;p&gt;Similarly if the component is dependent on some CSS, it should expose a route to that CSS (either as pure text or a via URL) and the parent application should be responsible injecting or importing those style rules.&lt;/p&gt;
+&lt;p&gt;For example, it should never write script tags directly into the DOM in order to load in sub dependencies – loading javascript from the network should be the sole responsibility of the parent application. The reason for this is if the application is an offline application that resource might not always be available if it’s pointing to an external URL. By informing the parent application upfront about your dependency the parent application can make sure that javascript is available no matter what the state the device’s internet connection is in.&lt;/p&gt;
+&lt;h3 id=&quot;Should-not-get-upset-when-it’s-no-longer-wanted&quot;&gt;&lt;a href=&quot;#Should-not-get-upset-when-it’s-no-longer-wanted&quot; class=&quot;headerlink&quot; title=&quot;Should not get upset when it’s no longer wanted.&quot;&gt;&lt;/a&gt;Should not get upset when it’s no longer wanted.&lt;/h3&gt;&lt;p&gt;It should expect that it can be destroyed at any time. All callbacks to asynchronous logic should handle the case where the objects or DOM nodes that they were just talking to no longer exist.&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;I’ve recently been involved in integrating a large and complex javascript application into another large and complex javascript applicati
+    
+    </summary>
+    
+      <category term="Work" scheme="https://mattandre.ws/category/work/"/>
+    
+      <category term="JavaScript" scheme="https://mattandre.ws/category/work/javascript/"/>
+    
+    
+      <category term="web app" scheme="https://mattandre.ws/tag/web-app/"/>
+    
+      <category term="CSS" scheme="https://mattandre.ws/tag/css/"/>
+    
+      <category term="Javascript" scheme="https://mattandre.ws/tag/javascript/"/>
+    
+      <category term="object orientated design" scheme="https://mattandre.ws/tag/object-orientated-design/"/>
+    
+      <category term="offline" scheme="https://mattandre.ws/tag/offline/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Offline HTML5 Web App with C# .NET</title>
+    <link href="https://mattandre.ws/2013/05/offline-html5-web-app-c-sharp/"/>
+    <id>https://mattandre.ws/2013/05/offline-html5-web-app-c-sharp/</id>
+    <published>2013-05-04T23:00:00.000Z</published>
+    <updated>2016-05-22T12:07:31.000Z</updated>
+    
+    <content type="html">&lt;p&gt;Don’t know PHP? Now find my offline web app sample in C# .NET, courtesy of Microsoft’s &lt;a href=&quot;https://twitter.com/ntotten&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Nathan Totten&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;GitHub Repo: &lt;a href=&quot;https://github.com/ntotten/offline-web-app-sample&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/ntotten/offline-web-app-sample&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The original tutorial containing PHP samples is located &lt;a href=&quot;http://labs.ft.com/2012/08/basic-offline-html5-web-app/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;on the FT Labs website&lt;/a&gt;.&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Don’t know PHP? Now find my offline web app sample in C# .NET, courtesy of Microsoft’s &lt;a href=&quot;https://twitter.com/ntotten&quot; target=&quot;_bla
+    
+    </summary>
+    
+      <category term="Work" scheme="https://mattandre.ws/category/work/"/>
+    
+    
+      <category term="FT" scheme="https://mattandre.ws/tag/ft/"/>
+    
+      <category term="web app" scheme="https://mattandre.ws/tag/web-app/"/>
+    
+      <category term="HTML5" scheme="https://mattandre.ws/tag/html5/"/>
+    
+      <category term="appcache" scheme="https://mattandre.ws/tag/appcache/"/>
+    
+      <category term=".net" scheme="https://mattandre.ws/tag/net/"/>
+    
+      <category term="c#" scheme="https://mattandre.ws/tag/c/"/>
+    
+      <category term="Microsoft" scheme="https://mattandre.ws/tag/microsoft/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring Airlines cancel almost all Beijing flights in February 2013</title>
+    <link href="https://mattandre.ws/2013/01/spring-airlines-cancel-beijing-flights-february-2013/"/>
+    <id>https://mattandre.ws/2013/01/spring-airlines-cancel-beijing-flights-february-2013/</id>
+    <published>2013-01-07T00:00:00.000Z</published>
+    <updated>2016-05-22T13:54:23.000Z</updated>
+    
+    <content type="html">&lt;p&gt;Last night I received a text from Chinese low-cost carrier &lt;a href=&quot;http://www.china-sss.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Spring Airlines&lt;/a&gt; notifying me that my flight from Shanghai to Beijing had been cancelled.&lt;/p&gt;
+&lt;p&gt;A &lt;a href=&quot;/images/beijing.png&quot;&gt;quick look on their website&lt;/a&gt; seems to suggest all their Shanghai – Beijing flights have been cancelled over the Spring festival period.&lt;/p&gt;
+&lt;p&gt;Somewhat annoying for me because apparently the refund will take between 2 and 6 months to come back. I guess I should have already learnt this lesson when I lost £500 when one day Oasis Hong Kong, a defunct long-haul budget airline that operated a flights between London, Hong Kong and Vancouver, &lt;a href=&quot;http://www.telegraph.co.uk/travel/1307946/Oasis-Hong-Kong-Airlines-goes-into-liquidation.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;ceased to exist&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;But I wonder if this is an early sign of struggle for the &lt;a href=&quot;https://en.wikipedia.org/wiki/Spring_Airlines&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;only Chinese low cost carrier&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Update: We got the money back :).&lt;/strong&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Last night I received a text from Chinese low-cost carrier &lt;a href=&quot;http://www.china-sss.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Spring Airl
+    
+    </summary>
+    
+      <category term="Travel" scheme="https://mattandre.ws/category/travel/"/>
+    
+      <category term="China" scheme="https://mattandre.ws/category/travel/china/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>FT Chinese&#39;s MBA Gym HTML5 iPad app among Apple App Store China&#39;s “Best of 2012”</title>
+    <link href="https://mattandre.ws/2012/12/ft-chineses-mba-gym-html5-ipad-app-recognised-by-apple/"/>
+    <id>https://mattandre.ws/2012/12/ft-chineses-mba-gym-html5-ipad-app-recognised-by-apple/</id>
+    <published>2012-12-15T00:00:00.000Z</published>
+    <updated>2016-05-22T13:51:37.000Z</updated>
+    
+    <content type="html">&lt;p&gt;&lt;a href=&quot;https://itunes.apple.com/cn/app/ft-shang-xue-yuan/id493892004?mt=8&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;FT Chinese’s MBA Gym (¥12 / £1.49)&lt;/a&gt; has been chosen by Apple for the App Store China’s “Best of 2012” and is right now number 20 in the App Store China paid app chart (or in 2nd position if you exclude games).&lt;/p&gt;
+&lt;p&gt;This is quite an achievement given the Chinese market’s reluctance to pay for content and that Apple would actually feature a wrapped HTML5 app so highly.&lt;/p&gt;
+&lt;img src=&quot;/images/appstore.jpg&quot;&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://itunes.apple.com/cn/app/ft-shang-xue-yuan/id493892004?mt=8&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;FT Chinese’s MBA Gym (¥12 / £
+    
+    </summary>
+    
+      <category term="Work" scheme="https://mattandre.ws/category/work/"/>
+    
+    
+      <category term="FT" scheme="https://mattandre.ws/tag/ft/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>The case for object literals over self executing functions for modular javascript</title>
+    <link href="https://mattandre.ws/2012/12/object-literals-vs-self-executing-functions-for-modular-javascript/"/>
+    <id>https://mattandre.ws/2012/12/object-literals-vs-self-executing-functions-for-modular-javascript/</id>
+    <published>2012-12-15T00:00:00.000Z</published>
+    <updated>2016-05-22T14:00:35.000Z</updated>
+    
+    <content type="html">&lt;p&gt;(This was inspired by Objective-C, where methods of classes are &lt;a href=&quot;http://stackoverflow.com/questions/2158660/why-doesnt-objective-c-support-private-methods&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;never &lt;em&gt;really&lt;/em&gt; private&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;In the FT Web App and Economist HTML5 App we have been increasingly using self executing functions for non-instantiable modules as they are a good way to enforce private scope for variables and functions.&lt;/p&gt;
+&lt;p&gt;A totally realistic example of a module created through a self executing function could be:-&lt;/p&gt;
+&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;39&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;40&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;41&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; myObject = (&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;comment&quot;&gt;/**&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 * Private variable&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 *&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 * @private&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; _privateVariable;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;comment&quot;&gt;/**&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 * Public variable&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 *&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 * @public&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; publicVariable;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;comment&quot;&gt;/**&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 * Public setter method for private variable&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 *&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 * @public&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;setPrivateVariable&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;value&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		_privateVariable = value;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;comment&quot;&gt;/**&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 * Public getter method for private variable&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 *&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 * @public&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;getPrivateVariable&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;value&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; _privateVariable;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;comment&quot;&gt;// Public api&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		publicVariable: publicVariable,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		setPrivateVariable: setPrivateVariable,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		getPrivateVariable: getPrivateVariable&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;());&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;We have a compilation step to compile our code, which is capable of throwing a warning or even preventing compilation if we are using functions that we’ve marked as private through an appropriate JSDoc hint. Therefore, as long as we can guarantee private methods or variables are never accessed inappropriately we don’t actually need to make private variables and methods private.&lt;/p&gt;
+&lt;p&gt;So the above example could, without changing any code that currently uses this object, easily be changed to something like this:-&lt;/p&gt;
+&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; myObject = &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;comment&quot;&gt;/**&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 * Enforce privateness if this property&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 * is detected to have been used outside&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 * of this module.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 *&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 * @private&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	_privateVariable: &lt;span class=&quot;literal&quot;&gt;undefined&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;comment&quot;&gt;/**&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 * Public variable&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 *&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 * @public&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	publicVariable: &lt;span class=&quot;literal&quot;&gt;undefined&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;comment&quot;&gt;/**&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 * Public setter method for private variable&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 *&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 * @public&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	setPrivateVariable: &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;setPrivateVariable&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;value&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; self = myObject;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		self._privateVariable = value;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;comment&quot;&gt;/**&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 * Public getter method for private variable&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 *&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 * @public&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	getPrivateVariable: &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;getPrivateVariable&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;value&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; self = myObject;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; self._privateVariable;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;As a lot of our code (1mb of it in the FT Web App) currently needs to be evaluated at start up, I’m interested in knowing what is the extent of the performance benefit of using object literals over self executing functions (then rely purely on the compiler to catch any violation of private methods and variables of each module).&lt;/p&gt;
+&lt;p&gt;The results, &lt;a href=&quot;http://jsperf.com/self-executing-vs-literal&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;which show that object literals (the latter example) are 95% faster on certain platforms&lt;/a&gt;, could make shifting from enclosed modules to object literals worthwhile (assuming you have the infrastructure set up to stop other objects from accessing properties and methods they should not be able to).&lt;/p&gt;
+&lt;p&gt;The object literal approach also allows us to be able to write unit tests for private functions (one of the downsides of using the module pattern listed by &lt;a href=&quot;https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Addy Osmani’s Javascript design patterns book&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Update&lt;/strong&gt;: To my surprise, it turns out the results are reversed to some extent on Safari/iOS. So, as always, the right choice depends each project’s individual requirements and supported platforms. But it seems moving to object literals isn’t going to help the FT Web App achieve faster start times on its most popular platforms (iPhone, iPad).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Update 2&lt;/strong&gt;: Sometimes the best solution is just to forget subtle micro-optimisations and instead focus on the developer joy. This is the equivalent code in CoffeeScript. Just lovely.&lt;/p&gt;
+&lt;figure class=&quot;highlight coffee&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;MyObject&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	privateValue = &lt;span class=&quot;literal&quot;&gt;undefined&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.publicValue = &lt;span class=&quot;literal&quot;&gt;undefined&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.setPrivateValue = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;params&quot;&gt;(value)&lt;/span&gt; -&amp;gt;&lt;/span&gt; privateValue = value&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.getPrivateValue = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; -&amp;gt;&lt;/span&gt; privateValue;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;Comments omitted because &lt;del&gt;I’m a bad person&lt;/del&gt;, &lt;del&gt;it’s five lines of code&lt;/del&gt;, they’re available above.&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;(This was inspired by Objective-C, where methods of classes are &lt;a href=&quot;http://stackoverflow.com/questions/2158660/why-doesnt-objective-
+    
+    </summary>
+    
+      <category term="Technologies" scheme="https://mattandre.ws/category/technologies/"/>
+    
+      <category term="JavaScript" scheme="https://mattandre.ws/category/technologies/javascript/"/>
+    
+    
+      <category term="web app" scheme="https://mattandre.ws/tag/web-app/"/>
+    
+      <category term="HTML5" scheme="https://mattandre.ws/tag/html5/"/>
+    
+      <category term="Javascript" scheme="https://mattandre.ws/tag/javascript/"/>
+    
+      <category term="Javascript Performance" scheme="https://mattandre.ws/tag/javascript-performance/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>春节2013</title>
+    <link href="https://mattandre.ws/2012/11/%E6%98%A5%E8%8A%822013/"/>
+    <id>https://mattandre.ws/2012/11/春节2013/</id>
+    <published>2012-11-26T00:00:00.000Z</published>
+    <updated>2016-05-22T12:28:47.000Z</updated>
+    
+    <content type="html">&lt;p&gt;我明年2月份打算去中国（上海和北京），这次我会在中国待3个星期，跟我在中国的朋友和家人一起过春节。&lt;/p&gt;
+&lt;p&gt;上次去中国的时候，和豆瓣的同仁们在他们的咖啡厅做了一个简短的Presentation，介绍了金融时报HTML5的应用。这次我在中国待的时间要比前两次长，如果大家有兴趣和我见面，讨论有关HTML5，Web Apps等移动开发项目，我很乐意与大家见面并且做相关的简短的Presentation。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我明年2月份打算去中国（上海和北京），这次我会在中国待3个星期，跟我在中国的朋友和家人一起过春节。&lt;/p&gt;
+&lt;p&gt;上次去中国的时候，和豆瓣的同仁们在他们的咖啡厅做了一个简短的Presentation，介绍了金融时报HTML5的应用。这次我在中国待的时间要比前两次长，如果大家
+    
+    </summary>
+    
+      <category term="Work" scheme="https://mattandre.ws/category/work/"/>
+    
+    
+  </entry>
+  
+</feed>
