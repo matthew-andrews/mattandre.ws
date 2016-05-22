@@ -23,8 +23,8 @@
             },
             "Action": "s3:*",
             "Resource": [
-              { "Fn::Join": [ "", [ "arn:aws:s3:::", { "Ref": "AWS::StackName" }, "-", { "Ref": "AWS::Region" }, "/*" ] ] },
-              { "Fn::Join": [ "", [ "arn:aws:s3:::", { "Ref": "AWS::StackName" }, "-", { "Ref": "AWS::Region" } ] ] }
+              "arn:aws:s3:::mattandre.ws/*",
+              "arn:aws:s3:::mattandre.ws"
              ]
           }]
         }
