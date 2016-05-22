@@ -1,3 +1,20 @@
+.archive {
+	padding: 0 20px;
+
+	@include large {
+		padding: 0;
+	}
+}
+
+.archive__block {
+	column-gap: 10px;
+	column-count: 2;
+
+	@include large {
+		column-count: 3;
+	}
+}
+
 .archive__year {
 	@include block-caption;
 	color: $color-grey;
