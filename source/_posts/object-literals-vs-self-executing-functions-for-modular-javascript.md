@@ -39,7 +39,7 @@ var myObject = (function () {
 	 * @public
 	 */
 	function setPrivateVariable(value) {
-		 _privateVariable = value;
+		_privateVariable = value;
 	}
 
 	/**

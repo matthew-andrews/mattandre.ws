@@ -1,6 +1,6 @@
 <% if (site.posts.length) { %>
 	<div class="widget">
-		<h3 class="widget__title"><a href="<%- url_for() %>">Recent Posts</a></h3>
+		<h3 class="widget__title"><a href="<%- url_for() %>">Recent</a></h3>
 		<div class="widget__body">
 			<ul>
 				<% site.posts.sort('date', -1).limit(5).each(function(post) { %>
