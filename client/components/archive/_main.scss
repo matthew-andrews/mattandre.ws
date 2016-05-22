@@ -1,0 +1,13 @@
+.archive__year {
+	@include block-caption;
+	color: $color-grey;
+}
+
+.archive__article-date {
+	color: $color-grey;
+	font-size: 0.85em
+}
+
+.archive__article-title {
+	font-weight: bold;
+}

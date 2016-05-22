@@ -33,10 +33,11 @@ $font-mono: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
 	margin-bottom: 1em;
 }
 
+@import "components/archive/main";
+@import "components/article/main";
 @import "components/footer/main";
 @import "components/header/main";
 @import "components/widget/main";
-@import "components/article/main";
 
 body {
 	background-color: $color-background;
