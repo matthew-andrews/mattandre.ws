@@ -59,7 +59,6 @@ feed:
   type: atom
   path: feed.xml
   limit: 20
-  path_hack: /feed/
 
 google_analytics: UA-34192510-1
 twitter: andrewsmatt
