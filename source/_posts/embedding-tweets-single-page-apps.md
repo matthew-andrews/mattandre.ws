@@ -50,7 +50,7 @@ function m(e) {
 
 var o = /twitter\.com(\:\d{2,4})?\/intent\/(\w+)/, u = "scrollbars=yes,resizable=yes,toolbar=no,location=yes", a = 550, f = 520, l = screen.height, c = screen.width, h;
 b.prototype = new t, n.aug(b.prototype, {render: function(e) {
-  return h = this, window.__twitterIntentHandler || (document.addEventListener ? document.addEventListener("click", m, !1) : document.attachEvent && document.attachEvent("onclick", m), window.__twitterIntentHandler = !0), s.fulfill(document.body)
+	return h = this, window.__twitterIntentHandler || (document.addEventListener ? document.addEventListener("click", m, !1) : document.attachEvent && document.attachEvent("onclick", m), window.__twitterIntentHandler = !0), s.fulfill(document.body)
 }}), b.open = g, e(b)
 ```
 
