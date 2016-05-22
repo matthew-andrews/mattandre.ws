@@ -23,28 +23,6 @@
         }
       }
     },
-    "StagingBucket": {
-      "Type": "AWS::S3::Bucket",
-      "Properties": {
-        "BucketName": "staging.mattandre.ws",
-        "WebsiteConfiguration": {
-          "IndexDocument": "index.html",
-          "ErrorDocument": "404/index.html",
-          "RoutingRules": [
-            {
-              "RoutingRuleCondition": {
-                "HttpErrorCodeReturnedEquals": "404",
-                "KeyPrefixEquals": "feed"
-              },
-              "RedirectRule": {
-                "HttpRedirectCode": "301",
-                "ReplaceKeyWith": "feed.xml"
-              }
-            }
-          ]
-        }
-      }
-    },
     "WWWBucket": {
       "Type": "AWS::S3::Bucket",
       "Properties": {
@@ -81,36 +59,6 @@
               "Resource": [
                 "arn:aws:s3:::mattandre.ws/*",
                 "arn:aws:s3:::mattandre.ws"
-              ]
-            }
-          ]
-        }
-      }
-    },
-    "StagingBucketPolicy": {
-      "Type": "AWS::S3::BucketPolicy",
-      "DependsOn": "StagingBucket",
-      "Properties": {
-        "Bucket" : "staging.mattandre.ws",
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Principal": "*",
-              "Action": ["s3:GetObject"],
-              "Resource": [
-                "arn:aws:s3:::staging.mattandre.ws/*"
-              ]
-            },
-            {
-              "Effect": "Allow",
-              "Principal": {
-                "AWS": { "Fn::Join": [ "", [ "arn:aws:iam::", { "Ref": "AWS::AccountId" }, ":user/DeployUserFor_mattandrews" ] ] }
-              },
-              "Action": "s3:*",
-              "Resource": [
-                "arn:aws:s3:::staging.mattandre.ws/*",
-                "arn:aws:s3:::staging.mattandre.ws"
               ]
             }
           ]
