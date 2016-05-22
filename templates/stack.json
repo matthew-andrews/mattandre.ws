@@ -6,7 +6,10 @@
       "Properties": {
         "BucketName": "www.mattandre.ws",
         "WebsiteConfiguration": {
-          "RedirectAllRequestsTo": "mattandre.ws"
+          "RedirectAllRequestsTo": {
+            "HostName": "mattandre.ws",
+            "Protocol": "https"
+          }
         }
       }
     },
