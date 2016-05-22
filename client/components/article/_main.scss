@@ -7,13 +7,14 @@
 }
 
 .article__header {
-	padding: $article-padding;
+	padding: $article-padding $article-padding 0 $article-padding;
 }
 
 .article__title {
-	font-size: 2em;
 	font-weight: bold;
-	line-height: 1.1em;
+	font-size: 2em;
+	margin: 1em 0;
+	display: block;
 }
 
 .article__date {

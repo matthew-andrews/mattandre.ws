@@ -41,6 +41,7 @@ $font-mono: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
 	border-radius: 3px;
 }
 
+@import "~normalize.css/normalize.css";
 @import "components/archive/main";
 @import "components/article/main";
 @import "components/footer/main";
