@@ -1,6 +1,7 @@
 ---
 title: CV
 permalink: cv/
+slug: cv
 ---
 Technologist, University of Manchester Maths graduate, Grade 8 Pianist, [travel addict](https://www.facebook.com/photo.php?v=103878763725&set=vb.501043725&type=2&theater), 2010 Confucius Institute Scholar, and former Harry Potter extra. Now working with cutting edge web technologies for the Financial Times in London.
 
