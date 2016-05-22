@@ -15,9 +15,13 @@
 		&.current {
 			font-weight: bold;
 		}
+
+		&.current:hover {
+			background-color: transparent;
+		}
 	}
 
-	a.page-number:hover {
+	.page-number:hover {
 		text-decoration: none;
 		background-color: $color-light-grey;
 	}

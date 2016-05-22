@@ -17,9 +17,3 @@ absolute-center(width, height = width)
   left: 50%
   margin-top: width * -0.5
   margin-left: height * -0.5
-
-avoid-column-break()
-  vendor("column-break-inside", avoid, only: webkit)
-  page-break-inside: avoid // for firefox
-  overflow: hidden // fix for firefox
-  break-inside: avoid-column

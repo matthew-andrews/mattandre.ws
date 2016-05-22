@@ -15,7 +15,7 @@ $highlight-purple: #cc99cc;
 @mixin code-block() {
 	overflow: auto;
 	background: $highlight-background;
-	margin: 0;
+	margin: 0 -1 * $article-padding;
 	padding: 15px;
 	border-style: solid;
 	border-color: $color-border;
@@ -54,7 +54,7 @@ $highlight-purple: #cc99cc;
 		@include code-block;
 
 		pre {
-			border: none;
+			border: 0;
 			margin: 0;
 			padding: 0;
 		}
@@ -65,19 +65,18 @@ $highlight-purple: #cc99cc;
 		}
 
 		td {
-			border: none;
+			border: 0;
 			padding: 0;
 		}
 
 		figcaption {
-//			clearfix();
 			font-size: 0.85em;
 			color: $highlight-comment;
 			line-height: 1em;
 			margin-bottom: 1em;
 
 			a {
-				float: right
+				float: right;
 			}
 		}
 
@@ -91,7 +90,7 @@ $highlight-purple: #cc99cc;
 		}
 
 		.line.marked {
-			background: highlight-selection
+			background: highlight-selection;
 		}
 	}
 
@@ -104,30 +103,30 @@ $highlight-purple: #cc99cc;
 		padding: 15px $article-padding 15px 0;
 
 		.gist-file {
-			border: none;
+			border: 0;
 			font-family: $font-mono;
 			margin: 0;
 
 			.gist-data {
 				background: none;
-				border: none;
+				border: 0;
 
 				.line-numbers {
 					@include line-numbers;
 					background: none;
-					border: none;
+					border: 0;
 					padding: 0 20px 0 0;
 				}
 
 				.line-data {
-					padding: 0 !important
+					padding: 0 !important;
 				}
 			}
 
 			.highlight {
 				margin: 0;
 				padding: 0;
-				border: none;
+				border: 0;
 			}
 
 			.gist-meta {
