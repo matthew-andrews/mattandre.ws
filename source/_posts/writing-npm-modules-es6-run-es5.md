@@ -29,7 +29,7 @@ The problem is we're far from being ready to assume that every app or module tha
 - It messes up diffs and commit history.
 - Just never commit built files*.
 
-* O.K. so this is like any other rule—break it before doing something even worse—but except on those occasions, definitely never do it!
+\* O.K. so this is like any other rule—break it before doing something even worse—but except on those occasions, definitely never do it!
 
 ## Writing npm modules in ES6 so that they run in ES5
 
