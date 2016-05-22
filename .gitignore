@@ -6,5 +6,4 @@ db.json
 node_modules/
 public/
 .deploy*/
-webpack.config.js
 .scss-lint.yml
