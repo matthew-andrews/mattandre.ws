@@ -1,6 +1,24 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
   "Resources" : {
+    "Bucket": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketName": "mattandre.ws",
+        "WebsiteConfiguration": {
+          "IndexDocument": "index.html"
+        }
+      }
+    },
+    "StagingBucket": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketName": "staging.mattandre.ws",
+        "WebsiteConfiguration": {
+          "IndexDocument": "index.html"
+        }
+      }
+    },
     "WWWBucket": {
       "Type": "AWS::S3::Bucket",
       "Properties": {
@@ -10,15 +28,6 @@
             "HostName": "mattandre.ws",
             "Protocol": "https"
           }
-        }
-      }
-    },
-    "Bucket": {
-      "Type": "AWS::S3::Bucket",
-      "Properties": {
-        "BucketName": "mattandre.ws",
-        "WebsiteConfiguration": {
-          "IndexDocument": "index.html"
         }
       }
     },
@@ -46,6 +55,36 @@
               "Resource": [
                 "arn:aws:s3:::mattandre.ws/*",
                 "arn:aws:s3:::mattandre.ws"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "StagingBucketPolicy": {
+      "Type": "AWS::S3::BucketPolicy",
+      "DependsOn": "StagingBucket",
+      "Properties": {
+        "Bucket" : "staging.mattandre.ws",
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": "*",
+              "Action": ["s3:GetObject"],
+              "Resource": [
+                "arn:aws:s3:::staging.mattandre.ws/*"
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": { "Fn::Join": [ "", [ "arn:aws:iam::", { "Ref": "AWS::AccountId" }, ":user/DeployUserFor_mattandrews" ] ] }
+              },
+              "Action": "s3:*",
+              "Resource": [
+                "arn:aws:s3:::staging.mattandre.ws/*",
+                "arn:aws:s3:::staging.mattandre.ws"
               ]
             }
           ]
