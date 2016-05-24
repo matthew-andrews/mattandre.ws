@@ -1,4 +1,4 @@
-<article id="<%= post.layout %>-<%= post.slug %>" class="article" itemscope itemprop="blogPost">
+<article id="<%= post.layout %>-<%= post.slug %>" class="article" itemscope itemType="http://schema.org/BlogPosting">
 	<div class="article__meta">
 		<% if (post.layout !== 'page') { %>
 			<%- partial('post/date', { class_name: 'article__date', date_format: null }) %>
