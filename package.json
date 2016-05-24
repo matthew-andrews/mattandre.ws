@@ -18,7 +18,7 @@
     "css-loader": "^0.23.1",
     "extract-css-block-webpack-plugin": "^1.3.0",
     "extract-text-webpack-plugin": "^1.0.1",
-    "hexo": "^3.2.0",
+    "hexo": "matthew-andrews/hexo#no-description-if-no-description",
     "imports-loader": "^0.6.5",
     "lintspaces-cli": "^0.1.1",
     "node-sass": "^3.7.0",
