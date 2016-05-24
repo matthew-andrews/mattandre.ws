@@ -66,6 +66,6 @@ Using `npm scripts` as your task runner has a number of quite compelling advanta
 
 One obvious downside is that for complex projects the scripts section of your `package.json` files will start to get a little crowded. But for those cases there's a natural upgrade path to [make](http://mrbook.org/tutorials/make/)…
 
-{% img /images/trollface.png [[Thank you and good night]] %}
+{% img /images/trollface.png "Thank you and good night'Trollface Emoji'" %}
 
 \* This might be a lie.
