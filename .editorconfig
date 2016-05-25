@@ -1,7 +1,10 @@
 root = true
 
-[**{.js,.scss,.html,.mustache,Makefile,.vcl,.md,.ejs}]
+[**{.js,.scss,.html,.mustache,Makefile,.vcl,.ejs}]
 indent_style = tab
+trim_trailing_whitespace = true
+
+[**{.md}]
 trim_trailing_whitespace = true
 
 [**{.json,.yml}]
