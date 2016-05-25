@@ -32,19 +32,19 @@
 }
 
 .article__category {
-	display: inline-block;
-	line-height: 1em;
-	margin-left: 8px;
-
-	&:before {
-		margin-left: 8px;
-		content: "\2022";
-	}
+	display: inline;
 }
 
 .article__category-link {
 	@include block-caption;
-	margin: 0 12px;
+	display: inline-block;
+	line-height: 1em;
+	margin-left: 12px;
+
+	&:before {
+		margin-right: 16px;
+		content: "\2022";
+	}
 }
 
 .article__footer {
