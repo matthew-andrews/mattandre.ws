@@ -56,7 +56,7 @@ theme: mattandre.ws
 
 # Feed
 feed:
-  type: atom
+  type: rss2
   path: feed.xml
   limit: 20
 
