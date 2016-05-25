@@ -9,15 +9,15 @@ tags:
 ---
 ## Reusable Makefile
 
-Trends like microservices and technologies like AWS Lambda mean applications are changing how applications are built.  Before, a single application may have been contained within a single repository but now one product might be delivered by dozens or even hundreds of little application in individual repositories, each of which are responsible for a small number of tasks.
+Trends like microservices and technologies like AWS Lambda mean the way applications are built is changing.  Before, a single _monolithic_ application may have been contained within a single repository but now one product might be delivered by dozens or even hundreds of little sub-applications each in individual repositories where every one of those responsible for a small number of tasks.
 
-Why you might do this is a topic for another time, but this approach makes maintaining build automation tools across an applications architected makes it harder.
+Why you might do this is a topic for another time, but this approach makes maintaining build automation tools across an application architected makes it harder.
 
-Front end build automation tools like gulp and grunt have are mature plugin framework.  That mean it's easy to share solutions to common problem.  You can create plugins that are downloaded at build time and can be shared across different repositories.
+Front end build automation tools like gulp and grunt have mature plugin framework.  That means it's easy to share solutions to common problems.  You can create plugins that are downloaded at build time and can be shared across different repositories.
 
 There is no package manager or registry for makefile.  But there's nothing to stop you putting Makefiles in npm (or bower, nuget, composer, etc) modules.  You could even use git submodules.
 
-Once you have a shared bit of makefile you can then use `include`.
+Once you have a shared bit of makefile you can then use `include` to _include_ it in another makefile.
 
 #### `include`
 
