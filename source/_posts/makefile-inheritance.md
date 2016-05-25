@@ -35,7 +35,7 @@ That centralised makefile contained standard patterns for installing dependencie
 
 Part of the philosophy behind it was to ensure that it was easy to override any part of it.
 
-For example, if a developer wanted their repository wanted to simply use the default task provided by the central makefile to install a repositories' dependencies (run by the developer by typing `make install`) they didn't need to do anything besides `include n.Makefile`.  It would be provided by default.
+For example, if a developer wanted their repository use the default `install` task provided by the central makefile (run by the developer by typing `make install`) they wouldn't need to do anything besides `include n.Makefile`.  It would be provided by default.
 
 However, if the developer wanted to write their own install task all they need to do is *implement* an `install` task in their Makefile.  They can even call `make install-super` anywhere in their `install` task to run the shared makefile's `install` task as well.
 
