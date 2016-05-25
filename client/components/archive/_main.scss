@@ -1,9 +1,18 @@
 .archive {
+	margin: 20px 0;
+}
+
+.archive__title,
+.archive__year {
 	padding: 0 20px;
 
 	@include large {
 		padding: 0;
 	}
+}
+
+.archive__title {
+	@include title;
 }
 
 .archive__block {

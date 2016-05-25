@@ -19,3 +19,11 @@
 	display: block;
 	margin-bottom: 15px;
 }
+
+@mixin title() {
+	font-weight: bold;
+	font-size: 2em;
+	margin: 0;
+	display: block;
+	line-height: 1.5em;
+}
