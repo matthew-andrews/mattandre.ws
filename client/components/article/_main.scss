@@ -44,6 +44,10 @@
 	&:before {
 		margin-right: 16px;
 		content: "\2022";
+
+		// Get rid of the underline on hover
+		// http://stackoverflow.com/questions/8820286/how-to-remove-only-underline-from-abefore
+		display: inline-block;
 	}
 }
 
