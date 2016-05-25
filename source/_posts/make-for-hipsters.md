@@ -265,6 +265,8 @@ secure:
 	echo "$(subst http,https,http://mattandre.ws)"
 ```
 
+Results in:
+
 ```
 $ make secure
 echo "https://mattandre.ws"
