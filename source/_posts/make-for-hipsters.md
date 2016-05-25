@@ -141,7 +141,7 @@ install:
 
 That worked and is simple except that if you ran `make install` twice in quick succession the second time, although faster than the first, would be quite slow.
 
-One feature of make is that it checks if a file or folder matching the rule name exists first before executing that rule's recipe â€” and it won't run the recipe if that file or foler already exists.
+One feature of make is that it checks if a file or folder matching the rule name exists first before executing that rule's recipe — and it won't run the recipe if that file or foler already exists.
 
 So we can improve our `make install` rule by:-
 
@@ -162,7 +162,7 @@ Unfortunately this has introduced a problem.  If you add a new dependency, for e
 
 I actually lied to you earlier.
 
-When I said that ‘one of the features of make was that it checks if a file or folder matching the rule name exists first before executing that rule's recipe â€” and won't run the recipe if that file or folder already exists’ I was oversimplifying things.
+When I said that ‘one of the features of make was that it checks if a file or folder matching the rule name exists first before executing that rule's recipe — and won't run the recipe if that file or folder already exists’ I was oversimplifying things.
 
 If that task's name matches a file and that that has prerequisites that match files that exist, make will look the last modification date of those files with the files.  If those files have changed more recently than the files that match the task name, it will run the recipe.
 
