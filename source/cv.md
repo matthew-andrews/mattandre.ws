@@ -11,6 +11,16 @@ Technologist, University of Manchester Maths graduate, Grade 8 Pianist, [travel 
 - 2011 – IT Manager – Climate Bridge, Shanghai, China
 - 2012 – present: Software Engineer – Financial Times, London, UK
 
+## Technologies
+
+- AWS (Lambda, S3, CloudFormation, DynamoDB, API Gateway, and more)
+- Open Source contributor to: [FT DOM Delegate](https://github.com/ftlabs/ftdomdelegate), [FastClick](https://github.com/ftlabs/fastclick), [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch), [denodeify](https://github.com/matthew-andrews/denodeify))
+- Make, Bash, Git
+- Sass (BEM, component-based CSS architecture)
+- Offline websites: AppCache, Service Worker
+- CI: CircleCI, Travis, Jenkins
+- Server: NodeJS, Ruby, PHP
+
 ## Notable Projects
 
 - [‘Next’ FT](https://next.ft.com/__opt-in?via=matta)
