@@ -15,7 +15,7 @@ This is it.
 
 ## Tools and architecture
 
-- It's built with **[Hexo.io](https://hexo.io/)** (although I swapped out the Sass compilation with [one we developed for the Financial Times](https://github.com/Financial-Times/n-makefile) and removed all the client side JavaScript entirely.
+- It's built with **[Hexo.io](https://hexo.io/)** (although I swapped out the Sass compilation with [one we developed for the Financial Times](https://github.com/Financial-Times/n-makefile) and removed the client side JavaScript entirely.
 - It's hosted on S3 (provisioned with [CloudFormation](https://github.com/matthew-andrews/mattandre.ws/blob/master/templates/stack.json)).
 - Circle CI runs the builds and pushes to production on green (when linting passes and the pages build).
 - It's behind a CDN (CloudFlare) who provide SSL for free (thank you CloudFlare <3).  They also support HTTP2 and have a nice API that you can use to do some clever cache optimisations with…
