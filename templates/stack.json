@@ -3,6 +3,9 @@
   "Parameters": {
     "DomainName": {
       "Type": "String"
+    },
+    "IAMDeployUser": {
+      "Type": "String"
     }
   },
   "Resources" : {
@@ -56,7 +59,7 @@
             {
               "Effect": "Allow",
               "Principal": {
-                "AWS": { "Fn::Join": [ "", [ "arn:aws:iam::", { "Ref": "AWS::AccountId" }, ":user/DeployUserFor_mattandrews" ] ] }
+                "AWS": { "Fn::Join": [ "", [ "arn:aws:iam::", { "Ref": "AWS::AccountId" }, ":user/", { "Ref": "IAMDeployUser" } ] ] }
               },
               "Action": "s3:*",
               "Resource": [
