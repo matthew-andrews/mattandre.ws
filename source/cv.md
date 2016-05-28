@@ -37,10 +37,10 @@ Technologist, University of Manchester Maths graduate, Grade 8 Pianist, [travel 
 
 ## Education
 
+- 2010 – 2011: Fully funded year long Mandarin language course at East China Normal University, Shanghai at the invitation of the Confucius Institute
 - 2007 – 2010: BSc Mathematics (2.1), University of Manchester, UK
 	- Took part in exchange programmes at Seoul National University, South Korea, University of New Delhi, India, and East China Normal University, China.
 	- Did fun, charitable things for Student Action and Manchester RAG.
-- 2010 – 2011: Fully funded year long Mandarin language course at East China Normal University, Shanghai at the invitation of the Confucius Institute
 
 ## Foreign Languages
 
