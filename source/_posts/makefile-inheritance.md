@@ -11,7 +11,7 @@ tags:
 
 Trends like microservices and technologies like AWS Lambda mean the way applications are built is changing.  Before, a single _monolithic_ application may have been contained within a single repository but now one product might be delivered by dozens or even hundreds of little sub-applications each in individual repositories where every one of those responsible for a small number of tasks.
 
-Why you might do this is a topic for another time, but this approach makes maintaining build automation tools across an application harder.
+Why you might do this is a topic for another time but this approach makes maintaining build automation tools across an application harder.
 
 Front end build automation tools like gulp and grunt have mature plugin framework.  That means it's easy to share solutions to common problems.  You can create plugins that are downloaded at build time and can be shared across different repositories.
 
@@ -43,7 +43,7 @@ This might appear at first glance to be quite similar to inheritance except that
 
 We basically hacked inheritance into make by exploiting wildcards.  In our shared makefile instead of defining an `install` task, we define an `instal%` task.
 
-This means that if there isn't a task called `install` running `make install` will run the steps defined in the `instal%` task and if an `install` task gets added that will run whenever a developer runs `make install` instead.
+This means that if there isn't a task called `install` in the project's Makefile, running `make install` will run the steps defined in the `instal%` task of the shared Makefile.  Similarly if a developer adds an `install` task to their project's Makefile that will run whenever a developer runs `make install` instead.
 
 For example:-
 
