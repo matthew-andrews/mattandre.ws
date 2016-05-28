@@ -8,7 +8,7 @@ Whilst building some [recent](https://matthew-andrews.github.io/serviceworker-si
 > …independent pieces of code (e.g. running in different browsing contexts) to communicate directly
 > http://www.w3.org/TR/webmessaging/#channel-messaging
 
-As far as I can see, they're basically Javascript wormholes between different tabs and windows.
+As far as I can see, they're basically JavaScript wormholes between different tabs and windows.
 
 # How do they work?
 

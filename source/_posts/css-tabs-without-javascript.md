@@ -1,5 +1,5 @@
 ---
-title: "Snippet: CSS Tabs without Javascript or Hashtag URLs"
+title: "Snippet: CSS Tabs without JavaScript or Hashtag URLs"
 date: 2012-08-29
 categories:
 - Work
@@ -8,7 +8,7 @@ tags:
 - CSS3
 - HTML
 ---
-Lately [in the lab](http://labs.ft.com/) we’ve been experimenting with using `<form>` elements to shift the burden handling basic functionality from Javascript to CSS and HTML to keep our apps as responsive and our Javascript code as clean as possible, especially whilst the Javascript engine (which, of course, [with few exceptions](https://github.com/matthew-andrews/Overtime) is only able to do one thing at a time) is busy processing.
+Lately [in the lab](http://labs.ft.com/) we’ve been experimenting with using `<form>` elements to shift the burden handling basic functionality from JavaScript to CSS and HTML to keep our apps as responsive and our JavaScript code as clean as possible, especially whilst the JavaScript engine (which, of course, [with few exceptions](https://github.com/matthew-andrews/Overtime) is only able to do one thing at a time) is busy processing.
 
 [Check out the result.](http://codepen.io/WilsonPage/full/fxwni)
 

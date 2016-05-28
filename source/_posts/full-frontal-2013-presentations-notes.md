@@ -5,7 +5,7 @@ tags:
 - conferences
 - HTML
 - HTML5
-- Javascript
+- JavaScript
 - Sass
 categories:
 - Work
@@ -21,9 +21,9 @@ A whistlestop tour of ES6 (the upcoming version of javascript due next year). Th
 
 ---
 
-### 10:30 – 11:10: [Javascript in the real world (slides)](https://speakerdeck.com/andrew/javascript-in-the-real-world) *[Andrew Nesbitt – @teabass](https://twitter.com/teabass)*
+### 10:30 – 11:10: [JavaScript in the real world (slides)](https://speakerdeck.com/andrew/javascript-in-the-real-world) *[Andrew Nesbitt – @teabass](https://twitter.com/teabass)*
 
-Mind still buzzing with `yield`ing generators we segued into Andrew Nesbitt's delightful Terminator-reference and Rabbit-photo packed presentation on the cutting edge of Javascript powered robots.
+Mind still buzzing with `yield`ing generators we segued into Andrew Nesbitt's delightful Terminator-reference and Rabbit-photo packed presentation on the cutting edge of JavaScript powered robots.
 
 - [Control your Lego Mindstorms EV3 Tanks with an xbox controller over bluetooth](https://github.com/andrew/node-ev3-robot)
 - [Johnny Five](https://github.com/rwaldron/johnny-five) – the jQuery of the javascript robots world.
@@ -41,7 +41,7 @@ Lots of charts of absurd growth and examples of mobile changing everything, from
 
 ### 12:20 – 13:00: [Pushing the limits of mobile performance (slides)](https://docs.google.com/presentation/d/1onNCD7APXOwbG58hvXdlogLDXbpId-KDeOLqr8xJ79Y/pub?start=false&loop=false&delayms=3000#slide=id.p) *[Andrew Grieve – @GrieveAndrew](https://twitter.com/GrieveAndrew)*
 
-A peak into the history of Gmail web app for the original iPhones. Amazing to see how much faster smart phones have become since 2007. My main take away: Javascript performance isn't the issue it used to be on mobile devices – rendering is (probably) a much bigger concern.
+A peak into the history of Gmail web app for the original iPhones. Amazing to see how much faster smart phones have become since 2007. My main take away: JavaScript performance isn't the issue it used to be on mobile devices – rendering is (probably) a much bigger concern.
 
 - [Eliminate the 360ms delay on touch screen devices but be aware of the caveats](https://github.com/ftlabs/fastclick)
 - [Use the HTML5 AppCache, but read Jake Archibald's post first](http://alistapart.com/article/application-cache-is-a-douchebag)

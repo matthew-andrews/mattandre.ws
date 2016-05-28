@@ -6,8 +6,8 @@ categories:
 - JavaScript
 tags:
 - HTML5
-- Javascript
-- Javascript Performance
+- JavaScript
+- JavaScript Performance
 - web app
 ---
 (This was inspired by Objective-C, where methods of classes are [never *really* private](http://stackoverflow.com/questions/2158660/why-doesnt-objective-c-support-private-methods))
@@ -108,7 +108,7 @@ As a lot of our code (1mb of it in the FT Web App) currently needs to be evaluat
 
 The results, [which show that object literals (the latter example) are 95% faster on certain platforms](http://jsperf.com/self-executing-vs-literal), could make shifting from enclosed modules to object literals worthwhile (assuming you have the infrastructure set up to stop other objects from accessing properties and methods they should not be able to).
 
-The object literal approach also allows us to be able to write unit tests for private functions (one of the downsides of using the module pattern listed by [Addy Osmani's Javascript design patterns book](https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript)).
+The object literal approach also allows us to be able to write unit tests for private functions (one of the downsides of using the module pattern listed by [Addy Osmani's JavaScript design patterns book](https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript)).
 
 **Update**: To my surprise, it turns out the results are reversed to some extent on Safari/iOS. So, as always, the right choice depends each project's individual requirements and supported platforms. But it seems moving to object literals isn't going to help the FT Web App achieve faster start times on its most popular platforms (iPhone, iPad).
 

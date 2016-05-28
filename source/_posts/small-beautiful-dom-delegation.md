@@ -25,7 +25,7 @@ Also after using TJ Holowaychuk's [SuperAgent](https://github.com/visionmedia/su
 
 ## What to do about event delegation?
 
-But there was a piece of jQuery we needed that was missing in the component world and that is a *nice* library to help with event delegation [(read more about Javascript event delegation and why you might use this pattern on Site Point)](https://www.sitepoint.com/javascript-event-delegation-is-easier-than-you-think/). So we built one and called it [FT DOM Delegate](https://github.com/ftlabs/ftdomdelegate) (or `dom-delegate` on the npm or bower registries).
+But there was a piece of jQuery we needed that was missing in the component world and that is a *nice* library to help with event delegation [(read more about JavaScript event delegation and why you might use this pattern on Site Point)](https://www.sitepoint.com/javascript-event-delegation-is-easier-than-you-think/). So we built one and called it [FT DOM Delegate](https://github.com/ftlabs/ftdomdelegate) (or `dom-delegate` on the npm or bower registries).
 
 Without the baggage of an old API that everyone already knows we were able to start from scratch. So this is what we did:-
 

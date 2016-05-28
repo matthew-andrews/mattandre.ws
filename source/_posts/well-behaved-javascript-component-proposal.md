@@ -6,7 +6,7 @@ categories:
 - JavaScript
 tags:
 - CSS
-- Javascript
+- JavaScript
 - object orientated design
 - offline
 - web app

@@ -15,7 +15,7 @@ No matter how hard I try my timeline recording never look consistent, with a (re
 
 – Chrome Office Hours: Performance
 
-Unlike other profiling tools in Chrome that can be controlled directly from Javascript I always find my Timeline reports have really poor signal-to-noise ratios. They tend to be a chaotic mixture of colours and where there is good information, it can feel like I'm just being told that I'm doing **everything wrong**:
+Unlike other profiling tools in Chrome that can be controlled directly from JavaScript I always find my Timeline reports have really poor signal-to-noise ratios. They tend to be a chaotic mixture of colours and where there is good information, it can feel like I'm just being told that I'm doing **everything wrong**:
 
 {% img /images/bad.png %}
 
