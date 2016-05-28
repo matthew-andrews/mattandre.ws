@@ -31,7 +31,7 @@ For example adding `include *.mk` will include all files in the same directory t
 
 The pattern we adopted was to have [a single, centralised Makefile](https://github.com/Financial-Times/n-makefile) that gets committed to each our applications in a file called `n.Makefile`.  That file is then _included_ into each repository's *actual* makefile by an `include n.Makefile` added at the top.  That centralised makefile contains a [simple update script](https://github.com/Financial-Times/n-makefile/blob/master/Makefile#L119L126) that allows each repository to be upgraded to the latest version by running `make update-tools`.
 
-That centralised makefile contained standard patterns for installing dependencies, building assets, deployments and linting.
+That centralised makefile contains standard patterns for installing dependencies, building assets, deployments and linting.
 
 Part of the philosophy behind it was to ensure that it was easy to override any part of it.
 
