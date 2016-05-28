@@ -7,9 +7,9 @@ Technologist, University of Manchester Maths graduate, Grade 8 Pianist, [travel 
 
 ## Work
 
-- 2010 – Summer Intern at British High Commission – New Delhi, India
-- 2011 – IT Manager – Climate Bridge, Shanghai, China
 - 2012 – present: Software Engineer – Financial Times, London, UK
+- 2011 – IT Manager – Climate Bridge, Shanghai, China
+- 2010 – Summer Intern at British High Commission – New Delhi, India
 
 ## Technologies
 
