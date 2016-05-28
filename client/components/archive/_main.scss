@@ -4,10 +4,10 @@
 
 .archive__title,
 .archive__year {
-	padding: 0 20px;
+	padding-left: 20px;
 
 	@include large {
-		padding: 0;
+		padding-left: 0;
 	}
 }
 
@@ -25,10 +25,12 @@
 }
 
 .archive__year {
-	@include block-caption;
+	font-weight: bold;
+	line-height: 1em;
 	color: $color-grey;
 	display: block;
-	margin: 1em 0;
+	padding-top: 1em;
+	padding-bottom: 1em;
 }
 
 .archive__article {
