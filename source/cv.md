@@ -19,7 +19,7 @@ Technologist, University of Manchester Maths graduate, Grade 8 Pianist, [travel 
 - Sass (BEM, component-based CSS architecture)
 - Offline websites: AppCache, Service Worker
 - CI: CircleCI, Travis, Jenkins
-- Server: NodeJS, Ruby, PHP
+- Languages: JavaScript (browser and NodeJS), Golang, Ruby, PHP
 
 ## Notable Projects
 
