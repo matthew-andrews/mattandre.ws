@@ -36,6 +36,6 @@ When you add together HTTP2, S3 and smart use of a CDN you get a very performant
 
 {% img /images/crazyperformance.png %}
 
-The above image shows that, occasionally, pages take the almost same amount of time to load in production (right) as they do _on my local machine_ (left).  Production isn't always this quick (a few, very unscientific and statistically invalid spot checks of pages on https://mattandre.ws shows that most of the site loads in about half a second, but is sometimes as slow as 800ms) but it does show that crazy level of performance _is possible_.
+The above image shows that, occasionally, pages take the almost same amount of time to load in production (right) as they do _on my local machine_ (left).  Production isn't always this quick (a few, very unscientific and statistically invalid spot checks of pages on https://mattandre.ws shows that most of the site loads in about half a second, but is sometimes as slow as 800ms) but it does show that a crazy level of performance _is possible_.
 
 And there's so much more left to optimise.
