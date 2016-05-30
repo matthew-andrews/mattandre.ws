@@ -72,7 +72,7 @@ widgets:
 # Header
 menu:
   CV:
-    url: /cv
+    url: /cv/
     importance: 1
   Twitter:
     url: https://twitter.com/andrewsmatt
@@ -96,5 +96,5 @@ menu:
     url: /feed
     importance: 1
   Contact:
-    url: /contact
+    url: /contact/
     importance: 1
