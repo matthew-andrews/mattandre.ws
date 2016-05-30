@@ -91,7 +91,7 @@ I've also added some buttons so that it's easy to test sending bits of data betw
 
 ## Uncaught DataCloneError: Failed to execute ‘postMessage’ on ‘MessagePort’: An object could not be cloned.
 
-Not every kind of javascript object can be sent in this way (which is why DOM nodes fail). According to the specification:
+Not every kind of JavaScript object can be sent in this way (which is why DOM nodes fail). According to the specification:
 
 > Posts a message to the given window. Messages can be structured objects, e.g. nested objects and arrays, can contain JavaScript values (strings, numbers, Dates, etc), and can contain certain data objects such as File Blob, FileList, and ArrayBuffer objects.
 > http://www.w3.org/TR/2012/WD-webmessaging-20120313/#posting-messages
