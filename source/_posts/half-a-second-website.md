@@ -9,7 +9,7 @@ tags:
 - Website Performance
 - Lambda
 ---
-I've spent the past couple of weekends rebuiling my website.  Previously it was a really old, slow, out-of-date WordPress site running on ridiculously expensive (for what it was) GoDaddy shared hosting.  Converting it to a statically generated (Jekyll or similar) site had been on my to-do list for years…
+I've spent the past couple of weekends rebuilding my website.  Previously it was a really old, slow, out-of-date WordPress site running on ridiculously expensive (for what it was) GoDaddy shared hosting.  Converting it to a statically generated (Jekyll or similar) site had been on my to-do list for years…
 
 This is it.
 
