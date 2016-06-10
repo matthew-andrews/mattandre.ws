@@ -17,4 +17,4 @@ watch-hexo:
 test: verify
 
 deploy:
-	s3up --strip 1 --region eu-west-1 --cache-control 's-maxage=31536000, max-age=300' --bucket mattandre.ws `find . -path "./public/*"`
+	s3up --strip 1 --cache-control 's-maxage=31536000, max-age=300' --bucket mattandre.ws `find . -path "./public/*"`
