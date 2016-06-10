@@ -17,4 +17,4 @@ watch-hexo:
 test: verify
 
 deploy:
-	nht deploy-static `find . -path "./public/*"` --strip 1 --region eu-west-1 --cache-control 's-maxage=31536000, max-age=300' --bucket mattandre.ws
+	s3up --strip 1 --region eu-west-1 --cache-control 's-maxage=31536000, max-age=300' --bucket mattandre.ws `find . -path "./public/*"`
