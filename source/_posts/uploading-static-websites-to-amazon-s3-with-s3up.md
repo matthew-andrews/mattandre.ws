@@ -16,6 +16,8 @@ When it comes to actually uploading files to S3 there are plenty of choices for 
 
 ## Introducing s3up!
 
+https://github.com/matthew-andrews/s3up
+
 A new cross platform command line tool for uploading files to S3.
 
 If you'd like to try it out or report bugs, [installation instructions and more information is up on GitHub](https://github.com/matthew-andrews/s3up).
