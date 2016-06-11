@@ -98,3 +98,6 @@ menu:
   Contact:
     url: /contact/
     importance: 1
+
+sitemap:
+  path: sitemap.xml
