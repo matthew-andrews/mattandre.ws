@@ -7,6 +7,7 @@ categories:
 tags:
 - CLI
 - S3
+- static website
 ---
 
 I've been using [Amazon S3](https://aws.amazon.com/s3) at work and at home a lot recently and have grown to really like its features.  Versioning, lifecycle rules and event streams can be used in really cool ways to make rock solid and {% post_link half-a-second-website super performant%} websites.
