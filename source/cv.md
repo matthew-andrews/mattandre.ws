@@ -14,7 +14,7 @@ Technologist, University of Manchester Maths graduate, Grade 8 Pianist, [travel 
 ## Technologies
 
 - AWS (Lambda, S3, CloudFormation, DynamoDB, API Gateway, and more)
-- Open Source contributor to: [FT DOM Delegate](https://github.com/ftlabs/ftdomdelegate), [FastClick](https://github.com/ftlabs/fastclick), [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch), [denodeify](https://github.com/matthew-andrews/denodeify)
+- Open Source contributor to: [FT DOM Delegate](https://github.com/ftlabs/ftdomdelegate), [FastClick](https://github.com/ftlabs/fastclick), [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch), [denodeify](https://github.com/matthew-andrews/denodeify), [s3up](https://github.com/matthew-andrews/s3up)
 - Make, Bash, Git
 - Sass (BEM, component-based CSS architecture)
 - Offline websites: AppCache, Service Worker
