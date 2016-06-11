@@ -1,5 +1,5 @@
 ---
-title: Uploading static files to Amazon S3 efficiently with s3up
+title: Uploading static files & websites to Amazon S3 efficiently with s3up
 date: 2016-06-11
 categories:
 - Technologies
