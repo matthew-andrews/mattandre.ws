@@ -30,6 +30,7 @@ If you'd like to try it out or report bugs, [installation instructions and more 
 - Splits large files up and uploads them in smaller pieces
 - Written in Go and compiled for all platforms, which means it is **fast**, can be **installed quickly**, and is **standalone** — it does not rely on other dependencies (like Python or Node)
 - Allows manipulation of the path that files get uploaded to 
+- Has a `--dry-run` so that the changes it will make to objects in S3 can be previewed
 
 ### Manipulating upload path
 
