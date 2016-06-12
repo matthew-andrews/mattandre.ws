@@ -20,7 +20,7 @@ For **Lambda error regex** […] type a regular expression to specify which Lamb
 
 **Note**
 The error patterns are matched against the `errorMessage` property in the Lambda response, which is populated by `context.fail(errorMessage)` in Node.js or by `throw new MyException(errorMessage)` in Java.
-Be aware of the fact that the `.\\` pattern will not match any newline (`\n`).
+Be aware of the fact that the `.\` pattern will not match any newline (`\n`).
 {% endblockquote %}
 
 This seems simple enough.
