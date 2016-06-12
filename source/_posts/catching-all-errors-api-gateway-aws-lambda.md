@@ -11,7 +11,7 @@ tags:
 
 When building applications with AWS Lambda and API Gateway I've found error handling quite difficult to work with.
 
-You first define what status codes your API method is able to serve (200, 404 and 500, for example).  You are encouraged to choose 200 as the default.  Then you can write regular expressions that match against the ‘Lambda Error’.
+You first define what status codes your API method is able to serve (200, 404 and 500, for example).  You are encouraged to choose 200 as the default.  Then you can write regular expressions that match against ‘Lambda Errors’.
 
 According to [Amazon's documentation](http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-method-settings-execution-console.html):-
 
