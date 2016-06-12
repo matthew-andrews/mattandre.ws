@@ -45,3 +45,9 @@ Just set the Lambda Error Regex that you want to match to your ‘catch all’ e
 Like this:-
 
 {% img /images/lambda-error-regex.png %}
+
+## Thoughts
+
+I'm really surprised that this is so difficult and that none of the documentation encourages (or helps) developers to write Lambda Error Regexs that match against all possible errors.
+
+If I had to write regular expressions against all the errors I anticipated having to handle I would never feel 100% confident that I got them all and would have needlessly risked returning 200 responses containing errors to users.
