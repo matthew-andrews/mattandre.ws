@@ -36,7 +36,7 @@ You need to create a `makefile` to tell `make` what to do.
 
 By default, `make` will try the following filenames in the following order: `GNUmakefile`, `makefile` and `Makefile` but your makefile can have any filename you like.
 
-If you’ve called it a name other than one of the defaults, you need to tell make that filename, which you can do by providing the `-f` option.
+If you’ve called it a name other than one of the defaults you need to tell make that filename, which you can do by providing the `-f` option.
 
 ```
 $ make -f MyMakefile
