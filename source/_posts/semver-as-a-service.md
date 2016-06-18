@@ -15,7 +15,7 @@ I've been continuing learning bits and pieces with mini projects…  This time: 
 
 https://github.com/matthew-andrews/semver-as-a-service/
 
-**Semver as a Service** simple API that will look at any GitHub repository's releases/tags, sort them and tell you the highest version or, if you specify a constraint, the highest version that meets a constraint.
+**Semver as a Service** is a simple API that will look at any GitHub repository's releases/tags, sort them and tell you the highest version or, if you specify a constraint, the highest version that meets a constraint.
 
 Try it out here:-
 
