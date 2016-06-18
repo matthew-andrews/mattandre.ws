@@ -29,6 +29,6 @@ Well, the main purpose was to learn Go, AWS, etc, but it's also handy for writin
 
 ```
 curl -sf https://api.mattandre.ws/semver/github/matthew-andrews/s3up \
-	| xargs -I '{}' curl -sfL https://github.com/matthew-andrews/s3up/releases/download/{}/apex_darwin_386 -o /usr/local/bin/apex \
-	&& chmod +x /usr/local/bin/apex
+	| xargs -I '{}' curl -sfL https://github.com/matthew-andrews/s3up/releases/download/{}/s3up_darwin_386 -o /usr/local/bin/s3up \
+	&& chmod +x /usr/local/bin/s3up
 ```
