@@ -1,5 +1,5 @@
 ---
-title: Error Handling in AWS Lambda and API Gateway — gotta catch 'em all
+title: Catching All Errors in AWS Lambda and API Gateway
 date: 2016-06-12
 categories:
 - Technologies
