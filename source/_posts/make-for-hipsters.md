@@ -290,4 +290,4 @@ echo "  https://mattandre.ws"
   https://mattandre.ws
 ```
 
-You can read more about make functions in the manual or see some creative uses of them in the [Financial Times' shared front end application Makefile](http://www.gnu.org/software/make/manual/make.html#Syntax-of-Functions).
+You can read more about make functions in the manual or see some creative uses of them in the [Financial Times' shared front end application Makefile](https://github.com/Financial-Times/n-makefile).
