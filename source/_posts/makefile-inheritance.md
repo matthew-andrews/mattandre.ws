@@ -13,7 +13,7 @@ Trends like microservices and technologies like AWS Lambda mean the way applicat
 
 Why you might do this is a topic for another time but this approach makes maintaining build automation tools across an application harder.
 
-Front end build automation tools like gulp and grunt have mature plugin framework.  That means it's easy to share solutions to common problems.  You can create plugins that are downloaded at build time and can be shared across different repositories.
+Front end build automation tools like gulp and grunt have mature plugin frameworks.  That means it's easy to share solutions to common problems.  You can create plugins that are downloaded at build time and can be shared across different repositories.
 
 There is no package manager or registry for makefile.  But there's nothing to stop you putting Makefiles in npm (or bower, nuget, composer, etc) modules.  You could even use git submodules.
 
