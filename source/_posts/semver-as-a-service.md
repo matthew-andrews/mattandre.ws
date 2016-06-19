@@ -25,7 +25,7 @@ Try it out here:-
 
 ## Why?
 
-Well, the main purpose was to learn Go, AWS, etc, but it's also handy for writing install scripts.  For example, this could be a simple script to install the latest version of [S3UP](https://github.com/matthew-andrews/s3up) on your Mac:-
+Well, the main purpose was to learn Go, AWS, etc, but it's also handy for writing install scripts.  For example, this could be a simple script to install the latest version of [s3up](https://github.com/matthew-andrews/s3up) on your Mac:-
 
 ```
 curl -sf https://api.mattandre.ws/semver/github/matthew-andrews/s3up \
