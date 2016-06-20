@@ -64,7 +64,7 @@ dothings:
 
 In this case we have a single ‘target’, `dothings`, and a single line ‘recipe’, `echo "hello world"`.  The recipe simply prints out the text ‘hello world’ into the terminal.
 
-Try this by runing that rule by typing `make dothing` into your terminal.  It should output someting like:-
+Try this by running that rule by typing `make dothing` into your terminal.  It should output something like:-
 
 ```
 $ make dothings
