@@ -141,7 +141,7 @@ install:
 
 That worked and is simple except that if you ran `make install` twice in quick succession the second time, although faster than the first, would be quite slow.
 
-One feature of make is that it checks if a file or folder matching the rule name exists first before executing that rule's recipe — and it won't run the recipe if that file or foler already exists.
+One feature of make is that it checks if a file or folder matching the rule name exists first before executing that rule's recipe — and it won't run the recipe if that file or folder already exists.
 
 So we can improve our `make install` rule by:-
 
