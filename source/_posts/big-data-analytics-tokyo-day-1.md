@@ -1,7 +1,9 @@
 ---
 title: Big Data Analytics Tokyo 2017 — day 1
 date: 2017-02-09
-categories: Work
+categories:
+- Work
+- Conferences
 tags: Analytics, Big Data, Artificial Intelligence, Machine Learning, Tokyo
 ---
 
