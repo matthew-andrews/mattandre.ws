@@ -98,7 +98,7 @@ Another ‘a word from our sponsors’ talk but I didn't really take anything aw
 
 I really struggled with the language issues here again — the slides were almost all in Japanese.  That said, it was fascinating to learn about a highly successful Japanese FinTech startup.
 
-The speaker's favourite algorithms were [Support Vector Machine](https://en.wikipedia.org/wiki/Support_vector_machine) and [State Space Model](https://en.wikipedia.org/wiki/State-space_representation)
+The speaker's favourite algorithms were [Support Vector Machine](https://en.wikipedia.org/wiki/Support_vector_machine) and [State Space Model](https://en.wikipedia.org/wiki/State-space_representation).
 
 ### And finally.
 
