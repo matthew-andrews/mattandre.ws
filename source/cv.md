@@ -48,3 +48,4 @@ Technologist, University of Manchester Maths graduate, Grade 8 Pianist, [travel 
 
 - Chinese Mandarin – Advanced
 - German – Advanced, although a little rusty
+- Japanese — Low intermediate JLPT N5
