@@ -62,7 +62,6 @@ feed:
 
 google_analytics: UA-34192510-1
 twitter: andrewsmatt
-google_plus: MattAndrewsUK
 
 widgets:
 - recent_posts
@@ -77,9 +76,6 @@ menu:
   Twitter:
     url: https://twitter.com/andrewsmatt
     importance: 1
-  Google+:
-    url: https://plus.google.com/+MattAndrewsUK/
-    importance: 3
   Weibo 微博:
     url: http://weibo.com/andrewsmatt
     importance: 3
