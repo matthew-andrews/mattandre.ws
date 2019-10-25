@@ -6,7 +6,7 @@ build build-production:
 	@$(MAKE) $@-super
 
 run:
-	static public
+	npm start
 
 watch:
 	@$(MAKE) watch-super watch-hexo -j2

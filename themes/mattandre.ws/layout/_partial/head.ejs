@@ -25,7 +25,7 @@
 	<title><%= config.title %> | Tokyo HTML5, JavaScript, Golang developer</title>
 	<% } %>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<%- open_graph({ twitter_id: config.twitter, google_plus: config.google_plus, updated: 'hacked' /* This switches off og:updated_time */ }) %>
+	<%- open_graph({ twitter_id: config.twitter, updated: 'hacked' /* This switches off og:updated_time */ }) %>
 	<% if (config.feed.path) { %>
 		<link rel="alternate" href="/<%- config.feed.path %>" title="<%= config.title %>" type="application/atom+xml">
 	<% } %>
