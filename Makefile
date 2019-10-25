@@ -1,5 +1,7 @@
 build build-production:
-	npm run build
+	rm -rf public
+	npm run build-hexo
+	npm run build-webpack
 
 run:
 	npm start

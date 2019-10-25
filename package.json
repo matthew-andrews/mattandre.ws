@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"No tests, YOLO!\"",
     "start": "static public",
-    "build": "rm -rf public && hexo generate",
+    "build-hexo": "hexo generate",
+    "build-webpack": "webpack",
     "watch-hexo": "hexo generate --watch",
     "watch-webpack": "webpack --watch --dev"
   },
