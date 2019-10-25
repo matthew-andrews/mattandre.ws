@@ -3,7 +3,6 @@ jobs:
   build:
     docker:
       - image: circleci/node:10.16.3
-      - image: circleci/python:3.7-stretch
     steps:
       - checkout
       - run:
@@ -16,7 +15,7 @@ jobs:
           command: npm install
       - run:
           name: Install awscli
-          command: sudo pip install awscli
+          command: sudo apt-get install awscli
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
