@@ -45,7 +45,7 @@ Then, click the **Static website hosting** box — and choose **Use this bucket
 
 You'll need to enter the **Index document**, which I'll set to be their suggestion, `index.html`.
 
-**Make sure to take note of the `Endpoint` — you'll need that later!** In my case this is `http://testing.mattandre.ws.s3-website-eu-west-1.amazonaws.com`.
+**Make sure to take note of the `Endpoint` — you'll need that later!** In my case this is `http://testing.mattandre.ws.s3-website-eu-west-1.amazonaws.com/`.
 
 {% img /images/bucket-properties.png %}
 
@@ -113,7 +113,7 @@ I uploaded an `index.html` file with the contents `<h1>Hello world</h1>` to my S
 - Click **Add record**
 - Set the **Type** to be `CNAME`
 - Set the **Name** to be the subdomain (or leave blank if you are creating a static website on the root of your website)
-- Set the **Target** to be equal to the **Endpoint** that you were given in step 5 but **remove** the `http://` prefix. In my case this is `testing.mattandre.ws.s3-website-eu-west-1.amazonaws.com`
+- Set the **Target** to be equal to the **Endpoint** that you were given in step 5 but **remove** the `http://` prefix and `/` suffix. In my case this is `testing.mattandre.ws.s3-website-eu-west-1.amazonaws.com`
 - Leave **TTL** and **Proxy Status** to be their defaults (_Auto_ and _Proxied_)
 - Click **Save**
 
