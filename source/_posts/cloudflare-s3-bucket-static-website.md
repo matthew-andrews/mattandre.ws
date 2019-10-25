@@ -96,8 +96,7 @@ Take a copy of the following JSON, take care to **replace** `testing.mattandre.w
     ]
 }
 ```
-
-(This grants Cloudflare's IP ranges **read-only** access to your S3 bucket contents)
+(This grants [Cloudflare's IP ranges](https://www.cloudflare.com/ips/) **read-only** access to your S3 bucket contents)
 
 ## Extra step - Upload a `index.html` file to your bucket
 
