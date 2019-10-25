@@ -22,11 +22,14 @@ jobs:
             - ./node_modules
       - run:
           name: test
-          command: npm test
+          command: make test
+      - run:
+          name: build
+          command: make build
       - deploy:
           name: Deploy to production if master
           command: |
               if [ "${CIRCLE_BRANCH}" == "master" ]; then
-                  make deploy
+                  make build-production deploy
               fi
 
