@@ -1,5 +1,5 @@
 ---
-title: How to securely configure Cloudflare for static website on AWS S3
+title: How to securely configure Cloudflare for static website hosting on AWS S3
 date: 2019-10-25
 categories:
 - Technologies
