@@ -14,7 +14,8 @@ watch:
 watch-hexo:
 	hexo generate --watch
 
-test: verify
+test:
+	npm test
 
 deploy:
 	cd public && aws s3 sync --cache-control 's-maxage=31536000, max-age=300' --dryrun . s3://mattandre.ws
