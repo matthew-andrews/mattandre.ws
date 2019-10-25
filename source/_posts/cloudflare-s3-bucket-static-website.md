@@ -25,7 +25,7 @@ Leave the rest as default and hit **Next**.
 
 ## Step 2 - Configure Options
 
-On the **Configure options**) you can leave all the other options as default.
+On the **Configure options** you can leave all the other options as default.
 
 ## Step 3 - Set permissions
 
