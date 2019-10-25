@@ -7,7 +7,8 @@ Technologist, University of Manchester Maths graduate, Grade 8 Pianist, [travel 
 
 ## Work
 
-- 2012 – present: Software Engineer – Financial Times, London, UK, and Tokyo, Japan
+- 2016 - present: Principal Engineer — Financial Times/Nikkei, Tokyo, Japan
+- 2012 – 2016: Software Engineer – Financial Times, London, UK
 - 2011 – IT Manager – Climate Bridge, Shanghai, China
 - 2010 – Summer Intern at British High Commission – New Delhi, India
 
@@ -37,6 +38,7 @@ Technologist, University of Manchester Maths graduate, Grade 8 Pianist, [travel 
 
 ## Education
 
+- 2018 - 2019: Executive MBA at IE Business School, Madrid sponsored by the FT.
 - 2010 – 2011: Fully funded year long Mandarin language course at East China Normal University, Shanghai at the invitation of the Confucius Institute
 - 2007 – 2010: BSc Mathematics (2.1), University of Manchester, UK
 	- Took part in exchange programmes at Seoul National University, South Korea, University of New Delhi, India, and East China Normal University, China.
