@@ -1,18 +1,19 @@
-include n.Makefile
-
 build build-production:
 	rm -rf public
-	hexo generate
-	@$(MAKE) $@-super
+	npm run build-hexo
+	npm run build-webpack
 
 run:
 	npm start
 
 watch:
-	@$(MAKE) watch-super watch-hexo -j2
+	@$(MAKE) watch-hexo watch-webpack -j2
 
 watch-hexo:
-	hexo generate --watch
+	npm run watch-hexo
+
+watch-webpack:
+	npm run watch-webpack
 
 test:
 	npm test
