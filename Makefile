@@ -18,5 +18,4 @@ test:
 	npm test
 
 deploy:
-	cd public && aws s3 sync --cache-control 's-maxage=31536000, max-age=300' . s3://mattandre.ws
-#	find . -path "./public/*" -exec s3up --strip 1 --cache-control 's-maxage=31536000, max-age=300' --bucket mattandre.ws {} +
+	cd public && aws s3 sync --cache-control 's-maxage=31536000, max-age=300' --size-only . s3://mattandre.ws
