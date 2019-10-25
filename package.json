@@ -5,7 +5,10 @@
   },
   "scripts": {
     "test": "echo \"No tests, YOLO!\"",
-    "start": "static public"
+    "start": "static public",
+    "build": "rm -rf public && hexo generate",
+    "watch-hexo": "hexo generate --watch",
+    "watch-webpack": "webpack --watch --dev"
   },
   "dependencies": {
     "hexo-generator-archive": "^0.1.4",
@@ -24,7 +27,6 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "hexo": "matthew-andrews/hexo#no-description-if-no-description",
     "imports-loader": "^0.6.5",
-    "lintspaces-cli": "^0.1.1",
     "node-sass": "^4.13.0",
     "node-static": "^0.7.7",
     "normalize.css": "^4.1.1",
