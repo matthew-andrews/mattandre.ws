@@ -29,7 +29,7 @@ For me I extremely fortunate in three ways:
 
 Your mileage may vary.
 
-** (How) has an MBA been valuable for me?
+## (How) has an MBA been valuable for me?
 
 - Before I might think of an idea for a business and fantasise it might make me a gazillionaire. Now I feel I know more clearly than ever what needs to be done to take that idea, evaluate its potential, make decisions about the trade-offs between various ways of getting it funded, and how it might be brought to life. _I also realise how much work and risk it is — and now feel almost (but not quite) all of my previous ideas lack the potential to make them worth the effort._
 - I can now read & understand basic financial statements but despite having a numerical background (BSc Mathematics) I'm not as good at it than I thought I would be.
