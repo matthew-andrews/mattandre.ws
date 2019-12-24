@@ -21,7 +21,7 @@ Before I answer I want to first write a short **disclaimer**.
 
 MBAs are **very expensive**, many are designed for a world that is increasingly **[out of date](https://www.economist.com/leaders/2019/10/31/the-future-of-management-education)** and I am certain **free or low cost online equivalents** of the vast majority of the course content now exist on Udemy, YouTube, Coursera, etc. _I often joked a Harvard Business Review subscription gives you a third of the value of an MBA with less than 1% of the cost._
 
-For me I extremely fortunate in three ways:
+For me I was extremely fortunate in three ways:
 
 - Firstly, my employer chose me as one of the three candidates they put forward each year for full sponsorship.
 - Secondly, **I joined IE**: an incredibly forward-thinking school who have technology capable of running truly collaborative and engaging classes connecting students and students across all the world's populated continents at once.
