@@ -25,7 +25,7 @@ For me I extremely fortunate in three ways:
 
 - Firstly, my employer chose me as one of the three candidates they put forward each year for full sponsorship and so, for me, _it was better than **free**_.
 - Secondly, I joined IE: an incredibly forward-thinking school who have technology capable of running truly collaborative and engaging classes connecting students and students across all the world's populated continents at once.
-- Finally, almost everything we learnt was new to me. I believe had I studied business at undergraduate level and complemented it with relevant work experience, I would have got much less out of it.
+- Finally, almost everything we learnt was new to me. I believe had I already had studied business at undergraduate level and complemented it with relevant work experience, I would have got much less out of it.
 
 Your mileage may vary.
 
