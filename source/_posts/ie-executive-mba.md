@@ -7,7 +7,7 @@ categories:
 
 I just graduated from IE Business School's **Executive MBA** programme in Madrid, Spain.
 
-The 15 month programme is conducted mostly online so I took most of the classes croached over my laptop in the dead of the night from my adopted home in Tokyo, Japan.
+The 15 month programme was conducted mostly online so I took most of the classes croached over my laptop in the dead of the night from my adopted home in Tokyo, Japan.
 
 Here's me happily accepting my certificate:
 
