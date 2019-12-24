@@ -1,5 +1,5 @@
 ---
-title: How I got value studying IE Business School's Executive MBA
+title: What I learned studying IE Business School's Executive MBA
 date: 2019-12-24
 categories:
 - MBA
