@@ -32,7 +32,7 @@ Your mileage may vary.
 ## (How) has an MBA been valuable for me?
 
 - Before, I might think of an idea for a business and fantasise it would make me a gazillionaire. Now, I feel I know more clearly than ever what needs to be done to take that idea, **evaluate its potential**, make decisions about the trade-offs between various ways of getting it **funded**, and how it might be brought to life. _I also realise **how much work and risk it is** — and now feel almost (but not quite) all of my previous ideas lack the potential to make them worth the effort._
-- I can now read & understand **basic financial statements** but despite having a numerical background (BSc Mathematics) I'm not as good at it than I thought I would be.
+- I can now read & understand **basic financial statements**, but despite having a numerical background (BSc Mathematics) I'm not as good at it as I thought I would be.
 - But I realised **I can write quite well**. I guess 8 years working for a newspaper has had some effect!
 - I learnt how to make a **marketing plan** … and made a basic one for part of my current project at the FT (and it was received well!)
 - I learnt what is considered [best](https://www.amazon.com/Manager-as-Negotiator-David-Lax/dp/1451636490) [practice](https://hbr.org/2001/04/six-habits-of-merely-effective-negotiators) when _Negotiating_ … and now use in my daily life all the time …
