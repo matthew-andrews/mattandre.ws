@@ -1,13 +1,14 @@
 ---
 title: CV
 permalink: cv/
-slug: cv
+Producslug: cv
 ---
-IE Business School Executive MBA graduate, Technologist, University of Manchester Maths graduate, Grade 8 Pianist, [travel addict](https://www.facebook.com/photo.php?v=103878763725&set=vb.501043725&type=2&theater), 2010 Confucius Institute Scholar, and former Harry Potter extra. Now working with cutting edge web technologies for the Financial Times in Tokyo.
+**Product Manager**, IE Business School **Executive MBA** graduate, Technologist, **Mandarin Chinese** speaker, University of Manchester Maths graduate, Grade 8 Pianist, [travel addict](https://www.facebook.com/photo.php?v=103878763725&set=vb.501043725&type=2&theater), 2010 Confucius Institute Scholar, and former Harry Potter extra. Now building products to save the news industry with cutting edge technologies for Nikkei and the Financial Times in Tokyo.
 
 ## Work
 
-- 2016 - present: Principal Engineer — Financial Times/Nikkei, Tokyo, Japan
+- 2019 - present: Product Manager — Financial Times/Nikkei, Tokyo, Japan
+- 2016 - 2019: Principal Engineer — Financial Times/Nikkei, Tokyo, Japan
 - 2012 – 2016: Software Engineer – Financial Times, London, UK
 - 2011 – IT Manager – Climate Bridge, Shanghai, China
 - 2010 – Summer Intern at British High Commission – New Delhi, India
@@ -39,9 +40,9 @@ IE Business School Executive MBA graduate, Technologist, University of Mancheste
 
 ## Education
 
-- 2018 - 2019: Executive MBA at IE Business School, Madrid sponsored by the FT.
-- 2010 – 2011: Fully funded year long Mandarin language course at East China Normal University, Shanghai at the invitation of the Confucius Institute
-- 2007 – 2010: BSc Mathematics (2.1), University of Manchester, UK
+- 2018 - 2019: **Executive MBA** at IE Business School, Madrid sponsored by the FT.
+- 2010 – 2011: **Mandarin language** course at East China Normal University, Shanghai sponsored by the Chinese Government (Confucius Institute)
+- 2007 – 2010: BSc **Mathematics** (2.1), University of Manchester, UK
 	- Took part in exchange programmes at Seoul National University, South Korea, University of New Delhi, India, and East China Normal University, China.
 	- Did fun, charitable things for Student Action and Manchester RAG.
 
