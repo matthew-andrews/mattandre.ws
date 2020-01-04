@@ -75,7 +75,7 @@ So Netflix built a tool called CHAOS MONKEY.
  
 It’s a virtual wild animal that they let loose on their digital estate causing chaos.
  
-Chaos Monkeys turn off servers, reconfigure settings and generally reap havoc.
+Chaos Monkeys turn off servers, reconfigure settings and generally wreak havoc.
  
 Why?
 
