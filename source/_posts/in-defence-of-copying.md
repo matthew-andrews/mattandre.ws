@@ -22,4 +22,4 @@ The author argues that imitation is a kind of crutch that holds back innovation.
 **Copying is a tool.** Like all tools there are times when it’s appropriate and other times when it is not. A smart innovator knows when to copy and when to create.
 
 So, my universal truth very few people agree with me on: 
-**Copying can be a good strategy to create innovative products.**
+**Copying is an essential tool for the creation of innovative products.**
