@@ -46,7 +46,7 @@ In your research you should identify your starting position. This should be ambi
 
 > Based on my research from Glassdoor, adjusted to inflation and by asking some of my contacts performing similar roles at other firms, I would like to ask for a salary of X.
 
-There are people who say it’s better to let the other set the starting bid, others who say it’s better for you to. I think if you’re not confident in your negotiation skills, let the other person open. Studies show that the opening bid acts as an anchor, pulling the final agreement up.
+There are people who say it’s better to let the other set the starting bid, others who say it’s better for you to. But bear in mind that studies show that the opening bid acts as an anchor, pulling the final agreement up.
 
 Finally, remember once you’ve stated your opening offer, you can only negotiate down, not up.
 
