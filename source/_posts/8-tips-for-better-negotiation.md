@@ -1,5 +1,5 @@
 ---
-title: How to gain magical superpowers — 8 tips for better negotiation
+title: How to gain a magical superpower — 8 tips for better negotiation
 date: 2020-01-25
 categories:
 - MBA
