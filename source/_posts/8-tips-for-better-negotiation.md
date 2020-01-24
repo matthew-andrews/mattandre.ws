@@ -92,7 +92,7 @@ Don’t focus on headline figures alone. In job seeking, companies are structure
 
 Don’t dismiss this as spare change. These extras can be significant. In my case, I was extremely fortunate that my company paid the full cost of my Executive MBA — these don’t come cheap! 
 
-Personal development, travel opportunities, annual leave allowance, flexible working arrangements, title, size of your team … can all make a massive difference to the value you get from your role (and can be far more tax efficient than paying for them yourself out of your income). Also consider the affect your job has on your health, happiness and general well-being.
+Personal development, travel opportunities, annual leave allowance, flexible working arrangements, job title, size of your team … can all make a massive difference to the value you get from your role (and can be far more tax efficient than paying for them yourself out of your income). Also consider the affect your job has on your health, happiness and general well-being.
 
 ## 8. Post-Agreement Negotiation
 
