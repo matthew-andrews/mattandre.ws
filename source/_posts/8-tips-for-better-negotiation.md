@@ -108,7 +108,7 @@ This is your chance not to make a new deal but improve what you’ve already agr
 
 By following these tips, I have negotiated better deals for myself at work and in my personal life and, occasionally, have succeeded in making a deal where others had thought impossible.
 
-I feel I have gained a magical superpower.
+I feel I really have gained a magical superpower.
 
 
 ### Further reading
