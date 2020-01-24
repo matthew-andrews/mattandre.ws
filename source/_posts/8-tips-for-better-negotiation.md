@@ -23,9 +23,9 @@ About yourself
 
 - What are your goals? How are they prioritised?
 - What are the issues to be negotiated and how important are they are to you?
-- What are your BATNAs — best alternative to negotiated agreement
+- What are your BATNAs? — best alternative to negotiated agreement
 - What would be the minimum terms you would accept?
-- What will be your starting position — the maximum you will push for
+- What will be your starting position? — the maximum you will push for
 
 About the other side
 
