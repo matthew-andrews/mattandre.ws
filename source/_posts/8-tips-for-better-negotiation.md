@@ -11,7 +11,7 @@ The truth is negotiation is not magic. It can even be learned from a book.
 
 Furthermore with this new understanding, where previously I might look upon “tough negotiators” with respect and admiration for their gall and negotiation skill, I now see confident amateurs losing opportunities for better deals.
 
-Where previously I have struggled to reach satisfactory agreements in work and in life, by patiently following a few simple steps I’ve been able to get what I’ve wanted faster and smoother, whilst helping my counterpart achieve their goals too.
+Where previously I have felt my negotiation skills were weak, by patiently following a few simple steps I’ve been able to get what I’ve wanted faster and smoother, whilst helping my counterpart achieve their goals too.
 
 ## 1. Prepare, prepare, prepare
 
@@ -46,7 +46,7 @@ In your research you should identify your starting position. This should be ambi
 
 > Based on my research from Glassdoor, adjusted to inflation and by asking some of my contacts performing similar roles at other firms, I would like to ask for a salary of X.
 
-There are people who say it’s better to let the other set the starting bid, others who say it’s better for you to. But bear in mind that studies show that the opening bid acts as an anchor, pulling the final agreement up.
+There are people who say it’s better to let the other set the starting bid, others who say it’s better for you to. But bear in mind that studies show that the opening bid acts as an anchor, pulling the final agreement up (or down).
 
 Finally, remember once you’ve stated your opening offer, you can only negotiate down, not up.
 
