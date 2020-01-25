@@ -77,7 +77,7 @@ User Science & Empathy
 	- Took part in exchange programmes at Seoul National University, South Korea, University of New Delhi, India, and East China Normal University, China.
 	- Did fun, charitable things for Student Action and Manchester RAG.
 
-## Foreign Languages
+### Foreign Languages
 
 - Chinese Mandarin – Advanced
 - German – Advanced, although a little rusty
