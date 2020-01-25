@@ -4,7 +4,8 @@ permalink: cv/
 Producslug: cv
 ---
 
-**I love using technology to design and deliver products that solve real user needs.**
+**Technology Leader and Product Manager with software engineering background.
+I love to design and deliver digital products that solve real user needs.**
 
 Management & Leadership
 - Strong track record building and motivating diverse teams, including small and large teams, as well as co-located and geographically dispersed remote teams.
