@@ -90,7 +90,7 @@ The more collaborative and trustful a relationship you can develop between you a
 
 Don’t focus on headline figures alone. In job seeking, companies are structured to have multiple budgets and salary pulls only from one. 
 
-Don’t dismiss this as spare change. These extras can be significant. In my case, I was extremely fortunate that my company paid the full cost of my Executive MBA — these don’t come cheap! 
+Don’t dismiss this as spare change. These extras can be significant.
 
 Personal development, travel opportunities, annual leave allowance, flexible working arrangements, job title, size of your team… can all make a massive difference to the value you get from your role (and can be far more tax efficient than paying for them yourself out of your income). Also consider the effect your job has on your health, happiness and general well-being.
 
