@@ -14,7 +14,7 @@ Management & Leadership
 Technical
 - Experience creating prototypes at different levels of fidelity appropriate for the hypothesis being tested.
 - Thorough understanding of SEO practices having formerly led the team responsible for SEO of FT.com during a major redesign project.
-- More than 10 years’ hands-on experience software development experience.
+- More than 10 years’ hands-on software development experience.
 
 Communication & Collaboration
 - Experience working with stakeholders at all levels, including board-level and 3rd party internal and external collaborators.
@@ -35,7 +35,7 @@ User Science & Empathy
 
 ## CV
 
-**Product Manager**, IE Business School **Executive MBA** graduate, Technologist, **Mandarin Chinese** speaker, University of Manchester Maths graduate, Grade 8 Pianist, [travel addict](https://www.facebook.com/photo.php?v=103878763725&set=vb.501043725&type=2&theater), 2010 Confucius Institute Scholar, and former Harry Potter extra. Now building products for the news industry with cutting edge technologies for Nikkei and the Financial Times in Tokyo.
+**Product Manager**, IE Business School **Executive MBA** graduate, Technologist, **Mandarin Chinese** speaker, University of Manchester Maths graduate, Grade 8 Pianist, travel addict, 2010 Confucius Institute Scholar, and former Harry Potter extra. Now building products for the news industry with cutting edge technologies for Nikkei and the Financial Times in Tokyo.
 
 ### Work
 

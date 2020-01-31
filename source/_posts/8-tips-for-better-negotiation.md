@@ -68,7 +68,7 @@ When applied to job negotiations, this can mean:
 
 Don’t jump in and start making demands. First listen.
 
-Before stating your perspective, listen first to the way they see it. Ask why in a way in a neutral, friendly tone. Genuinely listen and learn. Either by asking directly or indirectly, validate the research you’ve done on the other side’s goals and priorities.
+Before stating your perspective, listen first to the way they see it. Ask why in a neutral, friendly tone. Genuinely listen and learn. Either by asking directly or indirectly, validate the research you’ve done on the other side’s goals and priorities.
 
 ## 5. Remember negotiation is just one stage of a longer-term relationship
 
