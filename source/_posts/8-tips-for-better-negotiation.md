@@ -44,7 +44,7 @@ About the situation
 
 In your research you should identify your starting position. This should be ambitious but not outrageous, otherwise you risk not being taken seriously or causing offense. The more you can back up your starting position with research the better.
 
-> Based on my research from Glassdoor, adjusted to inflation and by asking some of my contacts performing similar roles at other firms, I would like to ask for a salary of X.
+> Based on my research from asking some of my contacts performing similar roles at other firms, I would like to ask for a salary of X.
 
 There are people who say it’s better to let the other set the starting bid, others who say it’s better for you to. But bear in mind that studies show that the opening bid acts as an anchor, pulling the final agreement up (or down).
 
