@@ -19,7 +19,7 @@ At so-called ‘networking events’ the purpose is too direct and artificial: t
 
 Join a sports club, go to local meetups, volunteer at a charity, organise something, find out where the people at the companies you’re interested in hang out after work.
 
-Doing so randomly can be good (you never know when you might stumble upon an opportunity). But you can be strategic: try to find places frequented by the sort of people you’d like to meet.
+Doing so randomly can be good (you never know when you might stumble upon an opportunity) but you can be strategic: try to find places frequented by the sort of people you’d like to meet.
 
 Take networking online: join conversations on Twitter and LinkedIn, publish a blog, create something.
 
