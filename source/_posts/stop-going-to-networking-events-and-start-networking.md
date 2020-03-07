@@ -57,7 +57,7 @@ When you think more about what you can give to others than what you can get from
 
 People who focus on collective benefits of making connections (“support my firm” or “help my clients”) rather than on personal ones (“support my career”) feel more authentic whilst networking.
 
-Any activity becomes more attractive when it’s linked to a higher motive. For example, if you belong to an underrepresented group, media attention that would result from building a stronger network would not only benefit you individually but help counter biases against entire group.
+Any activity becomes more attractive when it’s linked to a higher motive. For example, if you belong to an underrepresented group, media attention that would result from building a stronger network would not only benefit you individually but help counter biases against the entire group.
 
 So, if you find it hard to motivate yourself to put effort into networking just for the sake of just your career, find a more meaningful, motivating reason to do it, like becoming a role model or addressing an issue you consider important.
 
