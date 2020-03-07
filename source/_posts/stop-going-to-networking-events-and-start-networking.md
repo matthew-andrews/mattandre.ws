@@ -19,9 +19,9 @@ At so-called ‘networking events’ the purpose is too direct and artificial: t
 
 Join a sports club, go to local meetups, volunteer at a charity, organise something, find out where the people at the companies you’re interested in hang out after work.
 
-Take networking online: join conversations on Twitter and LinkedIn, publish a blog, create something.
-
 Doing so randomly can be good (you never know when you might stumble upon an opportunity). But you can be strategic: try to find places frequented by the sort of people you’d like to meet.
+
+Take networking online: join conversations on Twitter and LinkedIn, publish a blog, create something.
 
 If you publish a blog post once per month on Twitter and LinkedIn, chances are someone you would be interested in talking to will eventually ‘like’ or ‘retweet’ one of your posts. This can be a very nice, natural excuse to send them a message to thank them and start up a conversation.
 
