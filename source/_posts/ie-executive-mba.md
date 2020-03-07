@@ -38,6 +38,6 @@ Your mileage may vary.
 - I learnt what is considered [best](https://www.amazon.com/Manager-as-Negotiator-David-Lax/dp/1451636490) [practice](https://hbr.org/2001/04/six-habits-of-merely-effective-negotiators) when _Negotiating_ … and now use this in my daily life all the time …
 - Studying _IT/Technology_ from an academic & business perspective made me re-realise I'm really good at it and how much I love it.
 - On the other side, it's given me a much greater respect for those ‘from the business side’. _Finance, Strategy, Sales, Marketing_ are crafts in their own right and are in my opinion far more difficult than the likes of IT and operations. Why/what questions are infinitely more difficult to answer than who/how.
-- I learnt what _Networking_ actually is and realised I'm not as bad at it and enjoy it much more than I thought.
+- I learnt what [_Networking_ actually is](/2020/03/stop-going-to-networking-events-and-start-networking/) and realised I'm not as bad at it and enjoy it much more than I thought.
 - It will help the next step of my career — to move into **product** focused technology roles.
 - And finally, I've met a bunch of **wonderful people doing crazy amazing things** around the world and I'm looking forward to joining them at it some point very soon!
