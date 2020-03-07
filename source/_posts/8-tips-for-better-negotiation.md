@@ -84,7 +84,7 @@ Respect that each side needs to prioritise their own interests but that you also
 
 A good negotiation should not lead to a win-lose, it should be win-win. 
 
-The more collaborative and trustful a relationship you can develop between you and your counterpart, the more likely you will be to help each other identify opportunities to make the deal better for both of you.
+The more collaborative and trustful a relationship you can develop between you and your counterpart, the more likely you will be able to help each other identify opportunities to make the deal better for both of you.
 
 ## 7. Don’t focus purely on money
 
