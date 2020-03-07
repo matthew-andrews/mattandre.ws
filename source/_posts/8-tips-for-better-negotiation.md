@@ -36,7 +36,7 @@ About the other side
 About the situation
 
 - Deadlines? Which side is under more pressure to conclude negotiations quickly?
-- Are there any precedents that could benefit you? (Or not?)
+- Are there any precedents that could benefit you? (Or work against you?)
 - What would you like to avoid talking about? What will you say if they bring it up?
 
 
