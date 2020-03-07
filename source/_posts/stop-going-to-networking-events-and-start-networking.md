@@ -5,7 +5,7 @@ categories:
 - MBA
 ---
 
-When I hear the term ‘networking event’, I imagine a room of business card swapping suits and waitstaff carrying trays of canapes. It’s almost always a waste of time.
+When I hear the term ‘networking event’, I imagine a room of business card swapping suits and waitstaff carrying trays of canapes. It’s often a waste of time.
 
 It’s time to stop going to ‘networking events’ and start networking instead.
 
