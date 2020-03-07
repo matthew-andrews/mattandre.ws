@@ -9,7 +9,7 @@ When I hear the term ‘networking event’, I imagine a room of business card s
 
 It’s time to stop going to ‘networking events’ and start networking instead.
 
-So much material exists about how to overcome shyness to network effectively — and whilst being an introvert is still a barrier for many people, I believe many more perfectly confident people struggle to get value out of networking because so many events intended for networking are so poorly conducive for it — and they miss out on opportunities to accelerate the development of their private and professional lives.
+So much material exists about how to overcome shyness to network effectively — and whilst being an introvert is still a barrier for many people, I believe many more perfectly confident people struggle to get as much value out of networking as they should because so many events intended for networking are so bad — and they miss out on opportunities to accelerate the development of their private and professional lives.
 	
 Instead, we should think of networking as a mindset that we should have all the time.
 
