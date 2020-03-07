@@ -47,7 +47,7 @@ If you take time to properly identify and research shared interests, you’ll le
 
 Find something valuable to offer by thinking beyond the obvious.
 
-People tend to think narrowly about what they can offer. They focus on tangible, task-related things such as money, social connections, technical support and information, while ignoring less obvious assets such as gratitude, recognition and enhanced reputation.
+People tend to think narrowly about what they can offer. They focus the tangible such as money, social connections and information, while ignoring the less obvious such as gratitude, recognition and enhanced reputation.
 
 You might also have unique insights or knowledge that could be useful to people you meet. For example, junior people are often better informed than their senior colleagues about trends, new markets and technologies.
 
