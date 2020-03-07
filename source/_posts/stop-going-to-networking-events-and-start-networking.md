@@ -41,7 +41,7 @@ Then think about what the interests and goals of the others could be — and whe
 
 If you can, spend time preparing for each meeting, interaction or event before-hand seriously researching into people’s backgrounds and preparing intelligent informed questions.
 
-If you take time to properly identify and research shared interests, you’ll leave a better first impression and have a better chance of creating a more authentic and it will be more meaningful long-term relationship.
+If you take time to properly identify and research shared interests, you’ll leave a better first impression and have a better chance of creating a more authentic, meaningful long-term relationship.
 
 ## 4. Expand what you have to offer
 
