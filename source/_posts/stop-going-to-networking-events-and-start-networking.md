@@ -37,7 +37,7 @@ Be open to talk to everyone. You never know which people will end up being most 
 
 Think about what your interests and goals are.
 
-Then think about what the interests and goals of the others could be — and where they might align.
+Then think about what the interests and goals of the others could be — and where they might align with yours.
 
 If you can, spend time preparing for each meeting, interaction or event before-hand seriously researching into people’s backgrounds and preparing intelligent informed questions.
 
