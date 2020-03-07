@@ -80,4 +80,6 @@ Spend time really listening to the people you meet. Then when you get home, foll
 
 By doing this all the time, networking will change from being an activity to a mindset, will feel more natural and be more meaningful.
 
+---
+
 Adapted from notes from the very excellent [“Learn to Love Networking” from Harvard Business Review](https://hbr.org/2016/05/learn-to-love-networking)
