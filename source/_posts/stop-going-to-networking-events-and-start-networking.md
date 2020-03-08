@@ -7,7 +7,7 @@ categories:
 
 When I hear the term ‘networking event’, I imagine a room of business card swapping suits and waitstaff carrying trays of canapes. It’s often a waste of time.
 
-It’s time to stop going to ‘networking events’ and start networking instead.
+It's hard to recall many (if any) met at such events having a significant impact on my career. All the really influential people have come from more spontaneous meetings. It’s time to stop going to ‘networking events’ and start networking instead.
 
 So much material exists about how to overcome shyness to network effectively — and whilst being an introvert is still a barrier for many people, I believe many more perfectly confident people struggle to get as much value out of networking as they should because so many events intended for networking are so bad — and they miss out on opportunities to accelerate the development of their private and professional lives.
 	
@@ -17,7 +17,7 @@ Instead, we should think of networking as a mindset that we should have all the 
 
 At so-called ‘networking events’ the purpose is too direct and artificial: there’s no real communication. Better to look for opportunities to naturally connect at a more personal level, leaving business to later.
 
-Join a sports club, go to local meetups, volunteer at a charity, organise something, find out where the people at the companies you’re interested in hang out after work.
+Sign up to a course, join a sports club, go to local meetups, volunteer at a charity, organise something, find out where the people at the companies you’re interested in hang out after work.
 
 Doing so randomly can be good (you never know when you might stumble upon an opportunity) but you can be strategic: try to find places frequented by the sort of people you’d like to meet.
 
