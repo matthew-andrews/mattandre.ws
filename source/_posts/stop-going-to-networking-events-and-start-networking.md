@@ -7,7 +7,7 @@ categories:
 
 When I hear the term ‘networking event’, I imagine a room of business card swapping suits and waitstaff carrying trays of canapes. It’s often a waste of time.
 
-It's hard to recall many (if any) met at such events having a significant impact on my career. All the really influential people have come from more spontaneous meetings. It’s time to stop going to ‘networking events’ and start networking instead.
+It's hard to recall many (if any) of the peopl I've met at such events having a significant impact on my career. All the really influential people have come from more spontaneous meetings. It’s time to stop going to ‘networking events’ and start networking instead.
 
 So much material exists about how to overcome shyness to network effectively — and whilst being an introvert is still a barrier for many people, I believe many more perfectly confident people struggle to get as much value out of networking as they should because so many events intended for networking are so bad — and they miss out on opportunities to accelerate the development of their private and professional lives.
 	
