@@ -35,7 +35,7 @@ Your mileage may vary.
 - I can now read & understand **basic financial statements**, but despite having a numerical background (BSc Mathematics) I'm not as good at it as I thought I would be.
 - But I realised **I can write quite well**. I guess 8 years working for a newspaper has had some effect!
 - I learnt how to make a **marketing plan** … and made a basic one for part of my current project at the FT (and it was received well!)
-- I learnt what is considered [best](https://www.amazon.com/Manager-as-Negotiator-David-Lax/dp/1451636490) [practice](https://hbr.org/2001/04/six-habits-of-merely-effective-negotiators) when _Negotiating_ … and now use this in my daily life all the time …
+- I learnt what is considered [best practice when _Negotiating_](/2020/01/8-tips-for-better-negotiation/) … and now use this in my daily life all the time …
 - Studying _IT/Technology_ from an academic & business perspective made me re-realise I'm really good at it and how much I love it.
 - On the other side, it's given me a much greater respect for those ‘from the business side’. _Finance, Strategy, Sales, Marketing_ are crafts in their own right and are in my opinion far more difficult than the likes of IT and operations. Why/what questions are infinitely more difficult to answer than who/how.
 - I learnt what [_Networking_ actually is](/2020/03/stop-going-to-networking-events-and-start-networking/) and realised I'm not as bad at it and enjoy it much more than I thought.
