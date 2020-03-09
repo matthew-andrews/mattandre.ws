@@ -100,7 +100,7 @@ Once you have come to an agreement, offer your counterpart the opportunity to im
 
 This is not about re-opening negotiations. Honestly and genuinely commit to honouring the agreement you have already negotiated. But suggest both parties treat it as both of your new BATNA’s.
 
-If the initial negotiation has gone well for both sides, there will be areas of the deal you wish you had done better and areas your counterpart wish they could have done better.
+If the initial negotiation has gone well for both sides, there will be areas of the deal you wish you had done better and areas your counterpart wishes they could have done better too.
 
 This is your chance not to make a new deal but improve what you’ve already agreed on.
 
