@@ -5,7 +5,7 @@ categories:
 - MBA
 ---
 
-One of the most eye opening moments of [my Executive MBA](/2019/12/ie-executive-mba/) was our short one day course on **Negotiation**. Previously, I’d thought of negotiation skill to be a kind of magical superpower out of reach of mere mortals, like me.
+One of the most eye opening moments of [my Executive MBA](/2019/12/ie-executive-mba/) was our short one day course on **Negotiation**. Previously, I’d thought of negotiation skill as a kind of magical superpower out of reach of mere mortals, like me.
 
 The truth is negotiation is not magic. It can even be learned from a book.
 
