@@ -27,9 +27,9 @@ About yourself
 
 About the other side
 
-- What *do you think* are their goals? How *do you think* they prioritise them?
+- What *do you think* their goals are? How *do you think* they prioritise them?
 - What *do you think* is their BATNA?
-- What *do you think* would be minimum terms they would accept?
+- What *do you think* the minimum terms they would accept would be?
 
 About the situation
 
@@ -41,6 +41,8 @@ About the situation
 ## 2. Start high, but not stratospheric
 
 In your research you should identify your starting position. This should be ambitious but not outrageous, otherwise you risk not being taken seriously or causing offense. The more you can back up your starting position with research the better.
+
+You could say:
 
 > Based on my research from asking some of my contacts performing similar roles at other firms, I would like to ask for a salary of X.
 
