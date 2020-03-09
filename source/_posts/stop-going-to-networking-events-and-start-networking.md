@@ -84,4 +84,4 @@ Final thought: I'm absolutely terrible at applying this advice in real-life but 
 
 ---
 
-Adapted from notes from the very excellent [“Learn to Love Networking” from Harvard Business Review](https://hbr.org/2016/05/learn-to-love-networking)
+Adapted from several classes on Networking taken as part of my [IE Executive MBA](/2019/12/ie-executive-mba/), notes from the very excellent [“Learn to Love Networking” from Harvard Business Review](https://hbr.org/2016/05/learn-to-love-networking) and my own reflections.
