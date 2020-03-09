@@ -9,7 +9,7 @@ One of the most eye opening moments of [my Executive MBA](/2019/12/ie-executive-
 
 The truth is negotiation is not magic. It can even be learned from a book.
 
-Furthermore with this new understanding, where previously I might look upon “tough negotiators” with respect and admiration for their gall and negotiation skill, I now see confident amateurs losing opportunities for better deals.
+Furthermore with this new understanding, where before I might look upon “tough negotiators” with respect and admiration for their gall and negotiation skill, I now see confident amateurs losing opportunities for better deals.
 
 Previously I felt my negotiation skills were weak but by patiently following a few simple steps I’ve been able to get what I’ve wanted faster and more smoothly, whilst helping my counterpart achieve their goals too.
 
