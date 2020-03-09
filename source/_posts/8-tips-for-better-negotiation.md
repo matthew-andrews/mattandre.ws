@@ -5,13 +5,11 @@ categories:
 - MBA
 ---
 
-One of the most eye opening moments of [my Executive MBA](/2019/12/ie-executive-mba/) was our short one day course on **Negotiation**. Previously, I’d thought of negotiation skill as a kind of magical superpower out of reach of mere mortals, like me.
+One of the most eye opening moments of [my Executive MBA](/2019/12/ie-executive-mba/) was our short one day course on **Negotiation**.
 
-The truth is negotiation is not magic. It can even be learned from a book.
+Before, I’d thought negotiation skill was a kind of magical superpower out of reach of mere mortals, like me. But the truth is negotiation is not magic. It can even be learned from a book. By following a few simple steps I’ve been able to get what I’ve wanted faster and more smoothly, whilst helping my counterpart achieve their goals too.
 
 Furthermore with this new understanding, where before I might look upon “tough negotiators” with respect and admiration for their gall and negotiation skill, I now see confident amateurs losing opportunities for better deals.
-
-Previously I felt my negotiation skills were weak but by patiently following a few simple steps I’ve been able to get what I’ve wanted faster and more smoothly, whilst helping my counterpart achieve their goals too.
 
 ## 1. Prepare, prepare, prepare
 
