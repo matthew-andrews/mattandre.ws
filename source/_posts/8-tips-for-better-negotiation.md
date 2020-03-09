@@ -5,6 +5,18 @@ categories:
 - MBA
 ---
 
+<figure>
+    <figcaption>Listen to a recording of this article:</figcaption>
+    <audio
+        controls
+        src="/audio/8-tips-for-better-negotiation.mp3">
+            Your browser does not support the
+            <code>audio</code> element.
+    </audio>
+</figure>
+
+---
+
 One of the most eye opening moments of [my Executive MBA](/2019/12/ie-executive-mba/) was our short one day course on **Negotiation**.
 
 Before, I’d thought negotiation skill was a kind of magical superpower out of reach of mere mortals, like me. But the truth is negotiation is not magic. It can even be learned from a book. By following a few simple steps I’ve been able to get what I’ve wanted faster and more smoothly, whilst helping my counterpart achieve their goals too.
