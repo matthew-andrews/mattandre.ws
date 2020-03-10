@@ -19,4 +19,4 @@ test:
 	npm test
 
 deploy:
-	cd public && aws s3 sync --cache-control 's-maxage=31536000, max-age=300' --size-only . s3://mattandre.ws
+	cd public && aws s3 sync --cache-control 's-maxage=31536000, max-age=300' --size-only --delete . s3://mattandre.ws
