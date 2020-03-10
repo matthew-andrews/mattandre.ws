@@ -2,7 +2,7 @@
 title: Stop going to networking events and start networking
 date: 2020-03-07
 categories:
-- MBA
+- Business
 ---
 
 When I hear the term ‘networking event’, I imagine a room of business card swapping suits and waitstaff carrying trays of canapes. It’s often a waste of time.

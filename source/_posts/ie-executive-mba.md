@@ -2,7 +2,7 @@
 title: What I learned studying IE Business School's Executive MBA
 date: 2019-12-24
 categories:
-- MBA
+- Business
 ---
 
 I just graduated from IE Business School's **Executive MBA** programme in Madrid, Spain.

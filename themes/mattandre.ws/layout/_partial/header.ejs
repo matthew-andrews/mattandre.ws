@@ -1,9 +1,13 @@
 <header class="header">
-	<a href="<%- url_for() %>" class="header__title"><%= config.title %></a>
-	<div class="header__subtitle"><%= theme.subtitle %></div>
-	<nav class="header__nav">
-		<% for (var i in config.menu) { %>
-			<a class="header__nav-item header__nav-item--importance-<%= config.menu[i].importance %>" href="<%- url_for(config.menu[i].url) %>"><%= i %></a>
-		<% } %>
-	</nav>
+	<div class="header__container">
+		<div class="header__left"><a class="header__title" href="<%- url_for() %>"><img class="headshot" src="/images/head-300.png" alt="Matthew Andrews" /></a></div>
+		<div class="header__right">
+			<div class="header__subtitle"><%= theme.subtitle %></div>
+			<nav class="header__nav">
+				<% for (var i in config.menu) { %>
+					<a class="header__nav-item header__nav-item--importance-<%= config.menu[i].importance %>" href="<%- url_for(config.menu[i].url) %>"><%= i %></a>
+				<% } %>
+			</nav>
+		</div>
+	</div>
 </header>

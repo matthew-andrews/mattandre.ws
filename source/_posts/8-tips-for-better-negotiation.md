@@ -2,7 +2,7 @@
 title: 8 tips for better negotiation — or, how to gain a magical superpower
 date: 2020-01-25
 categories:
-- MBA
+- Business
 ---
 
 <figure>
