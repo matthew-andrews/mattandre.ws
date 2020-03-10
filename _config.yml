@@ -83,10 +83,10 @@ menu:
     importance: 1
   LinkedIn:
     url: https://www.linkedin.com/in/mattrandrews
-    importance: 3
+    importance: 2
   RSS:
     url: /feed
-    importance: 1
+    importance: 3
   Contact:
     url: /contact/
     importance: 1
