@@ -18,7 +18,7 @@ Buying into a vision always involves a leap of faith. You might not know how, or
 1. **Start with why.** What is your *purpose*. Everything follows from that.
 2. **Love the problem**, not the solution.
 3. **Think big.** Something that can be achieved in less than a year is not ambitious enough or substantial enough to inspire.
-4. **Inspire. Create something you can get excited about. You can make any product vision meaningful if you focus on how you genuinely help your users and customers.
+4. **Inspire.** Create something you can get excited about. You can make any product vision meaningful if you focus on how you genuinely help your users and customers.
 5. **Determine and embrace relevant meaningful trends.** It is not very hard to identify the important trends but it is hard to understand how those trends can be leveraged by your products to solve customer problems in new and better ways.
 6. **Skate to where the puck is heading, not to where it was.** Identify the things that are changing—as well as the things that are likely not to change—in the time frame of the product vision.
 7. **Be stubborn on vision but flexible on the details.**
