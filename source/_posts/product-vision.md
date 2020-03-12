@@ -47,7 +47,7 @@ As far as I can tell they can be the same or they can be different, but if they'
 
 Clearly if your company has multiple different products, each might have its own vision. On the other hand if you are a small single-product company a single combined company and product mission-vision statement may be more appropriate.
 
-Don't forget Marty's 10th commandment “evangelise continuously and relentlessly”, that evangelism will be diluted if split between multiple competing visions.
+Don't forget Marty's 10th commandment “evangelise continuously and relentlessly” — that evangelism will be diluted if split between multiple competing visions.
 
 ## Examples
 
