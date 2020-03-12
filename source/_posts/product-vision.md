@@ -43,7 +43,7 @@ The folks at [TransferWise](https://medium.com/@ilnem/how-to-build-product-visio
 
 ## Company Mission versus Product Vision
 
-As far as I can tell they can be the same or they can be different, but if they're different they should certainly be aligned. The company mission addresses a broader audience, whereas the product vision relatively may be more internally focused.
+As far as I can tell they can be the same or they can be different, but if they're different they should certainly be aligned. The company mission addresses a broader audience, whereas the product vision may be relatively more internally focused.
 
 Clearly if your company has multiple different products, each might have its own vision. On the other hand if you are a small single-product company a single vision may be more appropriate.
 
