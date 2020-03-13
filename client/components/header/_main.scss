@@ -69,4 +69,10 @@
 	height: 82px;
 	border-radius: 100%;
 	border: 4px solid $color-dark-blue;
+	transition-property: border-color;
+	transition-duration: 0.5s;
+}
+
+.headshot:hover {
+	border-color: #429fbdc9
 }
