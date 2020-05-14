@@ -5,10 +5,12 @@ categories:
 - Week Notes
 ---
 
-Hello and welcome to my weak notes. This format was ~~inspired by~~ copied from my esteemed colleague, Alice Bartlett. Week notes will be:
+Hello and welcome to my weak notes. This format was ~~inspired by~~ copied from my esteemed colleague, [Alice Bartlett](https://alicebartlett.co.uk/blog/weaknotes). Week notes will be:
 
 - Weekly. Except that some weeks will be too quiet or too busy and therefore will not be written.
-- Containing the kind of content I might Tweet then wait an hour then retrospectively realise it was not worth tweeting then delete.
+- Containing the kind of content I might [tweet](https://twitter.com/andrewsmatt) then wait an hour then retrospectively realise it was not worth tweeting then delete.
+
+In other words, what follows is unreliable low-grade content. Enjoy.
 
 ### **Copying**
 
@@ -28,9 +30,9 @@ The gym has been closed since the declaration of an emergency in Tokyo but I've 
 
 ### **Emergency**
 
-The state of emergency in Japan was lifted in most prefectures this week. We never had a enforced lockdown, only a polite request to shut businesses and stay home. In Tokyo, which continues its state of emergency, has already started showing signs of going back to normal. More and more restaurants are open for sit-down meals.
+The state of emergency in Japan was lifted in most prefectures this week. We never had a enforced lockdown, only a polite request to shut businesses and stay home. Tokyo, which continues its state of emergency, has already started showing signs of going back to normal. More and more restaurants are open for sit-down meals.
 
-This is good news. Not because I'm itching to eat out but because it's being done because Japan's COVID 19 situation seems truly heading a good direction. Tokyo is down in the 10's of cases per day and in the first three months of this year there were fewer deaths the average for previous years.
+This is good news. Not because I'm itching to eat out but because it's being done because Japan's COVID 19 situation seems truly heading a good direction. Tokyo is down in the 10's of cases per day.
 
 It's also good news because I am rapidly approaching the inflection point where the danger posed by going to get my hair cut is less than the danger posed by constantly touching my face to brush hair out of my eyes.
 
