@@ -16,7 +16,7 @@ In other words, what follows is unreliable low-grade content. Enjoy.
 
 ### **Copying**
 
-On the topic of copying, I've written a short note before about the value of *copying competitors* so I felt slightly vindicated to read it being advocated in the current edition of Harvard Business Review.
+On the topic of copying, I've written [a short note before](/2020/01/in-defence-of-copying/) about the value of *copying competitors* so I felt slightly vindicated to read it being advocated in the current edition of Harvard Business Review.
 
 > The practice of borrowing runs directly counter to the conventional strategic imperative of differentiation—which traditional strategists argue is essential to avoiding the negative spiral of competing only on cost. But trying to differentiate early on in a new market can lead a company down a blind alley. A more effective approach, we argue, is to treat other companies in the space as peers rather than competitors … Borrowing [enables companies] to develop working [prototypes] of its product quickly and cheaply.
 
@@ -24,7 +24,7 @@ On the topic of copying, I've written a short note before about the value of *co
 
 ### **Listening**
 
-It was an excellent read … or, in my case, *listen.* This latest issue of HBR was also available in audio for the very first time through their mobile app. I have listened to the audio edition of The Economist for years and absolutely love the hands-free continuous listening experience whilst commuting and going to the gym (remember those?) … so I was absolutely delighted by this  new feature.
+It was an excellent read … or, in my case, *listen.* This latest issue of HBR was also available in audio for the very first time through their mobile app. I have listened to the audio edition of The Economist for years and absolutely love the hands-free continuous listening experience whilst commuting and going to the gym (remember those?) … so I was absolutely delighted by this new feature.
 
 ### **Running**
 
