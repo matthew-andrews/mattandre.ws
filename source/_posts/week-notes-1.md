@@ -1,5 +1,5 @@
 ---
-title: Week Notes #1 ・Copying, Listening, Running, Emergency
+title: Week Notes \#1 ・Copying, Listening, Running, Emergency
 date: 2020-05-15
 categories:
 - Week Notes
