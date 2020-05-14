@@ -9,7 +9,7 @@ Hello and welcome to my ‘Week Notes’. This format was ~~inspired by~~ copied
 
 **Week notes will be:**
 
-- Weekly. Except that some weeks will be too quiet or too busy and therefore will not be written.
+- Weekly. Except that some weeks will be too quiet or too busy and therefore notes will not be written.
 - Containing the kind of content I might [tweet](https://twitter.com/andrewsmatt) then wait an hour then retrospectively realise it was not worth tweeting then delete.
 
 In other words, what follows is unreliable low-grade content. Enjoy.
