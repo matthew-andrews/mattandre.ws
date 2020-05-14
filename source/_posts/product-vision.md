@@ -1,5 +1,5 @@
 ---
-title: The Product Vision
+title: How to define a Product Vision
 date: 2020-03-12
 categories:
 - Product Development
