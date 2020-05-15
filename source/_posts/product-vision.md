@@ -3,6 +3,7 @@ title: How to define a Product Vision
 date: 2020-03-12
 categories:
 - Product Development
+home: true
 ---
 
 The past few days I've been researching product visions — what they are, what are the ingredients of a good one and what are some examples. These notes are the result of that research.

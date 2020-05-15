@@ -1,7 +1,6 @@
 ---
 title: About
 permalink: cv/
-Producslug: cv
 ---
 
 **Technology Leader and Product Manager with software engineering background.

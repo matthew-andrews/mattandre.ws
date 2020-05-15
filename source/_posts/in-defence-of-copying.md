@@ -5,6 +5,7 @@ categories:
 - Product Development
 tags:
 - Books
+home: true
 ---
 
 I was recommended to read Zero to One by Peter Thiel, which starts with an evocative question: **what important truth do very few people agree with you on?** Thiel then proceeds to describe the difference between “truly new innovation” (going from 0 to 1) against iterative improvements (going from 1 to n) and citing the example of Chinese copying products and business models from elsewhere as not innovation. I don’t believe this to be true and I believe the author is downplaying the value of copying.

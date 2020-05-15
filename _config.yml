@@ -13,7 +13,7 @@ permalink_defaults:
 source_dir: source
 public_dir: public
 tag_dir: tag
-archive_dir: ""
+archive_dir: archive
 category_dir: category
 code_dir: downloads/code
 skip_render:
@@ -72,8 +72,8 @@ menu:
   About:
     url: /cv/
     importance: 1
-  Business:
-    url: /category/business
+  'All Posts':
+    url: /all-posts/
     importance: 2
   Coding:
     url: /category/technologies
@@ -93,3 +93,8 @@ menu:
 
 sitemap:
   path: sitemap.xml
+
+index_generator:
+  path: all-posts
+  order_by: -date
+  pagination_dir: page
