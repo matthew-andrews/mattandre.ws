@@ -32,7 +32,7 @@ The gym has been closed since the declaration of an emergency in Tokyo but I've 
 
 ### **Emergency**
 
-The state of emergency in Japan was lifted in most prefectures this week. We never had a enforced lockdown, only a polite request to shut businesses and stay home. Tokyo, which continues its state of emergency, has already started showing signs of going back to normal. More and more restaurants are open for sit-down meals.
+The state of emergency in Japan was lifted in most prefectures this week. We never had an enforced lockdown, only a polite request to shut businesses and stay home. Tokyo, which continues its state of emergency, has already started showing signs of going back to normal. More and more restaurants are open for sit-down meals.
 
 This is good news. Not because I'm itching to eat out but because it's being done because Japan's COVID 19 situation seems truly heading a good direction. Tokyo is down in the 10's of cases per day.
 
