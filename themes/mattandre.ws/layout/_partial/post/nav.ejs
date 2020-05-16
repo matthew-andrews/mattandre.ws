@@ -1,5 +1,6 @@
 <% if (post.prev || post.next) { %>
 <nav class="article-nav">
+	<!--googleoff: all-->
 	<% if (post.prev) { %>
 		<a href="<%- url_for(post.prev.path) %>" class="article-nav__newer">
 			<strong class="article-nav__caption">Newer</strong>
@@ -12,5 +13,6 @@
 			<div class="article-nav__title"><%= post.next.title %></div>
 		</a>
 	<% } %>
+	<!--googleon: all-->
 </nav>
 <% } %>
