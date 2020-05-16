@@ -4,7 +4,7 @@ date: 2020-05-15
 categories:
 - Technologies
 ---
-I was tripped up by this silly little thing whilst writing a blog post with the title [**Week Notes #1 - Copying, Listening, Running, Emergency**](/2020/05/week-notes-1/), which rendered as **Week Notes**.
+I was tripped up by this silly little thing whilst writing a blog post with the title [**Week Notes #1 - Copying, Listening, Running, Emergency**](/2020/05/week-notes-1/), which rendered as simply **“Week Notes”** — losing everything from the ‘#’ onwards.
 
 My code was:
 
