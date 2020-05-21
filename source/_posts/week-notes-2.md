@@ -24,7 +24,7 @@ With this change I hope to create far more content on topics of personal interes
 
 ### Alan Parsons
 
-Speaking of subtle, almost inconsequential changes, I noticed that the music being played in my local 7-11 that always seemed to have been a cheap synthesiser version of The Monkee's classic “Cheer Up, Sleepy Jean”, has been replaced by less irritating piano rendition of the far more obscure Alan Parson’s “Eye In The Sky”.
+Speaking of subtle, almost inconsequential changes, I noticed that the music being played in my local 7-11 that always seemed to have been a cheap synthesiser version of The Monkee's classic “Cheer Up, Sleepy Jean”, has been replaced by a less irritating piano rendition of the far more obscure Alan Parson’s “Eye In The Sky”.
 
 I’ve actually seen that song being performed live by Alan Parsons, at a gig in Shepherd’s Bush, which I went to with my parents. That same night I took them to one of my favourite Chinese restaurants in London and introduced them to authentic Peking Duck (none of this Crispy Fried Duck rubbish), which they liked a lot, and Jellyfish, which they liked a little less.
 
