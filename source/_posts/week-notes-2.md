@@ -18,7 +18,7 @@ Observant viewers may have noticed I have reorganised my website a little bit.
 - The home page, which used to show all my newest posts, will now only show ones I've chosen to feature.
 - There's a new section “All Posts”, which is the full unfiltered feed.
 
-I've done this as part because there are some posts (like [my negotiation article](https://mattandre.ws/2020/01/8-tips-for-better-negotiation/)) that I spent a lot of time on, am genuinely quite proud of. But sometimes I just note down coding tips or personal thoughts like these Week Notes that, frankly speaking, would be better less read.
+I've done this because there are some posts (like [my negotiation article](https://mattandre.ws/2020/01/8-tips-for-better-negotiation/)) that I spent a lot of time on, am genuinely quite proud of. But sometimes I just note down coding tips or personal thoughts like these Week Notes that, frankly speaking, would be better less read.
 
 With this change I hope to create far more content on topics of personal interest to me, without (hopefully) drowning out the good stuff.
 
