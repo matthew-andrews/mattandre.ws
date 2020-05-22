@@ -17,6 +17,6 @@ Using email means I have one todo list for everything, regardless of whether som
 
 It's free.
 
-It's also an open standard. That means if I get bored of gmail, I can switch to another provider whilst keeping all my data and my email address. I can also try out new apps on my phone, tablet, etc … Every component can be chopped and changed more-or-less seamlessly. As an email address comes with every job in the world, I can also keep this same workflow regardless of which organisation I am working for.
+It's also an open standard. That means if I find a better alternative to gmail, I can switch to another provider whilst keeping all my data and my email address. I can also try out new apps on my phone, tablet, etc … Every component can be chopped and changed more-or-less seamlessly. As an email address comes with every job in the world, I can also keep this same workflow regardless of which organisation I am working for.
 
 PS. Whilst I agree with pretty much [all the issues Hey.com identified in email](https://hey.com/problems-with-email/), I disagree with No. 16. It's super simple to put stuff in your inbox. I do it all the time. Just write to yourself. As my colleagues I'm sure will attest, it's common to hear me say “let me just write myself an email” …
