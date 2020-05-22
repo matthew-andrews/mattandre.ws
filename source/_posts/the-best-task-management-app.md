@@ -1,6 +1,8 @@
 ---
-title: The best task management app: Email
+title: 'Email: the best task management app'
 date: 2020-05-22
+categories:
+- Technologies
 ---
 
 Inspired by the note on [hey.com](https://www.hey.com), I wrote up some notes how I use email.
