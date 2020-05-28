@@ -61,9 +61,9 @@ Not every team can (or should) move from *Stage-Gates* to *Discovery & Delivery*
 
 But there are 3 best practises every product team can learn and apply from the new process:
 
-1. Talk directly to real customers
-2. Test product concepts
-3. Release incrementally
+1. Talking directly to real customers
+2. Testing product concepts
+3. Releasing incrementally
 
 ### 1. Talk directly to real customers
 
