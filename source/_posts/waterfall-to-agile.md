@@ -57,9 +57,9 @@ Whereas those following the *Discovery & Delivery* process suffer risk of poor c
 
 ## How to make your waterfall process a little more agile
 
-Not every team can (or should) move from *Stage-Gates* to *Discovery & Delivery*.
+Not every team can (or should) move from *Stage-Gates* to *Discovery & Delivery*. Besides, it's not realistic to try to change everything at once. Changing how people work, much like product management itself, is best done **incrementally**, but where to start?
 
-But there are 3 best practises every product team can learn and apply from the new process:
+There are 3 best practises every product team can learn and apply from the new process:
 
 1. Talking directly to real customers
 2. Testing product concepts
