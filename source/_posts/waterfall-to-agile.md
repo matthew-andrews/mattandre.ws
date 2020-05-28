@@ -7,7 +7,7 @@ home: true
 ---
 27th of May was World Product Day and to celebrate I virtually attended the online Tokyo meet-up, which was fantastic not just for its content but for [another surprising reason not relevant to this post](https://twitter.com/andrewsmatt/status/1265612673393152001). You too can [watch the whole meet-up on YouTube](https://www.youtube.com/watch?v=4pdTKlSqfTQ).
 
-What I loved about the talk itself was how **did not paint a picture of a perfectly idealised product process** that is unreachable for most teams. Instead, it focused on *practical*, *prioritised* tips to make **any product process a bit better**.
+What I loved about the talk itself was how it **did not paint a picture of a perfectly idealised product process** that is unreachable for most teams. Instead, it focused on *practical*, *prioritised* tips to make **any product process a bit better**.
 
 The vast majority of us do not work within a perfect *Discovery & Delivery* culture. We work in situations that exhibit one of more of the old ways of doing things. Furthermore, the speaker, Todd Birzer, recognised **not every team *should* be working in the new way**. The old way can be appropriate in situations where there is a high degree of safety risk, or where it is expensive to fix mistakes.
 
