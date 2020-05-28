@@ -1,5 +1,5 @@
 ---
-title: 3 practical tips to make your waterfall process a little more agile
+title: 3 practical tips to make your waterfall product team a little more agile
 date: 2020-05-28
 categories:
 - Product Development
