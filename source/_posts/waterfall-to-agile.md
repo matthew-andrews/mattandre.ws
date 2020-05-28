@@ -112,7 +112,7 @@ Why do we want to release incrementally?
 - Course correct sooner if we are off-track
 - Learn and evolve faster than our competitors
 
-My own experience with [FT.co](http://ft.co)m resonated very strongly with this — I'm proud to say that we deployed code multiple times a day. New feature releases would be controlled by switches, instantly turning them on or off, or showing to customers through an A/B test. New feature ideas would typically be released this way every week or so.
+My own experience with [FT.com](http://ft.com) resonated very strongly with this — I'm proud to say that we deployed code multiple times a day. New feature releases would be controlled by switches, instantly turning them on or off, or showing to customers through an A/B test. New feature ideas would typically be released this way every week or so.
 
 #### A/B testing
 
