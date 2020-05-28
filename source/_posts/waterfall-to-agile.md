@@ -15,7 +15,7 @@ In spite of this, **there are things all product teams can learn from the new wa
 
 ### Old vs. new
 
-Product teams tend to work in one of two ways. Birzer uses the terms *Stage-Gates* and *Discovery & Delivery*. In my head I was substituting them with the frequently used terms *waterfall* and *agile*, but they are not exactly equivalent — not least of all because those terms come with a lot of baggage.
+Product teams tend to work in one of two ways. Birzer uses the terms *Stage-Gates* and *Discovery & Delivery*. In my head I was substituting them with the frequently used terms *waterfall* and *agile*, but they are not exactly equivalent — not least of all because the terms ‘waterfall’ and ‘agile’ come with a lot of baggage.
 
 ### Stage-Gates
 
