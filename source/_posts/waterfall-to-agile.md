@@ -83,7 +83,7 @@ Sales reps have a lot of bias — they will often filter the information from cu
 
 Through video conferencing you need to be more disciplined. When you're face-to-face you can be a bit more casual, go off on tangents because you have the personal rapport. It's a little tougher when you're on the video conference to develop that. You have to be more strict and focused. Your subjects might not be as patient with you. Stick to the time.
 
-With a video conference it's easy to invite a lot of colleagues but be careful, butmake sure they're not disruptive because if too many people are talking in at once it gets a little out of control.
+With a video conference it's easy to invite a lot of colleagues but be careful. Make sure they're not disruptive because if too many people are talking in at once it gets a little out of control.
 
 Think about security. Used password protection. Ask your subjects not to show confidential information on their screen. Only record when you have permission.
 
