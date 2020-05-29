@@ -1,5 +1,5 @@
 ---
-title: 3 things any product team can do to make their team a little more agile
+title: 3 ways any product team can become a little more agile
 date: 2020-05-28
 categories:
 - Product Development
