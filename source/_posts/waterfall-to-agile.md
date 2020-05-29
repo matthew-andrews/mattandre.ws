@@ -1,5 +1,5 @@
 ---
-title: 3 ways even the most dysfunctional product team can improve the products it makes
+title: 3 ways even the most dysfunctional product team can improve its products
 date: 2020-05-28
 categories:
 - Product Development
