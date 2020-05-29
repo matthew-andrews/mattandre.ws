@@ -77,7 +77,7 @@ However, our most insightful source is **direct conversations with customers**.
 
 Customers are defined as the companies, groups and individuals who are benefiting from your product. Or competitors' products. Or potential customers. Not your sales reps, not your sales channels.
 
-Sales reps have a lot of bias — they will often filter the information from customers to highlight the demand for features they think they need to meet their own sales goals. We need to have product conversations with customers. We need to understand them without trying to make a sale at the end of the conversation. We need to test our product concepts. In order to do that, you need to talk directly to your customers and not go through sales channels.
+Sales reps have a lot of bias — they will often filter the information from customers to highlight the demand for features they think they need to meet their own sales goals. We need to have product conversations with customers. We need to understand the customers without trying to make a sale at the end of the conversation. We need to test our product concepts. In order to do that, you need to talk directly to your customers and not go through sales channels.
 
 #### How to interview customers remotely
 
