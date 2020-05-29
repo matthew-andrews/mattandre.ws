@@ -3,7 +3,6 @@ title: Antifragile Supply Chains Pecha Kucha
 date: 2019-12-25
 categories:
 - Business
-home: true
 ---
 
 To give you a flavour of the sort of work I had to produce for my [MBA](/category/mba/), here is one fun and interesting assignment from my **Supply Chain Management** class: introduce **Antifragility** and apply it to the topic of **Supply Chains** through a Pecha Kucha-style presentation.
