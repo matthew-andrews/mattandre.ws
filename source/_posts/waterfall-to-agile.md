@@ -51,7 +51,7 @@ With *Discovery & Delivery,* requirements are figured out as you go. You're rapi
 
 Following a *Stage-Gates* approach risks being beaten by faster *Discovery & Delivery* competitors as they are more flexible and therefore better able to respond to customers.
 
-Whereas those following the *Discovery & Delivery* process suffer risk of poor coordination as their progress is less easy to track and increased financial risk as the process is more chaotic .
+Whereas those following the *Discovery & Delivery* process suffer risk of poor coordination as their progress is less easy to track and increased financial risk as the process is more chaotic.
 
 ---
 
