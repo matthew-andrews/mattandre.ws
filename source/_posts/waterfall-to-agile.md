@@ -1,5 +1,5 @@
 ---
-title: 3 ways any product team can become a little more agile
+title: 3 ways even the most dysfunctional product team can improve the products it makes
 date: 2020-05-28
 categories:
 - Product Development
