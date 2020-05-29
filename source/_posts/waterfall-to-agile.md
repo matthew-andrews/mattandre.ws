@@ -120,11 +120,9 @@ A/B testing is one of the ways that product teams can accelerate the evolution o
 
 ## Summary
 
-If you work in a product team following traditional project management techniques, you can make your product team a little bit better by focusing on this prioritised list:
+If you do just one thing differently after reading this post make it **talk directly to real customers**.
 
-1. Talking directly to real customers
-2. Testing product concepts
-3. Releasing incrementally
+If you're already doing that, then find ways to **test your product concepts** with customers and **release new features incrementally**.
 
 ## Additional reading
 
