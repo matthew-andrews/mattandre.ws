@@ -5,4 +5,6 @@ categories:
 - Week Notes
 ---
 
+No notes this week.
+
 It doesn't feel the right time for whimsical ramblings.
