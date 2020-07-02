@@ -71,7 +71,9 @@ The first rule of excellent product management is interview customers early and 
 
 We should understand our customers in many ways. *Customer satisfaction surveys, net promoter scores, third party research reports, product usage data, etc.*
 
-However, our most insightful source is **direct conversations with customers**.
+In particular we need to understand not just what the customer wants but **what they are trying to achieve**. The underlying needs your product is aiming to fulfil.
+
+And because of that our most insightful source is **direct conversations with customers**.
 
 #### Talk directly with your customers, not to (or through) your sales team
 
