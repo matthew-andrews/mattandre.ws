@@ -1,5 +1,5 @@
 ---
-title: 3 things any product team can do to improve its products
+title: 3 things any digital product team can do to build better products
 date: 2020-05-28
 categories:
 - Product Development
