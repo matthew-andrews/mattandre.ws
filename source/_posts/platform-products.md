@@ -11,7 +11,7 @@ In my post I argued that no matter how successful or dysfunctional your team, th
 
 My colleague rightly pointed out this can result in a **single-minded focus only on the parts of a product the end customer sees**, which can **lead teams to neglect the shared platforms** multiple product teams depend on.
 
-In my experience they way those platforms are managed tend to match one of the following patterns below, which I've written in order of increasing maturity and efficacy:-
+In my experience the way those platforms are managed tend to match one of the following patterns below, which I've written in order of increasing maturity and efficacy:-
 
 ### Shared responsibility
 
