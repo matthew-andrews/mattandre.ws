@@ -37,7 +37,7 @@ In my experience the way those platforms are managed tend to match one of the fo
 
 ### Custodian
 
-*Recognising the economic impact of the strict control over lake management, the Lake Management Authority loosened their control. Their role changes gatekeeper to custodian, working in collaboration with rather than in conflict with factories. The authority retains power to approve or deny lake access but empowers factories to take greater responsibility for extracting and discharging water. Innovative uses of the lake emerge more quickly, the cost to protect the lake falls and the economy grows. The lake stays clean.*
+*Recognising the economic impact of the strict control over lake management, the Lake Management Authority loosen their control. Their role changes gatekeeper to custodian, working in collaboration with rather than in conflict with factories. The authority retains power to approve or deny lake access but empowers factories to take greater responsibility for extracting and discharging water. Innovative uses of the lake emerge more quickly, the cost to protect the lake falls and the economy grows. The lake stays clean.*
 
 **When it works**
 
