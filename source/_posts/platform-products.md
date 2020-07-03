@@ -21,7 +21,7 @@ In my experience the way those platforms are managed tend to match one of the fo
 
 - At the beginning when a need for a platform-like capability is still emerging.
 - With small, very mature teams that are able to exercise strong self-discipline.
-- When teams are not being rushed and feel they need to cut corners.
+- When teams are not being rushed and don't feel they need to cut corners.
 
 ### Gatekeeper
 
