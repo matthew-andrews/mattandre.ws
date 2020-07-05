@@ -87,7 +87,7 @@ Through video conferencing you need to be more disciplined. When you're face-to-
 
 With a video conference it's easy to invite a lot of colleagues but be careful. Make sure they're not disruptive because if too many people are talking in at once it gets a little out of control.
 
-Think about security. Used password protection. Ask your subjects not to show confidential information on their screen. Only record when you have permission.
+Think about security. Use password protection. Ask your subjects not to show confidential information on their screen. Only record when you have permission.
 
 ### 2. Test your product concepts
 
