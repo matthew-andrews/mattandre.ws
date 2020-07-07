@@ -3,7 +3,6 @@ title: "Case sensitive filenames on OS X with git – “fatal: destination exis
 date: 2013-06-27
 categories:
 - Technologies
-- Git
 ---
 One of the more frustrating features of OS X when you're using git that can really trip you up if you're frequently switching between Linux and OS X is that **file names on OS X are [not case sensitive](http://stackoverflow.com/questions/10523849/changing-capitalization-of-filenames-in-git)**. It doesn't understand the difference between blah and Blah.
 
