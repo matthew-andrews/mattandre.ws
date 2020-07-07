@@ -2,11 +2,9 @@
 title: Full Frontal Conference 2013 Notes
 tags:
 - brighton
-- conferences
 - Sass
 categories:
 - Work
-- Conferences
 date: 2013-11-09
 ---
 ### 09:50 — 10:30: [ES6 Uncensored (slides)](https://speakerdeck.com/anguscroll/es6-uncensored) *[Angus Croll – @angustweets](https://twitter.com/angustweets)*
