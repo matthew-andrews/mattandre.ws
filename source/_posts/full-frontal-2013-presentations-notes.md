@@ -5,7 +5,6 @@ tags:
 - conferences
 - HTML
 - HTML5
-- JavaScript
 - Sass
 categories:
 - Work
