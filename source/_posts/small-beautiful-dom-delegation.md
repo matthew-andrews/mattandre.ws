@@ -9,7 +9,6 @@ tags:
 - JavaScript
 - web app
 - jQuery
-- HTML5
 ---
 When building the [FT's](https://app.ft.com/) and [Economist's](https://app.economist.com/) HTML5 apps we felt that as we were targeting only the latest browsers shipping the entirety of jQuery would be a bit – well – wasteful. What we wanted were small focused components that could be swapped in and out that we could pull in (initially) via **npm**, **bower** or (later) our [build service](https://origami-build.ft.com/). This thinking has since spread to the rest of the FT, who are now also [moving away from jQuery](http://origami.ft.com/docs/3rd-party-a-list/#why-not-jquery).
 

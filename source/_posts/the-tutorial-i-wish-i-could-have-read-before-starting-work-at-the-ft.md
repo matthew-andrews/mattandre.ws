@@ -8,7 +8,6 @@ tags:
 - appcache
 - bootstrapping
 - FT
-- HTML5
 - web app
 ---
 {% img /images/ftlabs.jpg %}

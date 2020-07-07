@@ -3,10 +3,8 @@ title: Does the HTML5 History API automatically add pages to the AppCache?
 date: 2013-07-12
 categories:
 - Technologies
-- HTML5
 tags:
 - appcache
-- HTML5
 - web app
 ---
 I met with a colleague from a previous company this evening who had gotten back in touch after stumbling across [one of the tutorials I had written about the HTML5 History API and AppCache](http://labs.ft.com/2013/04/offline-html5-history-api/). This, I thought, was quite cool. What was less cool was that my post didn't actually answer his question, which was:

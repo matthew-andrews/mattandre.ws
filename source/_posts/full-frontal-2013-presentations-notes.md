@@ -3,8 +3,6 @@ title: Full Frontal Conference 2013 Notes
 tags:
 - brighton
 - conferences
-- HTML
-- HTML5
 - Sass
 categories:
 - Work

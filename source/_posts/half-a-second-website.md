@@ -3,7 +3,6 @@ title: Building a half-a-second website
 date: 2016-05-28
 categories:
 - Technologies
-- HTML5
 tags:
 - HTTP2
 - Website Performance
