@@ -1,5 +1,5 @@
 ---
-title: What I learned studying IE Business School's Executive MBA
+title: IE Executive MBA Review — What I learned
 date: 2019-12-24
 categories:
 - Business
