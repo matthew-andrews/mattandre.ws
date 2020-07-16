@@ -101,6 +101,10 @@ It's a funnel process, you're getting rid of a lot of ideas early on and only mo
 
 Product concepts should start as **simple as possible**, such as a paper print out. Then a video. A clickable prototype. Only when you've gathered significant evidence that there is demand for your feature should you start to write code for beta software.
 
+It's never too late to start. Even if you've almost completely finished the new feature without any customer input, find a way to test it.
+
+If you're struggling to decide which approach to use to test, also don't worry. Just pick one. Not every kind of user testing is ideal for every scenario, but imperfect user testing is better than no user testing.
+
 ### 3. Find ways to release incrementally
 
 We often think it's the first-to-market company that has all the advantage but it's often the company that evolves the fastest that ends up winning in the long run.
