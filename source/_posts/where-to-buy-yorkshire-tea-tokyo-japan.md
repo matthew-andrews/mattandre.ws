@@ -1,6 +1,6 @@
 ---
 title: Where to buy Yorkshire Tea in Tokyo, Japan
-date: 2020-07-21
+date: 2020-01-21
 ---
 
 After searching far and wide, all it took was a quick email to Yorkshire Tea themselves to find the answer:-
