@@ -1,11 +1,10 @@
----
 title: Where to buy Yorkshire Tea in Tokyo, Japan
 date: 2020-01-21
 ---
 
 After searching far and wide, all it took was a quick email to Yorkshire Tea themselves to find the answer:-
 
-## Meidiya 明治屋
+## Meidi-Ya 明治屋
 
 But only some stores:-
 
@@ -15,10 +14,10 @@ But only some stores:-
 - [Meidi-Ya Roppongi Store](https://goo.gl/maps/ur3cDc8qTYBP2Nji6)
 - [Meidi-Ya Hiroo Store](https://goo.gl/maps/kemzASbPknr55FUq9)
 
-I topped up at Kyobashi.
+I topped up at Roppongi.
 
-**¥950 for 40 tea bags** include tax (¥880 without tax):-
-
-{% img /images/yorkshire.jpg %}
+**¥950 for 40 tea bags** include tax (¥880 without tax)
 
 You can also order online from the distributor or if you are happy to buy in bulk and wait a month or more, there are some sellers on Amazon and Rakuten who important it from the UK or US.
+
+{% img /images/yorkshire.jpg %}
